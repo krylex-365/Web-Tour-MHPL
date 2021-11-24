@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="header"></div>
+<h1>Hello World!!!!</h1>
+<div th:if="${test}">
+    <p th:text="${test.index}"></p>
+</div>
+<div th:if="${diaDiemDTOs}">
+    <table>
+        <tbody th:each="diaDiem : ${diaDiemDTOs}" th:remove="tag">
+        <tr>
+            <td th:text="${diaDiem.MaDiaDiem}">...</td>
+            <td th:text="${diaDiem.TenDiaDiem}">...</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:insert="./children/children"></div>
+</body>
+</html>
