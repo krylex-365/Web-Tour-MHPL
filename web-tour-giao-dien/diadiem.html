@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Dashboard</title>
+    <title>Loại chi phí</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -218,136 +218,132 @@
         ***********************************-->
 
         <div class="content-body">
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="card gradient-1">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Số Tour</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white"></h2>
-                            <a>
-                                <p class="text-white mb-0">4</p>
-                            </a>
-                        </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-map"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card gradient-2">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Số Đoàn</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white"></h2>
-                            <a>
-                                <p class="text-white mb-0">3</p>
-                            </a>
-                        </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-tags"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card gradient-3">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Số Nhân viên</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white"></h2>
-                            <a>
-                                <p class="text-white mb-0">8</p>
-                            </a>
-                        </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card gradient-4">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Số Khách hàng</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white"></h2>
-                            <a>
-                                <p class="text-white mb-0">12</p>
-                            </a>
-                        </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
-                    </div>
-                </div>
-            </div>
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Quản lý Địa điểm</li>
+            </ol>
         </div>
+    </div>
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--@if (ViewBag.Update == "yes")
+                        {
+                            <div class="card-title mb-3">
+                                <h4>SỬA PHÒNG BAN</h4>
+                            </div>
+                            <form method="post" asp-controller="PhongBan" asp-action="Update">
+                                <div class="form-group">
+                                    <label for="mapb">Mã phòng ban <span class="text-danger">*</span></label>
+                                    <input value="@Model.phongBanDTO.PhongBanId" type="text" name="PhongBanId" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tenpb">Tên phòng ban <span class="text-danger">*</span></label>
+                                    <input value="@Model.phongBanDTO.TenPhongBan" type="text" name="TenPhongBan" class="form-control" placeholder="Nhập tên phòng ban.." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sdt">Số điện thoại <span class="text-danger">*</span></label>
+                                    <input value="@Model.phongBanDTO.SDTPhongBan" type="number" name="SDTPhongBan" class="form-control" placeholder="Nhấp số điện thoại.." required>
+                                </div>
+                                <input type="submit" value="Sửa thông tin" name="sua" class="btn btn-primary">
+                                <a asp-controller="PhongBan" asp-action="Index" style="float: right;"><button type="button" class="btn btn-danger">Hủy</button></a>
+                            </form>
+                        }
+                        else-->
+                            <div class="card-title mb-3">
+                                <h4>THÊM ĐỊA ĐIỂM</h4>
+                            </div>
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="madd">Mã địa điểm <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="text" name="DiaDiemId" id="madd" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
+                                        <div class="input-group-append">
+                                            <button id="btn-dd" class="btn btn-outline-dark" type="button" onclick="CapPhatMaDD()"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tenpb">Tên địa điểm <span class="text-danger">*</span></label>
+                                    <input type="text" name="TenDiaDiem" class="form-control" placeholder="Nhập tên địa điểm.." required>
+                                </div>
+                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-primary">
+                            </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h3>Đoàn đang đi</h3>
+                            <div class="col-md-12 mb-4">
+                                <h4>DANH SÁCH ĐỊA ĐIỂM</h4>
+                                <!--@if (ViewBag.ErrorRemove == "yes")
+                                {
+                                    <p class="td-center" style="color:red;">@ViewBag.Remove</p>
+                                }
+                                else
+                                {
+                                    <p class="td-center" style="color:green;">@ViewBag.Remove</p>
+                                }-->
+                            </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover zero-configuration dataTable" id="DataTable">
+                            <table id="DataTable" class="table table-bordered table-hover zero-configuration dataTable">
                                 <thead class="text-primary">
                                     <tr>
-                                        <th style="width:5%;" class="th-center-bold">#</th>
-                                        <th style="width:10%;" class="th-center-bold">Mã đoàn</th>
-                                        <th style="width:25%;" class="th-center-bold">Tên đoàn</th>
-                                        <th style="width:12%;" class="th-center-bold">Giá đoàn</th>
-                                        <th style="width:14%;" class="th-center-bold">Ngày bắt đầu</th>
-                                        <th style="width:14%;" class="th-center-bold">Ngày kết thúc</th>
-                                        <th style="width:10%;" class="th-center-bold">Chi tiết</th>
-                                        <th style="width:5%;" class="th-center-bold">Sửa</th>
-                                        <th style="width:5%;" class="th-center-bold">Xóa</th>
+                                        <th class="th-center-bold">#</th>
+                                        <th class="th-center-bold">Mã địa điểm</th>
+                                        <th class="th-center-bold">Tên địa điểm</th>
+                                        <th class="th-center-bold">Sửa</th>
+                                        <th class="th-center-bold">Xóa</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-order-body">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>DL000001</td>
-                                        <td>Đoàn tham quan 1</td>
-                                        <td>40000</td>
-                                        <td>09/08/2000</td>
-                                        <td>09/08/2000</td>
-                                        <td class="td-center">
-                                            <a href="#">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#chiTietDoan"><i class="fa fa-info"></i></button>
-                                            </a>
-                                        </td>
-                                        <td class="td-center">
-                                            <form method="post">
-                                                <input value="" type="hidden" name="id" />
-                                                <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
-                                            </form>
-                                        </td>
-                                        <td class="td-center">
-                                            <a>
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#XoaDoan"><i class="fa fa-close"></i></button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>DL000002</td>
-                                        <td>Đoàn tham quan 2</td>
-                                        <td>50000</td>
-                                        <td>01/02/2001</td>
-                                        <td>14/02/2001</td>
-                                        <td class="td-center">
-                                            <a href="#">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#chiTietDoan"><i class="fa fa-info"></i></button>
-                                            </a>
-                                        </td>
-                                        <td class="td-center">
-                                            <form method="post">
-                                                <input value="" type="hidden" name="id" />
-                                                <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
-                                            </form>
-                                        </td>
-                                        <td class="td-center">
-                                            <a>
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#XoaDoan"><i class="fa fa-close"></i></button>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                <tbody>
+                                    <!--@if (Model.phongBanDTOs.Count == 0)
+                                    {
+                                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                                        {-->
+                                            <tr>
+                                                <td>1</td>
+                                                <td>0000001</td>
+                                                <td>Tên địa điểm</td>
+                                                    <td class="td-center">
+                                                        <form method="post">
+                                                            <input value="DiaDiemId" type="hidden" name="id" />
+                                                            <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                                                        </form>
+                                                    </td>
+                                                    <td class="td-center">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DiaDiemId">
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </td>
+                                            </tr>
+
+                                            <div class="modal fade" id="DiaDiemId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Bạn chắc chắn muốn xoá<br>địa điểm 0000001?</h3>
+                                                        </div>
+                                                        <div class="modal-footer" style="margin: auto;">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+                                                            <form method="post" asp-controller="PhongBan" asp-action="Remove">
+                                                                <button name="id" type="submit" class="btn btn-danger" value="DiaDiemId">Xóa địa điểm</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                 </tbody>
                             </table>
                         </div>
@@ -358,6 +354,12 @@
     </div>
     <!-- #/ container -->
 </div>
+<script>
+    function CapPhatMaDD() {
+        $('#madd').val('0000001');
+        $('#btn-dd').prop('disabled', true);
+    }
+</script>
 
         <!--**********************************
             Content body end
