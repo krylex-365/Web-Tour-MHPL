@@ -12,8 +12,8 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String sayHello() {
-        return "hello";
+    public String dashboard() {
+        return "index";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/test")

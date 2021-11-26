@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../static/images/favicon.png"
+          th:href="@{/images/favicon.png}">
+
+    <link rel="stylesheet" href="../../static/plugins/jqueryui/css/jquery-ui-1-12-1.css"
+          th:href="@{/plugins/jqueryui/css/jquery-ui-1-12-1.css}">
+    <!-- Pignose Calender -->
+    <link href="../../static/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet"
+          th:href="@{/plugins/pg-calendar/css/pignose.calendar.min.css}">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="../../static/plugins/chartist/css/chartist.min.css"
+          th:href="@{/plugins/chartist/css/chartist.min.css}">
+    <link rel="stylesheet" href="../../static/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css"
+          th:href="@{/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css}">
+    <!-- Custom Stylesheet -->
+    <link href="../../static/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+          rel="stylesheet"
+          th:href="@{/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css}">
+    <link href="../../static/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet"
+          th:href="@{/plugins/tables/css/datatable/dataTables.bootstrap4.min.css}">
+    <!-- Page plugins css -->
+    <link href="../../static/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet"
+          th:href="@{/plugins/clockpicker/dist/jquery-clockpicker.min.css}">
+    <!-- Color picker plugins css -->
+    <link href="../../static/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet"
+          th:href="@{/plugins/jquery-asColorPicker-master/css/asColorPicker.css}">
+    <!-- Date picker plugins css -->
+    <link href="../../static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet"
+          th:href="@{/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+    <link href="../../static/css/style.css" rel="stylesheet"
+          th:href="@{/css/style.css}">
+    <link href="../../static/css/style-custom.css" rel="stylesheet"
+          th:href="@{/css/style-custom.css}">
+    <style>
+        .box {
+            padding: 0;
+        }
+
+        .box select {
+            background-color: #7571f9;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            font-size: 0.875rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
+        }
+
+        .box:hover::before {
+            color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .box select option {
+            padding: 30px;
+        }
+
+        input[type="checkbox"]:after {
+            border: 1px solid #7571f9 !important;
+            margin: auto !important;
+        }
+
+        #DataTable_filter .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+
+        #DataTable_length .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>

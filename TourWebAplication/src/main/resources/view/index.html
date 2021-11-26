@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="inc/header">
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<div id="main-wrapper">
+<div th:insert="inc/form-layout"></div>
+    <!--**********************************
+        Content body start
+    ***********************************-->
+
+    <div class="content-body">
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-1">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Số Tour</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white"></h2>
+                                <a>
+                                    <p class="text-white mb-0">4</p>
+                                </a>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-map"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-2">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Số Đoàn</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white"></h2>
+                                <a>
+                                    <p class="text-white mb-0">3</p>
+                                </a>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-tags"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-3">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Số Nhân viên</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white"></h2>
+                                <a>
+                                    <p class="text-white mb-0">8</p>
+                                </a>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-4">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Số Khách hàng</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white"></h2>
+                                <a>
+                                    <p class="text-white mb-0">12</p>
+                                </a>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3>Đoàn đang đi</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover zero-configuration dataTable"
+                                       id="DataTable">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th style="width:5%;" class="th-center-bold">#</th>
+                                        <th style="width:10%;" class="th-center-bold">Mã đoàn</th>
+                                        <th style="width:25%;" class="th-center-bold">Tên đoàn</th>
+                                        <th style="width:12%;" class="th-center-bold">Giá đoàn</th>
+                                        <th style="width:14%;" class="th-center-bold">Ngày bắt đầu</th>
+                                        <th style="width:14%;" class="th-center-bold">Ngày kết thúc</th>
+                                        <th style="width:10%;" class="th-center-bold">Chi tiết</th>
+                                        <th style="width:5%;" class="th-center-bold">Sửa</th>
+                                        <th style="width:5%;" class="th-center-bold">Xóa</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="table-order-body">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>DL000001</td>
+                                        <td>Đoàn tham quan 1</td>
+                                        <td>40000</td>
+                                        <td>09/08/2000</td>
+                                        <td>09/08/2000</td>
+                                        <td class="td-center">
+                                            <a href="#">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#chiTietDoan"><i class="fa fa-info"></i></button>
+                                            </a>
+                                        </td>
+                                        <td class="td-center">
+                                            <form method="post">
+                                                <input value="" type="hidden" name="id"/>
+                                                <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                                            </form>
+                                        </td>
+                                        <td class="td-center">
+                                            <a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#XoaDoan"><i class="fa fa-close"></i></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>DL000002</td>
+                                        <td>Đoàn tham quan 2</td>
+                                        <td>50000</td>
+                                        <td>01/02/2001</td>
+                                        <td>14/02/2001</td>
+                                        <td class="td-center">
+                                            <a href="#">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#chiTietDoan"><i class="fa fa-info"></i></button>
+                                            </a>
+                                        </td>
+                                        <td class="td-center">
+                                            <form method="post">
+                                                <input value="" type="hidden" name="id"/>
+                                                <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                                            </form>
+                                        </td>
+                                        <td class="td-center">
+                                            <a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#XoaDoan"><i class="fa fa-close"></i></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+    <div th:insert="inc/footer"></div>
+</div>
+</body>
+</html>

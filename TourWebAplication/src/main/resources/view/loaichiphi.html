@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Loại chi phí</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+
+<div id="main-wrapper">
+    <div th:insert="inc/form-layout"></div>
+    <!--**********************************
+        Content body start
+    ***********************************-->
+
+    <div class="content-body">
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Quản lý Loại chi phí</li>
+                </ol>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!--@if (ViewBag.Update == "yes")
+                            {
+                                <div class="card-title mb-3">
+                                    <h4>SỬA PHÒNG BAN</h4>
+                                </div>
+                                <form method="post" asp-controller="PhongBan" asp-action="Update">
+                                    <div class="form-group">
+                                        <label for="mapb">Mã phòng ban <span class="text-danger">*</span></label>
+                                        <input value="@Model.phongBanDTO.PhongBanId" type="text" name="PhongBanId" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tenpb">Tên phòng ban <span class="text-danger">*</span></label>
+                                        <input value="@Model.phongBanDTO.TenPhongBan" type="text" name="TenPhongBan" class="form-control" placeholder="Nhập tên phòng ban.." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sdt">Số điện thoại <span class="text-danger">*</span></label>
+                                        <input value="@Model.phongBanDTO.SDTPhongBan" type="number" name="SDTPhongBan" class="form-control" placeholder="Nhấp số điện thoại.." required>
+                                    </div>
+                                    <input type="submit" value="Sửa thông tin" name="sua" class="btn btn-primary">
+                                    <a asp-controller="PhongBan" asp-action="Index" style="float: right;"><button type="button" class="btn btn-danger">Hủy</button></a>
+                                </form>
+                            }
+                            else-->
+                            <div class="card-title mb-3">
+                                <h4>THÊM LOẠI CHI PHÍ</h4>
+                            </div>
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="malcp">Mã loại chi phí <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="text" name="LoaiChiPhiId" id="malcp" class="form-control"
+                                               placeholder="Số liệu tự cấp phát.." readonly="readonly">
+                                        <div class="input-group-append">
+                                            <button id="btn-lcp" class="btn btn-outline-dark" type="button"
+                                                    onclick="CapPhatMaLCP()"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tenpb">Tên loại chi phí <span class="text-danger">*</span></label>
+                                    <input type="text" name="TenLoaiChiPhi" class="form-control"
+                                           placeholder="Nhập tên loại chi phí.." required>
+                                </div>
+                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <div class="col-md-12 mb-4">
+                                    <h4>DANH SÁCH LOẠI CHI PHÍ</h4>
+                                    <!--@if (ViewBag.ErrorRemove == "yes")
+                                    {
+                                        <p class="td-center" style="color:red;">@ViewBag.Remove</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="td-center" style="color:green;">@ViewBag.Remove</p>
+                                    }-->
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="DataTable"
+                                       class="table table-bordered table-hover zero-configuration dataTable">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th class="th-center-bold">#</th>
+                                        <th class="th-center-bold">Mã loại chi phí</th>
+                                        <th class="th-center-bold">Tên loại chi phí</th>
+                                        <th class="th-center-bold">Sửa</th>
+                                        <th class="th-center-bold">Xóa</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--@if (Model.phongBanDTOs.Count == 0)
+                                    {
+                                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                                        {-->
+                                    <tr>
+                                        <td>1</td>
+                                        <td>0000001</td>
+                                        <td>Tên loại chi phí</td>
+                                        <td class="td-center">
+                                            <form method="post">
+                                                <input value="LoaiChiPhiId" type="hidden" name="id"/>
+                                                <button type="submit" class="btn btn-primary"><i
+                                                        class="fa fa-pencil"></i></button>
+                                            </form>
+                                        </td>
+                                        <td class="td-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#LoaiChiPhiId">
+                                                <i class="fa fa-close"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="LoaiChiPhiId" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                        style="margin: auto;text-align: center;">Bạn chắc chắn muốn
+                                                        xoá<br>loại chi phí 0000001?</h3>
+                                                </div>
+                                                <div class="modal-footer" style="margin: auto;">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                        Hủy
+                                                    </button>
+                                                    <form method="post" asp-controller="PhongBan" asp-action="Remove">
+                                                        <button name="id" type="submit" class="btn btn-danger"
+                                                                value="LoaiChiPhiId">Xóa loại chi phí
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <script>
+        function CapPhatMaLCP() {
+            $('#malcp').val('0000001');
+            $('#btn-lcp').prop('disabled', true);
+        }
+    </script>
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+    <div th:insert="inc/footer"></div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--**********************************
+        Footer start
+    ***********************************-->
+<div class="footer">
+    <div class="copyright">
+        <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+    </div>
+</div>
+<!--**********************************
+    Footer end
+***********************************-->
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+<!--**********************************
+    Scripts
+***********************************-->
+<script>
+    function checkDel() {
+        if ($("#checkBoxAll").is(":checked")) {
+            $(".chkCheckBoxId").prop("checked", true);
+            $("#btnDel").prop("disabled", false);
+        }
+        else {
+            $(".chkCheckBoxId").prop("checked", false);
+            $("#btnDel").prop("disabled", true);
+        }
+    }
+    function checkSingleDel() {
+        if ($(".chkCheckBoxId").is(":checked")) {
+            $("#btnDel").prop("disabled", false);
+        }
+        else {
+            $("#btnDel").prop("disabled", true);
+        }
+    }
+</script>
+
+<script src="../../static/plugins/common/common.min.js" th:src="@{/plugins/common/common.min.js}"></script>
+<script src="../../static/js/custom.min.js" th:src="@{/js/custom.min.js}"></script>
+<script src="../../static/js/settings.js" th:src="@{/js/settings.js}"></script>
+<script src="../../static/js/gleek.js" th:src="@{/js/gleek.js}"></script>
+<script src="../../static/js/styleSwitcher.js" th:src="@{/js/styleSwitcher.js}"></script>
+
+<script src="../../static/plugins/jquery/jquery.min.js" th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script src="../../static/js/js-custom.js" th:src="@{/js/js-custom.js}"></script>
+
+<script src="../../static/plugins/tables/js/jquery.dataTables.min.js" th:src="@{/plugins/tables/js/jquery.dataTables.min.js}"></script>
+<script src="../../static/plugins/tables/js/datatable/dataTables.bootstrap4.min.js" th:src="@{/plugins/tables/js/datatable/dataTables.bootstrap4.min.js}"></script>
+<script src="../../static/plugins/tables/js/datatable-init/datatable-basic.min.js" th:src="@{/plugins/tables/js/datatable-init/datatable-basic.min.js}"></script>
+
+<script src="../../static/plugins/moment/moment.js" th:src="@{/plugins/moment/moment.js}"></script>
+<script src="../../static/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js" th:src="@{/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js}"></script>
+<!-- Clock Plugin JavaScript -->
+<script src="../../static/plugins/clockpicker/dist/jquery-clockpicker.min.js" th:src="@{/plugins/clockpicker/dist/jquery-clockpicker.min.js}"></script>
+<!-- Color Picker Plugin JavaScript -->
+<script src="../../static/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js" th:src="@{/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js}"></script>
+<script src="../../static/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js" th:src="@{/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js}"></script>
+<script src="../../static/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js" th:src="@{/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js}"></script>
+<!-- Date Picker Plugin JavaScript -->
+<script src="../../static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js" th:src="@{/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+<!-- Form Picker Init JavaScript -->
+<script src="../../static/js/plugins-init/form-pickers-init.js" th:src="@{/js/plugins-init/form-pickers-init.js}"></script>
+
+<!-- jQuery UI library -->
+<script src="../../static/plugins/jqueryui/js/jquery-ui-1-12-1.js" th:src="@{/plugins/jqueryui/js/jquery-ui-1-12-1.js}"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" th:src="@{../static/images/favicon.png}">
+
+    <link rel="stylesheet" th:src="@{../static/plugins/jqueryui/css/jquery-ui-1-12-1.css}">
+    <!-- Pignose Calender -->
+    <link th:src="@{../static/plugins/pg-calendar/css/pignose.calendar.min.css}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" th:src="@{../static/plugins/chartist/css/chartist.min.css}">
+    <link rel="stylesheet" th:src="@{../static/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css}">
+    <!-- Custom Stylesheet -->
+    <link th:src="@{../static/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css}" rel="stylesheet">
+    <link th:src="@{../static/plugins/tables/css/datatable/dataTables.bootstrap4.min.css}" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link th:src="@{../static/plugins/clockpicker/dist/jquery-clockpicker.min.css}" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link th:src="@{../static/plugins/jquery-asColorPicker-master/css/asColorPicker.css}" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link th:src="@{../static/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css}" rel="stylesheet">
+    <link th:src="@{../static/css/style.css}" rel="stylesheet">
+    <link th:src="@{../static/css/style-custom.css}" rel="stylesheet">
+    <style>
+        .box {
+            padding: 0;
+        }
+
+        .box select {
+            background-color: #7571f9;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            font-size: 0.875rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
+        }
+
+        .box:hover::before {
+            color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .box select option {
+            padding: 30px;
+        }
+
+        input[type="checkbox"]:after {
+            border: 1px solid #7571f9 !important;
+            margin: auto !important;
+        }
+
+        #DataTable_filter .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+
+        #DataTable_length .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<!--*******************
+    Preloader start
+********************-->
+<!--<div id="preloader">-->
+<!--    <div class="loader">-->
+<!--        <svg class="circular" viewBox="25 25 50 50">-->
+<!--            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />-->
+<!--        </svg>-->
+<!--    </div>-->
+<!--</div>-->
+<!--*******************
+    Preloader end
+********************-->
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div class="nav-header">
+        <div class="brand-logo">
+            <a href="../../view/index.html">
+                <b class="logo-abbr"><img th:href="@{../static/images/logo.png}" alt=""> </b>
+                <span class="logo-compact"><img th:href="@{../static/images/logo-compact.png}" alt=""></span>
+                <span class="brand-title">
+                        <img th:href="@{../static/images/logo-text.png}" alt="">
+                    </span>
+            </a>
+        </div>
+    </div>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+    <!--**********************************
+        Header start
+    ***********************************-->
+    <div class="header">
+        <div class="header-content clearfix">
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="toggle-icon"><i class="icon-menu"></i></span>
+                </div>
+            </div>
+            <div class="header-right">
+                <ul class="clearfix">
+                    <li class="icons dropdown">Hi</li>
+                    <li class="icons dropdown">
+                        <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                            <span class="activity active"></span>
+                            <img th:href="@{../static/images/user/form-user.png}" height="40" width="40" alt="">
+                        </div>
+                        <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                            <div class="dropdown-content-body">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="icon-user"></i> <span>Profile</span></a>
+                                    </li>
+                                    <hr class="my-2">
+                                    <li>
+                                        <a href="#"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                    </li>
+                                    <li><a href="../login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Header end ti-comment-alt
+    ***********************************-->
+    <!--**********************************
+        Sidebar start
+    ***********************************-->
+    <div class="nk-sidebar">
+        <div class="nk-nav-scroll">
+            <ul class="metismenu" id="menu">
+                <li class="nav-label">Dashboard</li>
+                <li>
+                    <a href="../../view/index.html">
+                        <i class="icon-graph menu-icon"></i> <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-label">Apps</li>
+                <li>
+                    <a href="../loaihinhtour.html">
+                        <i class="icon-grid menu-icon"></i> <span class="nav-text">Quản lý Loại hình tour</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="icon-location-pin"></i> <span class="nav-text">Quản lý Tour</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../diadiem.html">
+                        <i class="icon-map menu-icon"></i> <span class="nav-text">Quản lý Địa điểm</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="icon-pie-chart menu-icon"></i> <span class="nav-text">Quản lý Đoàn du lịch</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-people menu-icon"></i> <span class="nav-text">Nhân viên</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                        <li><a href="#">Quản lý nhân viên</a></li>
+                        <li><a href="#">Thống kê nhân viên</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <i class="icon-people menu-icon"></i> <span class="nav-text">Quản lý Khách hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-wallet menu-icon"></i> <span class="nav-text">Chi phí</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                        <li><a href="../loaichiphi.html">Loại chi phí</a></li>
+                        <li><a href="#">Thống kê chi phí</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <i class="icon-screen-tablet menu-icon"></i> <span class="nav-text">Thống kê doanh thu</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--**********************************
+        Sidebar end
+    ***********************************-->
+</body>
+</html>
