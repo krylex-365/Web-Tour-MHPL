@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Loại chi phí</title>
+    <title>Dashboard</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -189,7 +189,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="./khachhhang.html">
+                        <a href="./khachhang.html">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">Quản lý Khách hàng</span>
                         </a>
                     </li>
@@ -218,135 +218,101 @@
         ***********************************-->
 
         <div class="content-body">
+
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Quản lý Loại hình tour</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="./khachhang.html">Quản lý khách hàng</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm khách hàng</a></li> 
             </ol>
         </div>
     </div>
+    <!-- row -->
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4 col-md-12">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <!--@if (ViewBag.Update == "yes")
-                        {
-                            <div class="card-title mb-3">
-                                <h4>SỬA PHÒNG BAN</h4>
-                            </div>
-                            <form method="post" asp-controller="PhongBan" asp-action="Update">
-                                <div class="form-group">
-                                    <label for="mapb">Mã phòng ban <span class="text-danger">*</span></label>
-                                    <input value="@Model.phongBanDTO.PhongBanId" type="text" name="PhongBanId" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tenpb">Tên phòng ban <span class="text-danger">*</span></label>
-                                    <input value="@Model.phongBanDTO.TenPhongBan" type="text" name="TenPhongBan" class="form-control" placeholder="Nhập tên phòng ban.." required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="sdt">Số điện thoại <span class="text-danger">*</span></label>
-                                    <input value="@Model.phongBanDTO.SDTPhongBan" type="number" name="SDTPhongBan" class="form-control" placeholder="Nhấp số điện thoại.." required>
-                                </div>
-                                <input type="submit" value="Sửa thông tin" name="sua" class="btn btn-primary">
-                                <a asp-controller="PhongBan" asp-action="Index" style="float: right;"><button type="button" class="btn btn-danger">Hủy</button></a>
-                            </form>
-                        }
-                        else-->
-                            <div class="card-title mb-3">
-                                <h4>THÊM LOẠI HÌNH TOUR</h4>
-                            </div>
-                            <form method="post">
-                                <div class="form-group">
-                                    <label for="madd">Mã loại hình <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" name="LoaiHinhTourId" id="malht" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
-                                        <div class="input-group-append">
-                                            <button id="btn-lht" class="btn btn-outline-dark" type="button" onclick="CapPhatMaLHT()"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tenpb">Tên loại hình <span class="text-danger">*</span></label>
-                                    <input type="text" name="TenLoaiHinhTour" class="form-control" placeholder="Nhập tên loại hình.." required>
-                                </div>
-                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-primary">
-                            </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <div class="col-md-12 mb-4">
-                                <h4>DANH SÁCH LOẠI HÌNH TOUR</h4>
-                                <!--@if (ViewBag.ErrorRemove == "yes")
-                                {
-                                    <p class="td-center" style="color:red;">@ViewBag.Remove</p>
-                                }
-                                else
-                                {
-                                    <p class="td-center" style="color:green;">@ViewBag.Remove</p>
-                                }-->
+                        <div class="row">
+                            <div class="col-lg-12 mb-3">
+                                <a href="./khachhang.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table id="DataTable" class="table table-bordered table-hover zero-configuration dataTable">
-                                <thead class="text-primary">
-                                    <tr>
-                                        <th class="th-center-bold">#</th>
-                                        <th class="th-center-bold">Mã loại hình/th>
-                                        <th class="th-center-bold">Tên loại hình</th>
-                                        <th class="th-center-bold">Sửa</th>
-                                        <th class="th-center-bold">Xóa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!--@if (Model.phongBanDTOs.Count == 0)
-                                    {
-                                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
-                                    }
-                                    else
-                                    {
-                                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
-                                        {-->
-                                            <tr>
-                                                <td>1</td>
-                                                <td>0000001</td>
-                                                <td>Tên loại hình</td>
-                                                    <td class="td-center">
-                                                        <form method="post">
-                                                            <input value="LoaiHinhTourId" type="hidden" name="id" />
-                                                            <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
-                                                        </form>
-                                                    </td>
-                                                    <td class="td-center">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#XoaLoaiHinhTourId">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </td>
-                                            </tr>
-
-                                            <div class="modal fade" id="XoaLoaiHinhTourId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Bạn chắc chắn muốn xoá<br>loại hình tour 0000001?</h3>
-                                                        </div>
-                                                        <div class="modal-footer" style="margin: auto;">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                                                            <form method="post">
-                                                                <button name="id" type="submit" class="btn btn-danger" value="LoaiHinhTourId">Xóa loại hình</button>
-                                                            </form>
-                                                        </div>
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-lg-12 mb-3"><h3>Thông tin khách hàng</h3></div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="makh">Mã khách hàng <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <input id="makh" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="KhachHangId" readonly="readonly">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-dark" type="button" onclick="CapPhatMaKH()"><i class="fa fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
-                                </tbody>
-                            </table>
-                        </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="hoten">Họ tên khách hàng <span class="text-danger">*</span></label>
+                                                <input type="text" name="HoTenKhachHang" class="form-control" placeholder="Nhập họ tên..." required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="gioitinh">Giới tính <span class="text-danger">*</span></label>
+                                                <select class="form-control" name="GioiTinh" required>
+                                                    <option value="">-- Chọn giới tính --</option>
+                                                    <option value="Nam">Nam</option>
+                                                    <option value="Nữ">Nữ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ngaysinh">Ngày sinh <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mydatepicker" name="NgaySinh" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="cmnd">Số chứng minh thư <span class="text-danger">*</span></label>
+                                                <input type="text" name="Cmnd" class="form-control" placeholder="Nhập số chứng minh thư..." required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="sdt">Số điện thoại <span class="text-danger">*</span></label>
+                                                <input type="text" name="SDT" class="form-control" placeholder="Nhập số điện thoại..." required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="diachi">Địa chỉ <span class="text-danger">*</span></label>
+                                                <input type="text" name="DiaChi" class="form-control" placeholder="Nhập địa chỉ..." required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="quoctich">Quốc tịch <span class="text-danger">*</span></label>
+                                                <input type="text" name="QuocTich" class="form-control" placeholder="Nhập quốc tịch..." required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 td-center">
+                                    <button type="submit" class="btn btn-primary">Thêm khách hàng</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -355,11 +321,11 @@
     <!-- #/ container -->
 </div>
 <script>
-    function CapPhatMaLHT() {
-        $('#malht').val('0000001');
-        $('#btn-lht').prop('disabled', true);
+    function CapPhatMaKH() {
+        $('#makh').val('KH000001');
     }
 </script>
+
 
         <!--**********************************
             Content body end

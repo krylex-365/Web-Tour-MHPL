@@ -184,12 +184,12 @@
                             <i class="icon-people menu-icon"></i> <span class="nav-text">Nhân viên</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="#">Quản lý nhân viên</a></li>
+                            <li><a href="./nhanvien.html">Quản lý nhân viên</a></li>
                             <li><a href="#">Thống kê nhân viên</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a>
+                        <a href="./khachhang.html">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">Quản lý Khách hàng</span>
                         </a>
                     </li>
@@ -236,7 +236,7 @@
                             <div class="card-title mb-3">
                                 <h4>SỬA PHÒNG BAN</h4>
                             </div>
-                            <form method="post" asp-controller="PhongBan" asp-action="Update">
+                            <form method="post">
                                 <div class="form-group">
                                     <label for="mapb">Mã phòng ban <span class="text-danger">*</span></label>
                                     <input value="@Model.phongBanDTO.PhongBanId" type="text" name="PhongBanId" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
@@ -250,7 +250,7 @@
                                     <input value="@Model.phongBanDTO.SDTPhongBan" type="number" name="SDTPhongBan" class="form-control" placeholder="Nhấp số điện thoại.." required>
                                 </div>
                                 <input type="submit" value="Sửa thông tin" name="sua" class="btn btn-primary">
-                                <a asp-controller="PhongBan" asp-action="Index" style="float: right;"><button type="button" class="btn btn-danger">Hủy</button></a>
+                                <a style="float: right;"><button type="button" class="btn btn-danger">Hủy</button></a>
                             </form>
                         }
                         else-->
@@ -323,12 +323,12 @@
                                                         </form>
                                                     </td>
                                                     <td class="td-center">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LoaiChiPhiId">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#XoaLoaiChiPhiId">
                                                             <i class="fa fa-close"></i>
                                                         </button>
                                                     </td>
                                             </tr>
-                                            <div class="modal fade" id="LoaiChiPhiId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="XoaLoaiChiPhiId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
