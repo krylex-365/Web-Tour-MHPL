@@ -20,9 +20,12 @@ public class LoaiHinhTourController {
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
         model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
+        //capPhatId truoc khi tao page
+        model.addAttribute("maLoai", capPhatId());
         return "loaihinhtour";
     }
 
+    //Sua
     @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour")
     public String getloaiHinhTuor(@RequestParam("id") String id, Model model) {
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
@@ -34,18 +37,58 @@ public class LoaiHinhTourController {
                 return "loaihinhtour";
             }
         }
+        return "redirect:/loaihinhtour";
+    }
+
+    //submit sua
+    @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/sua")
+    public String suaLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model) {
+        LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
+        ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
+        if(!maLoai.equals("") && !tenLoai.equals("")) {
+            if (loaiHinhTourBUS.suaLoaiHinhTour(maLoai, tenLoai)) {
+                return "redirect:/loaihinhtour";
+            }
+        }
+        //that bai lam gi do
+        //capPhatId truoc khi tao page
+        model.addAttribute("maLoai", capPhatId());
+        model.addAttribute("message", "false");
         model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
         return "loaihinhtour";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sualoaihinhtour")
-    public String suaLoaiHinhTuor(@ModelAttribute("loaiHinhTourDTO") LoaiHinhTourDTO loaiHinhTourDTO, Model model) {
+    //submit them
+    @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/them")
+    public String themLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model) {
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
-        if (loaiHinhTourBUS.suaLoaiHinhTour(loaiHinhTourDTO.getMaLoai(), loaiHinhTourDTO.getTenLoai())) {
-            model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
-            return "loaihinhtour";
+        if(!maLoai.equals("") && !tenLoai.equals("")) {
+            if (loaiHinhTourBUS.themLoaiHinhTour(maLoai, tenLoai)) {
+                return "redirect:/loaihinhtour";
+            }
         }
+        //that bai lam gi do
+        //capPhatId truoc khi tao page
+        model.addAttribute("maLoai", capPhatId());
+        model.addAttribute("message", "false");
+        model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
+        return "loaihinhtour";
+    }
+
+    //Xoa
+    @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/xoa")
+    public String xoaLoaiHinhTuor(@RequestParam("id") String id, Model model) {
+        LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
+        ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
+        if(!id.equals("")) {
+            if (loaiHinhTourBUS.xoaLoaiHinhTour(id)) {
+                return "redirect:/loaihinhtour";
+            }
+        }
+        //that bai lam gi do
+        //capPhatId truoc khi tao page
+        model.addAttribute("maLoai", capPhatId());
         model.addAttribute("message", "false");
         model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
         return "loaihinhtour";
