@@ -68,7 +68,7 @@
                                     <div th:if="${list}">
                                         <tbody th:each="data : ${list}" th:remove="tag">
                                         <tr>
-                                            <td th:text="${list.indexOf(data)}"></td>
+                                            <td th:text="${list.indexOf(data)} + 1"></td>
                                             <td th:text="${data.tourDTO.maTour}"></td>
                                             <td th:text="${data.tourDTO.tenTour}"></td>
                                             <div th:if="${data.giaTourDTO}">
@@ -90,8 +90,8 @@
                                                 </a>
                                             </td>
                                             <td class="td-center">
-                                                <form method="post">
-                                                    <input value="TourId" type="hidden" name="id"/>
+                                                <form method="get" th:action="@{/tour/thietlap}">
+                                                    <input th:value="${data.tourDTO.maTour}" type="hidden" name="id"/>
                                                     <button type="submit" class="btn btn-primary"><i
                                                             class="fa fa-cog"></i></button>
                                                 </form>

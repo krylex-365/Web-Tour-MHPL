@@ -1,12 +1,7 @@
 package com.example.tourwebaplication.controller;
 
-import com.example.tourwebaplication.model.BUS.GiaTourBUS;
-import com.example.tourwebaplication.model.BUS.LoaiHinhTourBUS;
-import com.example.tourwebaplication.model.BUS.TourBUS;
-import com.example.tourwebaplication.model.BUS.Utils;
-import com.example.tourwebaplication.model.DTO.GiaTourDTO;
-import com.example.tourwebaplication.model.DTO.LoaiHinhTourDTO;
-import com.example.tourwebaplication.model.DTO.TourDTO;
+import com.example.tourwebaplication.model.BUS.*;
+import com.example.tourwebaplication.model.DTO.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -151,14 +146,62 @@ public class TourController {
         return "redirect:/tour";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/tour/thietlap")
+    public String lapThongTinThietLap(@RequestParam String id, Model model) {
+        DiaDiemThamQuanBUS diaDiemThamQuanBUS = new DiaDiemThamQuanBUS();
+        GiaTourBUS giaTourBUS = new GiaTourBUS();
+        DiaDiemBUS diaDiemBUS = new DiaDiemBUS();
+
+        ArrayList<DiaDiemDTO> diaDiemDTOs = diaDiemBUS.getDiaDiemDTOs();
+        ArrayList<DiaDiemThamQuanDTO> diaDiemThamQuanDTOs = diaDiemThamQuanBUS.searchDiaDiemThamQuanByMaTour(id);
+        ArrayList<GiaTourDTO> giaTourDTOs = giaTourBUS.getGiaTourDTOs();
+        ArrayList<GiaTourDTO> giaTourDTOstmp = new ArrayList<>();
+        for (GiaTourDTO giaTourDTO: giaTourDTOs){
+            if(giaTourDTO.getMaTour().equals(id)){
+                giaTourDTOstmp.add(giaTourDTO);
+            }
+        }
+        ArrayList<DataThietLap> dataThietLaps = new ArrayList<>();
+        ArrayList<DiaDiemDTO> diaDiemDTOsTmp = new ArrayList<>();
+        diaDiemDTOsTmp = (ArrayList<DiaDiemDTO>) diaDiemDTOs.clone();
+        for (DiaDiemThamQuanDTO diaDiemThamQuanDTO: diaDiemThamQuanDTOs){
+            DataThietLap dataThietLap = new DataThietLap();
+            dataThietLap.diaDiemThamQuanDTO = diaDiemThamQuanDTO;
+            for (DiaDiemDTO diaDiemDTO: diaDiemDTOs){
+                if(diaDiemDTO.getMaDiaDiem().equals(diaDiemThamQuanDTO.getMaDiaDiem())){
+                    dataThietLap.diaDiemDTO = diaDiemDTO;
+                    diaDiemDTOsTmp.remove(diaDiemDTO);
+                }
+            }
+            dataThietLaps.add(dataThietLap);
+        }
+
+        model.addAttribute("maTour", id);
+        model.addAttribute("capPhatMaGia", capPhatIdGiaTour());
+        model.addAttribute("giaTourDTOs", giaTourDTOstmp);
+        model.addAttribute("dataThietLaps", dataThietLaps);
+        model.addAttribute("diaDiemDTOs", diaDiemDTOsTmp);
+        return "tourThietlap";
+    }
+
     public String capPhatId(){
         Utils utils = new Utils();
         return utils.initMaTour("");
+    }
+
+    public String capPhatIdGiaTour(){
+        Utils utils = new Utils();
+        return utils.initMaGia("");
     }
 
     public class Data{
         public TourDTO tourDTO;
         public GiaTourDTO giaTourDTO;
         public LoaiHinhTourDTO loaiHinhTourDTO;
+    }
+
+    public class DataThietLap{
+        public DiaDiemThamQuanDTO diaDiemThamQuanDTO;
+        public DiaDiemDTO diaDiemDTO;
     }
 }

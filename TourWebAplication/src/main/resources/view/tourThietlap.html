@@ -1,501 +1,435 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:insert="inc/header">
     <title>Thiết lập Tour</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
 
-    <link rel="stylesheet" href="./plugins/jqueryui/css/jquery-ui-1-12-1.css">
-    <!-- Pignose Calender -->
-    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
-    <!-- Chartist -->
-    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
-    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
-    <!-- Custom Stylesheet -->
-    <link href="./plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
-    <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <!-- Page plugins css -->
-    <link href="./plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
-    <link href="./plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
-    <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
-    <link href="./css/style-custom.css" rel="stylesheet">
-    <style>
-        .box {
-            padding: 0;
-        }
-
-            .box select {
-                background-color: #7571f9;
-                color: white;
-                padding: 12px;
-                width: 100%;
-                font-size: 0.875rem;
-                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-                -webkit-appearance: button;
-                appearance: button;
-                outline: none;
-            }
-
-            .box:hover::before {
-                color: rgba(255, 255, 255, 0.6);
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-
-            .box select option {
-                padding: 30px;
-            }
-
-        input[type="checkbox"]:after {
-            border: 1px solid #7571f9 !important;
-            margin: auto !important;
-        }
-
-        #DataTable_filter .form-control {
-            border: 1px solid #7571f9;
-            border-radius: 0.5rem;
-        }
-
-        #DataTable_length .form-control {
-            border: 1px solid #7571f9;
-            border-radius: 0.5rem;
-        }
-
-        #DataTables_Table_0_filter .form-control, #DataTables_Table_0_length .form-control {
-            border: 1px solid #7571f9;
-            border-radius: 0.5rem;
-        }
-
-        #DataTables_Table_1_filter .form-control, #DataTables_Table_1_length .form-control {
-            border: 1px solid #7571f9;
-            border-radius: 0.5rem;
-        }
-    </style>
 </head>
 
 <body>
+<div id="main-wrapper">
+    <div th:insert="inc/form-layout"></div>
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
     <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
+    Content body start
+***********************************-->
 
-        <!--**********************************
-        Nav header start
-    ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="./index.html">
-                    <b class="logo-abbr"><img src="./images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
-                    <span class="brand-title">
-                        <img src="./images/logo-text.png" alt="">
-                    </span>
-                </a>
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/tour}">Quản lý tour</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
+                </ol>
             </div>
         </div>
-        <!--**********************************
-        Nav header end
-    ***********************************-->
-        <!--**********************************
-        Header start
-    ***********************************-->
-        <div class="header">
-            <div class="header-content clearfix">
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="toggle-icon"><i class="icon-menu"></i></span>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <ul class="clearfix">
-                        <li class="icons dropdown">Hi</li>
-                        <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="./images/user/form-user.png" height="40" width="40" alt="">
-                            </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="icon-user"></i> <span>Profile</span></a>
-                                        </li>
-                                        <hr class="my-2">
-                                        <li>
-                                            <a href="#"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                        </li>
-                                        <li><a href="./login"><i class="icon-key"></i> <span>Logout</span></a></li>
-                                    </ul>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <a th:href="@{/tour}" style="float:left;">
+                                        <button class="btn btn-primary"><i class="fa fa-arrow-left"
+                                                                           aria-hidden="true"></i> Quay lại
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-        Header end ti-comment-alt
-    ***********************************-->
-        <!--**********************************
-        Sidebar start
-    ***********************************-->
-        <div class="nk-sidebar">
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
-                    <li>
-                        <a href="./index.html">
-                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-label">Apps</li>
-                    <li>
-                        <a href="./loaihinhtour.html">
-                            <i class="icon-grid menu-icon"></i> <span class="nav-text">Quản lý Loại hình tour</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="icon-location-pin"></i> <span class="nav-text">Quản lý Tour</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./diadiem.html">
-                            <i class="icon-map menu-icon"></i> <span class="nav-text">Quản lý Địa điểm</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="icon-pie-chart menu-icon"></i> <span class="nav-text">Quản lý Đoàn du lịch</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-people menu-icon"></i> <span class="nav-text">Nhân viên</span>
-                        </a>
-                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="./nhanvien.html">Quản lý nhân viên</a></li>
-                            <li><a href="#">Thống kê nhân viên</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="./khachhang.html">
-                            <i class="icon-people menu-icon"></i> <span class="nav-text">Quản lý Khách hàng</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-wallet menu-icon"></i> <span class="nav-text">Chi phí</span>
-                        </a>
-                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="./loaichiphi.html">Loại chi phí</a></li>
-                            <li><a href="#">Thống kê chi phí</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="icon-screen-tablet menu-icon"></i> <span class="nav-text">Thống kê doanh thu</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--**********************************
-        Sidebar end
-    ***********************************-->
-        <!--**********************************
-        Content body start
-    ***********************************-->
-
-        <div class="content-body">
-
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="./nhanvien.html">Quản lý tour</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
-                    </ol>
-                </div>
-            </div>
-            <!-- row -->
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12 mb-3">
-                                        <a href="./tour.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
-                                    </div>
-                                </div>
-                                <ul class="nav nav-pills mb-3">
-                                    <li class="nav-item">
-                                        <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Thông tin giá tour</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Thông tin địa điểm tour</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content br-n pn mt-4">
-                                    <!--*****
-                                    Tab 1
-                                    *****-->
-                                    <div id="navpills-1" class="tab-pane active">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-6">
-                                                <h4 style="float:left;">DANH SÁCH GIÁ TOUR</h4>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemGia"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
-                                            </div>
-                                            <div class="modal fade" id="ThemGia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin giá</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post">
-                                                                <div class="form-group">
-                                                                    <label for="magia">Mã giá <span class="text-danger">*</span></label>
-                                                                    <div class="input-group">
-                                                                        <input type="text" name="LoaiChiPhiId" id="magia" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
-                                                                        <div class="input-group-append">
-                                                                            <button id="btn-gia" class="btn btn-outline-dark" type="button" onclick="CapPhatMaGia()"><i class="fa fa-plus"></i></button>
-                                                                        </div>
+                            <ul class="nav nav-pills mb-3">
+                                <li class="nav-item">
+                                    <a href="#navpills-1" class="nav-link active" data-toggle="tab"
+                                       aria-expanded="false">Thông tin giá tour</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Thông
+                                        tin địa điểm tour</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content br-n pn mt-4">
+                                <div class="alert alert-primary" role="alert" th:text="${success}"
+                                     th:if="${success}"></div>
+                                <div class="alert alert-danger" role="alert" th:text="${error}"
+                                     th:if="${error}"></div>
+                                <!--*****
+                                Tab 1
+                                *****-->
+                                <div id="navpills-1" class="tab-pane active">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h4 style="float:left;">DANH SÁCH GIÁ TOUR</h4>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary" style="float:right;" data-toggle="modal"
+                                                    data-target="#ThemGia"><span
+                                                    style="margin-right: 10px">Thêm mới </span><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                        <div class="modal fade" id="ThemGia" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                            style="margin: auto;">Thông tin giá</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" th:action="@{/tour/thietlap/themGia}">
+                                                            <div class="form-group">
+                                                                <label for="magia">Mã giá <span
+                                                                        class="text-danger">*</span></label>
+                                                                <div class="input-group">
+                                                                    <input th:if="${maTour}" th:value="${maTour}"
+                                                                           type="hidden" name="maTour"/>
+                                                                    <input type="text" name="maGia" id="maGia"
+                                                                           class="form-control"
+                                                                           placeholder="Số liệu tự cấp phát.."
+                                                                           readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <button id="btn-gia"
+                                                                                class="btn btn-outline-dark"
+                                                                                type="button" onclick="CapPhatMaGia()">
+                                                                            <i class="fa fa-plus"></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="giatour">Giá tour <span class="text-danger">*</span></label>
-                                                                    <input type="number" name="GiaTour" class="form-control" placeholder="Nhập giá..." required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Giá tour <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="number" name="giaTour" class="form-control"
+                                                                       placeholder="Nhập giá..." required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ngày bắt đầu <span
+                                                                        class="text-danger">*</span></label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control mydatepicker"
+                                                                           name="ngayBD" placeholder="mm/dd/yyyy"
+                                                                           required> <span
+                                                                        class="input-group-append"><span
+                                                                        class="input-group-text"><i
+                                                                        class="mdi mdi-calendar-check"></i></span></span>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="ngaysinh">Ngày bắt đầu <span class="text-danger">*</span></label>
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control mydatepicker" name="NgayBD" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-                                                                    </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ngày kết thúc <span class="text-danger">*</span></label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control mydatepicker"
+                                                                           name="ngayKT" placeholder="mm/dd/yyyy"
+                                                                           required> <span
+                                                                        class="input-group-append"><span
+                                                                        class="input-group-text"><i
+                                                                        class="mdi mdi-calendar-check"></i></span></span>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="ngaysinh">Ngày kết thúc <span class="text-danger">*</span></label>
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control mydatepicker" name="NgayKT" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-                                                                    </div>
-                                                                </div>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-primary" style="float:right;">
-                                                            </form>
-                                                        </div>
+                                                            </div>
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Cancel
+                                                            </button>
+                                                            <input type="submit" value="Thêm mới" name="themmoi"
+                                                                   class="btn btn-primary" style="float:right;">
+                                                        </form>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover zero-configuration dataTable">
-                                                    <thead class="text-primary">
-                                                        <tr>
-                                                            <th class="th-center-bold">#</th>
-                                                            <th class="th-center-bold">Mã giá</th>
-                                                            <th class="th-center-bold">Giá tiền</th>
-                                                            <th class="th-center-bold">Ngày bắt đầu</th>
-                                                            <th class="th-center-bold">Ngày kết thúc</th>
-                                                            <th class="th-center-bold">Áp dụng</th>
-                                                            <th class="th-center-bold">Sửa</th>
-                                                            <th class="th-center-bold">Xóa</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!--@if (Model.phongBanDTOs.Count == 0)
-                                                    {
-                                                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
-                                                    }
-                                                    else
-                                                    {
-                                                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
-                                                        {-->
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>0000001</td>
-                                                            <td>2000</td>
-                                                            <td>14/02/2022</td>
-                                                            <td>11/03/2022</td>
-                                                            <td class="td-center">
-                                                                <form method="post">
-                                                                    <input value="GiaTourId" type="hidden" name="id" />
-                                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>
-                                                                </form>
-                                                            </td>
-                                                            <td class="td-center">
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SuaGiaTourId">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </button>
-                                                            </td>
-                                                            <td class="td-center">
-                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaGiaTourId">
-                                                                    <i class="fa fa-close"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <div class="modal fade" id="SuaGiaTourId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin giá</h3>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form method="post">
-                                                                            <div class="form-group">
-                                                                                <label for="magia">Mã giá <span class="text-danger">*</span></label>
-                                                                                <div class="input-group">
-                                                                                    <input value="GT000001" type="text" name="MaGiaId" id="magia" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="giatour">Giá tour <span class="text-danger">*</span></label>
-                                                                                <input value="2500" type="number" name="GiaTour" class="form-control" placeholder="Nhập giá..." required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ngaysinh">Ngày bắt đầu <span class="text-danger">*</span></label>
-                                                                                <div class="input-group">
-                                                                                    <input value="02/04/2022" type="text" class="form-control mydatepicker" name="NgayBD" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ngaysinh">Ngày kết thúc <span class="text-danger">*</span></label>
-                                                                                <div class="input-group">
-                                                                                    <input value="03/05/2022" type="text" class="form-control mydatepicker" name="NgayKT" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                            <input type="submit" value="Sửa thông tin" name="themmoi" class="btn btn-primary" style="float:right;">
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal fade" id="XoaGiaTourId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Bạn chắc chắn muốn xoá<br>loại chi phí 0000001?</h3>
-                                                                    </div>
-                                                                    <div class="modal-footer" style="margin: auto;">
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                                                                        <form method="post" asp-controller="PhongBan" asp-action="Remove">
-                                                                            <button name="id" type="submit" class="btn btn-danger" value="LoaiChiPhiId">Xóa loại chi phí</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </tbody>
-                                                </table>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--*****
-                                Tab 2
-                                *****-->
-                                    <div id="navpills-2" class="tab-pane">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-6">
-                                                <h4 style="float:left;">DANH SÁCH ĐỊA ĐIỂM TOUR</h4>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemDiaDiem"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
-                                            </div>
-                                            <div class="modal fade" id="ThemDiaDiem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin địa điểm</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post">
-                                                                <div class="form-group">
-                                                                    <label for="gioitinh">Địa điểm <span class="text-danger">*</span></label>
-                                                                    <select class="form-control" name="DiaDiem" required>
-                                                                        <option value="">-- Chọn địa điểm --</option>
-                                                                        <!-- for danh sách địa điểm -->
-                                                                        <option value="Mã">mã - tên</option>
-                                                                    </select>
-                                                                </div>
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-primary" style="float:right;">
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover zero-configuration dataTable">
-                                                    <thead class="text-primary">
-                                                        <tr>
-                                                            <th class="th-center-bold">#</th>
-                                                            <th class="th-center-bold">Mã địa điểm</th>
-                                                            <th class="th-center-bold">Tên địa điểm</th>
-                                                            <th class="th-center-bold">Thứ tự</th>
-                                                            <th class="th-center-bold">Xóa</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!--@if (Model.phongBanDTOs.Count == 0)
-                                                    {
-                                                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
-                                                    }
-                                                    else
-                                                    {
-                                                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
-                                                        {-->
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>0000001</td>
-                                                            <td>ABC</td>
-                                                            <td>1</td>
-                                                            <td class="td-center">
-                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaDiaDiemId">
-                                                                    <i class="fa fa-close"></i>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th class="th-center-bold">#</th>
+                                                    <th class="th-center-bold">Mã giá</th>
+                                                    <th class="th-center-bold">Giá tiền</th>
+                                                    <th class="th-center-bold">Ngày bắt đầu</th>
+                                                    <th class="th-center-bold">Ngày kết thúc</th>
+                                                    <th class="th-center-bold">Áp dụng</th>
+                                                    <th class="th-center-bold">Sửa</th>
+                                                    <th class="th-center-bold">Xóa</th>
+                                                </tr>
+                                                </thead>
+                                                <div th:if="${giaTourDTOs}">
+                                                    <tbody th:each="giatour : ${giaTourDTOs}" th:remove="tag">
+                                                    <!--@if (Model.phongBanDTOs.Count == 0)
+                                                {
+                                                    <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+                                                }
+                                                else
+                                                {
+                                                    @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                                                    {-->
+                                                    <tr>
+                                                        <td th:text="${giaTourDTOs.indexOf(giatour)} + 1"></td>
+                                                        <td th:text="${giatour.maGia}"></td>
+                                                        <td th:text="${giatour.thanhTien}"></td>
+                                                        <td th:text="${giatour.tgBatDau}"></td>
+                                                        <td th:text="${giatour.tgKetThuc}"></td>
+                                                        <td class="td-center">
+                                                            <form method="post" th:action="@{/tour/apdunggiatour}">
+                                                                <input th:value="${giatour.maTour}" type="hidden"
+                                                                       name="maTour"/>
+                                                                <input th:value="${giatour.maGia}" type="hidden"
+                                                                       name="maGia"/>
+                                                                <button type="submit" class="btn btn-primary"
+                                                                        th:if="${giatour.hienHanh} == 1" disabled>
+                                                                    <i class="fa fa-check"></i>
                                                                 </button>
-                                                            </td>
-                                                        </tr>
-                                                        <div class="modal fade" id="XoaDiaDiemId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Bạn chắc chắn muốn xoá<br>địa điểm 0000001?</h3>
-                                                                    </div>
-                                                                    <div class="modal-footer" style="margin: auto;">
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                                                                        <form method="post">
-                                                                            <button name="id" type="submit" class="btn btn-danger" value="DiaDiemId">Xóa địa điểm</button>
-                                                                        </form>
-                                                                    </div>
+                                                                <button type="submit" class="btn btn-primary"
+                                                                        th:unless="${giatour.hienHanh} == 1">
+                                                                    <i class="fa fa-check"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                        <td class="td-center">
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-toggle="modal"
+                                                                    th:data-target="'#SuaGiaTourId' + ${giatour.maGia}">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td class="td-center">
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-toggle="modal"
+                                                                    th:data-target="'#XoaGiaTourId' + ${giatour.maGia}">
+                                                                <i class="fa fa-close"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <div class="modal fade" th:id="'SuaGiaTourId' + ${giatour.maGia}"
+                                                         tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                        style="margin: auto;">Thông tin giá</h3>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post"
+                                                                          th:action="@{/tour/thietlap/suaGia}">
+                                                                        <div class="form-group">
+                                                                            <label for="magia">Mã giá <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <div class="input-group">
+                                                                                <input th:value="${giatour.maTour}"
+                                                                                       type="hidden" name="maTour"/>
+                                                                                <input th:value="${giatour.maGia}"
+                                                                                       type="text"
+                                                                                       name="maGia" id="maGia"
+                                                                                       class="form-control"
+                                                                                       placeholder="Số liệu tự cấp phát.."
+                                                                                       readonly="readonly">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Giá tour <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <input th:value="${giatour.thanhTien}"
+                                                                                   type="number"
+                                                                                   name="giaTour" class="form-control"
+                                                                                   placeholder="Nhập giá..." required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Ngày bắt đầu <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <div class="input-group">
+                                                                                <input th:value="${giatour.tgBatDau}"
+                                                                                       type="text"
+                                                                                       class="form-control mydatepicker"
+                                                                                       name="ngayBD"
+                                                                                       placeholder="mm/dd/yyyy"
+                                                                                       required> <span
+                                                                                    class="input-group-append"><span
+                                                                                    class="input-group-text"><i
+                                                                                    class="mdi mdi-calendar-check"></i></span></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Ngày kết thúc <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <div class="input-group">
+                                                                                <input th:value="${giatour.tgKetThuc}"
+                                                                                       type="text"
+                                                                                       class="form-control mydatepicker"
+                                                                                       name="ngayKT"
+                                                                                       placeholder="mm/dd/yyyy"
+                                                                                       required> <span
+                                                                                    class="input-group-append"><span
+                                                                                    class="input-group-text"><i
+                                                                                    class="mdi mdi-calendar-check"></i></span></span>
+                                                                                <input th:value="${giatour.hienHanh}"
+                                                                                       type="hidden" name="hienHanh"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <button type="button" class="btn btn-danger"
+                                                                                data-dismiss="modal">Cancel
+                                                                        </button>
+                                                                        <input type="submit" value="Sửa thông tin"
+                                                                               name="themmoi" class="btn btn-primary"
+                                                                               style="float:right;">
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="modal fade" th:id="'XoaGiaTourId' + ${giatour.maGia}"
+                                                         tabindex="-1"
+                                                         role="dialog" aria-labelledby="exampleModalLabel"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                        style="margin: auto;text-align: center;">Bạn
+                                                                        chắc chắn muốn xoá<br
+                                                                                th:text="'loại chi phí ' + ${giatour.maGia} + '?'">
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="modal-footer" style="margin: auto;">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                            data-dismiss="modal">Hủy
+                                                                    </button>
+                                                                    <form method="post"
+                                                                          th:action="@{/tour/thietlap/xoaGia}">
+                                                                        <input th:value="${giatour.maTour}"
+                                                                               type="hidden" name="maTour"/>
+                                                                        <button name="maGia" type="submit"
+                                                                                class="btn btn-danger"
+                                                                                th:value="${giatour.maGia}">Xóa loại chi
+                                                                            phí
+                                                                        </button>
+                                                                        <input th:value="${giatour.hienHanh}"
+                                                                               type="hidden" name="hienHanh"/>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     </tbody>
-                                                </table>
+                                                </div>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--*****
+                            Tab 2
+                            *****-->
+                                <div id="navpills-2" class="tab-pane">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h4 style="float:left;">DANH SÁCH ĐỊA ĐIỂM TOUR</h4>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary" style="float:right;" data-toggle="modal"
+                                                    data-target="#ThemDiaDiem"><span
+                                                    style="margin-right: 10px">Thêm mới </span><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                        <div class="modal fade" id="ThemDiaDiem" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                            style="margin: auto;">Thông tin địa điểm</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form th:if="${diaDiemDTOs} and ${maTour}" th:action="@{/tour/thietlap/themDiaDiemThamQuan}" method="post">
+                                                            <div class="form-group">
+                                                                <label>Địa điểm <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input th:value="${maTour}"
+                                                                       type="hidden" name="maTour"/>
+                                                                <select class="form-control" name="maDiaDiem" required>
+                                                                    <option value="">-- Chọn địa điểm --</option>
+                                                                    <!-- for danh sách địa điểm -->
+                                                                    <option th:each="diaDiem: ${diaDiemDTOs}"
+                                                                            th:value="${diaDiem.maDiaDiem}"
+                                                                            th:text="${diaDiem.maDiaDiem} + ' - ' + ${diaDiem.tenDiaDiem}"></option>
+                                                                </select>
+                                                            </div>
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-dismiss="modal">Cancel
+                                                            </button>
+                                                            <input type="submit" value="Thêm mới" name="themmoi"
+                                                                   class="btn btn-primary" style="float:right;">
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th class="th-center-bold">#</th>
+                                                    <th class="th-center-bold">Mã địa điểm</th>
+                                                    <th class="th-center-bold">Tên địa điểm</th>
+                                                    <th class="th-center-bold">Thứ tự</th>
+                                                    <th class="th-center-bold">Xóa</th>
+                                                </tr>
+                                                </thead>
+                                                <div th:if="${dataThietLaps}">
+                                                    <tbody th:each="data: ${dataThietLaps}" th:remove="tag">
+                                                    <!--@if (Model.phongBanDTOs.Count == 0)
+                                                {
+                                                    <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+                                                }
+                                                else
+                                                {
+                                                    @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                                                    {-->
+                                                    <tr>
+                                                        <td th:text="${dataThietLaps.indexOf(data)} + 1">1</td>
+                                                        <td th:text="${data.diaDiemDTO.maDiaDiem}"></td>
+                                                        <td th:text="${data.diaDiemDTO.tenDiaDiem}"></td>
+                                                        <td th:text="${data.diaDiemThamQuanDTO.thuTu}"></td>
+                                                        <td class="td-center">
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-toggle="modal"
+                                                                    th:data-target="'#XoaDiaDiemId' + ${data.diaDiemDTO.maDiaDiem}">
+                                                                <i class="fa fa-close"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <div class="modal fade" th:id="'XoaDiaDiemId' + ${data.diaDiemDTO.maDiaDiem}" tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                        style="margin: auto;text-align: center;"
+                                                                        th:text="'Bạn chắc chắn muốn xoá<br>địa điểm ' + ${data.diaDiemDTO.maDiaDiem} + '?'"></h3>
+                                                                </div>
+                                                                <div class="modal-footer" style="margin: auto;">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                            data-dismiss="modal">Hủy
+                                                                    </button>
+                                                                    <form method="post" th:action="@{/tour/thietlap/xoaDiaDiemThamQuan}">
+                                                                        <input th:value="${data.diaDiemThamQuanDTO.maTour}"
+                                                                               type="hidden" name="maTour"/>
+                                                                        <button name="maDiaDiem" type="submit"
+                                                                                class="btn btn-danger"
+                                                                                th:value="${data.diaDiemThamQuanDTO.maDiaDiem}">Xóa địa điểm
+                                                                        </button>
+                                                                        <input th:value="${data.diaDiemThamQuanDTO.thuTu}"
+                                                                               type="hidden" name="thuTu"/>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </tbody>
+                                                </div>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -504,86 +438,22 @@
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <script>
-            function CapPhatMaGia() {
-                $('#magia').val('GT000001');
-                $('#btn-gia').prop('disabled', true);
-            }
-        </script>
-
-
-        <!--**********************************
-        Content body end
-    ***********************************-->
-        <!--**********************************
-        Footer start
-    ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
-        </div>
-        <!--**********************************
-        Footer end
-    ***********************************-->
+        <!-- #/ container -->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script>
-        function checkDel() {
-            if ($("#checkBoxAll").is(":checked")) {
-                $(".chkCheckBoxId").prop("checked", true);
-                $("#btnDel").prop("disabled", false);
-            }
-            else {
-                $(".chkCheckBoxId").prop("checked", false);
-                $("#btnDel").prop("disabled", true);
-            }
-        }
-        function checkSingleDel() {
-            if ($(".chkCheckBoxId").is(":checked")) {
-                $("#btnDel").prop("disabled", false);
-            }
-            else {
-                $("#btnDel").prop("disabled", true);
-            }
+    <script th:inline="javascript">
+        function CapPhatMaGia() {
+            $('#maGia').val([[${capPhatMaGia}]]);
+            $('#btn-gia').prop('disabled', true);
         }
     </script>
 
-    <script src="./plugins/common/common.min.js"></script>
-    <script src="./js/custom.min.js"></script>
-    <script src="./js/settings.js"></script>
-    <script src="./js/gleek.js"></script>
-    <script src="./js/styleSwitcher.js"></script>
 
-    <script src="./plugins/jquery/jquery.min.js"></script>
-    <script src="./js/js-custom.js"></script>
-
-    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
-    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
-
-    <script src="./plugins/moment/moment.js"></script>
-    <script src="./plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-    <!-- Clock Plugin JavaScript -->
-    <script src="./plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
-    <!-- Color Picker Plugin JavaScript -->
-    <script src="./plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
-    <script src="./plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
-    <script src="./plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
-    <!-- Date Picker Plugin JavaScript -->
-    <script src="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- Form Picker Init JavaScript -->
-    <script src="./js/plugins-init/form-pickers-init.js"></script>
-
-    <!-- jQuery UI library -->
-    <script src="./plugins/jqueryui/js/jquery-ui-1-12-1.js"></script>
+    <!--**********************************
+    Content body end
+***********************************-->
+    <div th:insert="inc/footer"></div>
+</div>
 </body>
 
 </html>
