@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="inc/header">
+    <title>Thêm tour</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+<div id="main-wrapper">
+    <div th:insert="inc/form-layout"></div>
+    <!--**********************************
+        Content body start
+    ***********************************-->
+
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="./nhanvien.html">Quản lý tour</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <a href="./tour.html" style="float:left;">
+                                        <button class="btn btn-primary"><i class="fa fa-arrow-left"
+                                                                           aria-hidden="true"></i> Quay lại
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div th:if="${loaiHinhTourDTOs} and ${loaiHinhTourDTOs}">
+                                <form id="themTour" th:action="@{/tour/them}" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-3"><h3>Thông tin tour</h3></div>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="matour">Mã tour <span
+                                                                class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input id="matour" class="form-control" type="text"
+                                                                   placeholder="Dữ liệu cấp phát…" name="maTour"
+                                                                   readonly="readonly">
+                                                            <div class="input-group-append">
+                                                                <button id="btn-tour" class="btn btn-outline-dark"
+                                                                        type="button" onclick="CapPhatMaTour()"><i
+                                                                        class="fa fa-plus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Tên tour <span class="text-danger">*</span></label>
+                                                        <input type="text" name="tenTour" class="form-control"
+                                                               placeholder="Nhập tên..." required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Loại hình <span class="text-danger">*</span></label>
+                                                        <select class="form-control" name="loaiHinh" required>
+                                                            <option value="">-- Chọn loại hình --</option>
+                                                            <!-- for option list loaihinh -->
+                                                            <option th:each="loaiHinhTourDTO : ${loaiHinhTourDTOs}"
+                                                                    th:value="${loaiHinhTourDTO.maLoai}"
+                                                                    th:text="${loaiHinhTourDTO.maLoai} + ' - ' + ${loaiHinhTourDTO.tenLoai}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="dacdiem">Đặc điểm <span class="text-danger">*</span></label>
+                                                        <textarea class="form-control h-150px" rows="5" id="dacDiem"
+                                                                  form="themTour" name="dacDiem"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Giá tour <span class="text-danger">*</span></label>
+                                                        <input type="number" name="giaTour" class="form-control"
+                                                               placeholder="Nhập giá..." required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Ngày bắt đầu <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker"
+                                                                   name="ngayBD" placeholder="mm/dd/yyyy" required>
+                                                            <span class="input-group-append"><span
+                                                                    class="input-group-text"><i
+                                                                    class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Ngày kết thúc <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker"
+                                                                   name="ngayKT" placeholder="mm/dd/yyyy" required>
+                                                            <span class="input-group-append"><span
+                                                                    class="input-group-text"><i
+                                                                    class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-12 td-center">
+                                            <button type="submit" class="btn btn-primary">Thêm tour</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+    <script th:inline="javascript">
+        function CapPhatMaTour() {
+            $('#matour').val([[${maTour}]]);
+            $('#btn-tour').prop('disabled', true);
+        }
+    </script>
+
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+    <div th:insert="inc/footer"></div>
+</div>
+</body>
+
+</html>
