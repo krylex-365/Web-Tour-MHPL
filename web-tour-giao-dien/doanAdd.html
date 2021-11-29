@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sửa tour</title>
+    <title>Thêm đoàn</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -223,7 +223,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="./nhanvien.html">Quản lý tour</a></li>
+                        <li class="breadcrumb-item"><a href="./doan.html">Quản lý đoàn</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
                     </ol>
                 </div>
@@ -237,55 +237,69 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
-                                        <a href="./tour.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                                        <a href="./doan.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
                                     </div>
                                 </div>
-                                <form id="themTour" method="post">
+                                <form id="themDoan" method="post">
                                     <div class="row">
-                                        <div class="col-lg-12 mb-3"><h3>Sửa thông tin tour</h3></div>
+                                        <div class="col-lg-12 mb-3"><h3>Thông tin đoàn</h3></div>
                                         <div class="col-lg-12">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="matour">Mã tour <span class="text-danger">*</span></label>
+                                                        <label for="madoan">Mã đoàn <span class="text-danger">*</span></label>
                                                         <div class="input-group">
-                                                            <input value="TR000001" id="matour" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="TourId" readonly="readonly">
+                                                            <input id="madoan" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="DoanId" readonly="readonly">
+                                                            <div class="input-group-append">
+                                                                <button id="btn-tour" class="btn btn-outline-dark" type="button" onclick="CapPhatMaDoan()"><i class="fa fa-plus"></i></button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="tentour">Tên tour <span class="text-danger">*</span></label>
-                                                        <input value="Nha Trang - Da Nang" type="text" name="TenTour" class="form-control" placeholder="Nhập tên..." required>
+                                                        <label for="tendoan">Tên đoàn <span class="text-danger">*</span></label>
+                                                        <input type="text" name="TenDoan" class="form-control" placeholder="Nhập tên..." required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="loaihinh">Loại hình <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="LoaiHinh" required>
-                                                            <!-- trước tiên cho <option value="mã loại của thằng sửa">mã - tên loại của thẳng sửa</option> -->
-                                                            <!-- sau đó for option list loaihinh -->
-                                                            <!-- thằng nào có mã = mã của thằng sửa thì bỏ qua không hiện option ra -->
-                                                            <!--<option value="LH000002">LH000002 - Tham quan</option>-->
-                                                            <!-- Dưới đây là đoạn code c# hồi đó
-
-                                                            <option value="@Model.quanLyNhanVien.CongViecId">@Model.quanLyNhanVien.TenCongViec</option>
-                                                            @foreach (CongViecDTO congViecDTO in Model.congViecDTOs)
-                                                            {
-                                                                if (congViecDTO.CongViecId == Model.quanLyNhanVien.CongViecId)
-                                                                {
-                                                                    continue;
-                                                                }
-                                                                <option value="@congViecDTO.CongViecId">@congViecDTO.TenCongViec</option>
-                                                            }
-                                                            -->
+                                                        <label for="matour">Tour <span class="text-danger">*</span></label>
+                                                        <select id="giaTour" class="form-control" name="matour" onchange="setGia()" required>
+                                                            <option value="">-- Chọn tour --</option>
+                                                            <!-- for option list tour -->
+                                                            <option value="TR000001">TR000001 - tên - 2500</option>
+                                                            <option value="TR000002">TR000002 - tên - 2400</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="dacdiem">Đặc điểm <span class="text-danger">*</span></label>
-                                                        <textarea class="form-control h-150px" rows="5" id="DacDiem" form="themTour" name="dacdiem"><!--đưa biến đặc điểm vào đây--></textarea>
+                                                        <label for="chitiet">Chi tiết <span class="text-danger">*</span></label>
+                                                        <textarea class="form-control h-150px" rows="5" id="ChiTiet" form="themDoan" name="chitiet"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="giatour">Giá đoàn <span class="text-danger">*</span></label>
+                                                        <input id="giaDoan" type="number" name="GiaTour" class="form-control" placeholder="Nhập giá..." required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ngay">Ngày khởi hành <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker" name="NgayKH" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ngay">Ngày kết thúc <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker" name="NgayKT" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -293,7 +307,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-12 td-center">
-                                            <button type="submit" class="btn btn-primary">Sửa thông tin tour</button>
+                                            <button type="submit" class="btn btn-primary">Thêm đoàn</button>
                                         </div>
                                     </div>
                                 </form>
@@ -304,6 +318,25 @@
             </div>
             <!-- #/ container -->
         </div>
+        <script>
+            function CapPhatMaDoan() {
+                $('#madoan').val('DL000001');
+                $('#btn-doan').prop('disabled', true);
+            }
+
+            function setGia() {
+                var option = $('#giaTour').find(':selected').text();
+                var text = option.split("-")
+                var gia = text[2]
+                console.log(gia)
+                if (gia === ' Chọn tour ') {
+                    $('#giaDoan').val('');
+                } else {
+                    $('#giaDoan').val(parseInt(gia));
+                }
+                
+            }
+        </script>
 
 
         <!--**********************************

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sửa tour</title>
+    <title>Quản lý Đoàn</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -222,9 +222,8 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="./nhanvien.html">Quản lý tour</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
+                        <li class="breadcrumb-item"><a href="./index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Quản lý đoàn</li>
                     </ol>
                 </div>
             </div>
@@ -235,76 +234,142 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12 mb-3">
-                                        <a href="./tour.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                                <div class="card-title row">
+                                    <div class="col-md-12 mb-4">
+                                        <h3 class="td-center">DANH SÁCH ĐOÀN DU LỊCH</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <!--<a asp-controller="QuanLyNhanVien" asp-action="Index" style="float:right;"><button class="btn btn-primary">Quay lại <i class="fa fa-undo" aria-hidden="true"></i></button></a>-->
+                                        <a href="./doanAdd.html" style="float:right;">
+                                            <button class="btn btn-primary"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
+                                        </a>
                                     </div>
                                 </div>
-                                <form id="themTour" method="post">
-                                    <div class="row">
-                                        <div class="col-lg-12 mb-3"><h3>Sửa thông tin tour</h3></div>
-                                        <div class="col-lg-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="matour">Mã tour <span class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                                            <input value="TR000001" id="matour" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="TourId" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="tentour">Tên tour <span class="text-danger">*</span></label>
-                                                        <input value="Nha Trang - Da Nang" type="text" name="TenTour" class="form-control" placeholder="Nhập tên..." required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="loaihinh">Loại hình <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="LoaiHinh" required>
-                                                            <!-- trước tiên cho <option value="mã loại của thằng sửa">mã - tên loại của thẳng sửa</option> -->
-                                                            <!-- sau đó for option list loaihinh -->
-                                                            <!-- thằng nào có mã = mã của thằng sửa thì bỏ qua không hiện option ra -->
-                                                            <!--<option value="LH000002">LH000002 - Tham quan</option>-->
-                                                            <!-- Dưới đây là đoạn code c# hồi đó
-
-                                                            <option value="@Model.quanLyNhanVien.CongViecId">@Model.quanLyNhanVien.TenCongViec</option>
-                                                            @foreach (CongViecDTO congViecDTO in Model.congViecDTOs)
-                                                            {
-                                                                if (congViecDTO.CongViecId == Model.quanLyNhanVien.CongViecId)
-                                                                {
-                                                                    continue;
-                                                                }
-                                                                <option value="@congViecDTO.CongViecId">@congViecDTO.TenCongViec</option>
-                                                            }
-                                                            -->
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="dacdiem">Đặc điểm <span class="text-danger">*</span></label>
-                                                        <textarea class="form-control h-150px" rows="5" id="DacDiem" form="themTour" name="dacdiem"><!--đưa biến đặc điểm vào đây--></textarea>
-                                                    </div>
-                                                </div>
+                                <div class="table-responsive">
+                                    <table id="DataTable" class="table table-bordered table-hover zero-configuration">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th style="width:5%;" class="th-center-bold">#</th>
+                                                <th style="width:15%;" class="th-center-bold">Mã đoàn</th>
+                                                <th style="width:20%;" class="th-center-bold">Tên đoàn</th>
+                                                <th style="width:12%;" class="th-center-bold">Giá đoàn</th>
+                                                <th style="width:14%;" class="th-center-bold">Ngày khởi hành</th>
+                                                <th style="width:14%;" class="th-center-bold">Ngày kết thúc</th>
+                                                <th style="width:5%;" class="th-center-bold">Chi tiết</th>
+                                                <th style="width:5%;" class="th-center-bold">Thiết lập</th>
+                                                <th style="width:5%;" class="th-center-bold">Sửa</th>
+                                                <th style="width:5%;" class="th-center-bold">Xóa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:5%;">1</td>
+                                                <td style="width:15%;">DoanId</td>
+                                                <td style="width:20%;">TenDoan</td>
+                                                <td style="width:12%;">1500</td>
+                                                <td style="width:14%;">12/01/2021</td>
+                                                <td style="width:14%;">12/31/2021</td>
+                                                <td class="td-center" style="width:5%;">
+                                                    <a href="#">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChiTietDoan"><i class="fa fa-info"></i></button>
+                                                    </a>
+                                                </td>
+                                                <td class="td-center" style="width:5%;">
+                                                    <form method="post">
+                                                        <input value="DoanId" type="hidden" name="id" />
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-cog"></i></button>
+                                                    </form>
+                                                </td>
+                                                <td class="td-center" style="width:5%;">
+                                                    <form method="post">
+                                                        <input value="DoanId" type="hidden" name="id" />
+                                                        <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                                                    </form>
+                                                </td>
+                                                <td class="td-center" style="width:5%;">
+                                                    <a>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#XoaDoanId"><i class="fa fa-close"></i></button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <!-- đưa model vào đây -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
+                {-->
+                <div class="modal fade bd-example-modal-lg" id="ChiTietDoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitle" style="color:#7571f9;">Thông tin đoàn</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Mã đoàn:</h6>
+                                                <p> NhanVienId </p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Tên đoàn:</h6>
+                                                <p> TenNhanVien </p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Loại hình:</h6>
+                                                <p> @quanLyNhanVien1.TenPhongBan </p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Giá đoàn:</h6>
+                                                <p> @quanLyNhanVien1.NgaySinh </p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Ngày khởi hành:</h6>
+                                                <p> @quanLyNhanVien1.SDT </p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Ngày kết thúc:</h6>
+                                                <p> @quanLyNhanVien1.DiaChi </p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-bottom: 10px">
+                                                <h6 style="color:#ea5774;font-weight:500;">Chi tiết:</h6>
+                                                <p> @quanLyNhanVien1.DiaChi </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-lg-12 td-center">
-                                            <button type="submit" class="btn btn-primary">Sửa thông tin tour</button>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="XoaDoanId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Are you sure to delete this: </h3>
+                            </div>
+                            <div class="modal-footer" style="margin: auto;">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                <form method="post">
+                                    <button name="id" type="submit" class="btn btn-danger" value="DoanId">Yes, delete it !</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <!-- #/ container -->
         </div>
-
 
         <!--**********************************
             Content body end
