@@ -12,7 +12,7 @@ import java.sql.*;
  * @author minhk
  */
 public class Connect {
-    private static  String dbURL = "jdbc:sqlserver://LINHLV:1433;databaseName=TOURDULICH;user=linh;password=12345678;";
+    private static  String dbURL = "jdbc:sqlserver://21AK22-COM:1433;databaseName=TOURDULICH;user=sa;password=123456789;";
     // Linh: jdbc:sqlserver://LINHLV:1433;databaseName=TOURDULICH;user=linh;password=12345678;
     // NKiệt: jdbc:sqlserver://DESKTOP-7P1UPJS:1433;databaseName=TOURDULICH;user=sa;password=123456789;
     
