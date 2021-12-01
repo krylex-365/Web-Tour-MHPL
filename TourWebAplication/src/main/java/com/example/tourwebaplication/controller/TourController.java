@@ -127,7 +127,7 @@ public class TourController {
                            String giaTour, String ngayBD, String ngayKT, RedirectAttributes redirectAttributes) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            Date tgBD = tgBD = simpleDateFormat.parse(ngayBD);
+            Date tgBD = simpleDateFormat.parse(ngayBD);
             Date tgKT = simpleDateFormat.parse(ngayKT);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ngayBD = format.format(tgBD);

@@ -94,7 +94,7 @@ public class DoanDuLichBUS {
         return -1;
     }
 
-    public boolean themDoan(DoanDuLichDTO doanDuLichDTO, ArrayList<DoanDuLichDTO> doanDuLichDTOs) {
+    public boolean themDoan(DoanDuLichDTO doanDuLichDTO/*, ArrayList<DoanDuLichDTO> doanDuLichDTOs*/) {
         for (DoanDuLichDTO doan : doanDuLichDTOs) {
             if (doan.getMaDoan().equals(doanDuLichDTO.getMaDoan())) {
                 return false;

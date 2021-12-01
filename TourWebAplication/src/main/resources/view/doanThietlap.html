@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Thiết lập Đoàn</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+
+    <link rel="stylesheet" href="./plugins/jqueryui/css/jquery-ui-1-12-1.css">
+    <!-- Pignose Calender -->
+    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <!-- Custom Stylesheet -->
+    <link href="./plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="./plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="./plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/style-custom.css" rel="stylesheet">
+    <style>
+        .box {
+            padding: 0;
+        }
+
+            .box select {
+                background-color: #7571f9;
+                color: white;
+                padding: 12px;
+                width: 100%;
+                font-size: 0.875rem;
+                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+                -webkit-appearance: button;
+                appearance: button;
+                outline: none;
+            }
+
+            .box:hover::before {
+                color: rgba(255, 255, 255, 0.6);
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .box select option {
+                padding: 30px;
+            }
+
+        input[type="checkbox"]:after {
+            border: 1px solid #7571f9 !important;
+            margin: auto !important;
+        }
+
+        #DataTable_filter .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+
+        #DataTable_length .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+
+        #DataTables_Table_0_filter .form-control, #DataTables_Table_0_length .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+
+        #DataTables_Table_1_filter .form-control, #DataTables_Table_1_length .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+
+        #DataTables_Table_2_filter .form-control, #DataTables_Table_2_length .form-control {
+            border: 1px solid #7571f9;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="./index.html">
+                    <b class="logo-abbr"><img src="./images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="./images/logo-text.png" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content clearfix">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown">Hi</li>
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="./images/user/form-user.png" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><i class="icon-user"></i> <span>Profile</span></a>
+                                        </li>
+                                        <hr class="my-2">
+                                        <li>
+                                            <a href="#"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                        </li>
+                                        <li><a href="./login"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li>
+                        <a href="./index.html">
+                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-label">Apps</li>
+                    <li>
+                        <a href="./loaihinhtour.html">
+                            <i class="icon-grid menu-icon"></i> <span class="nav-text">Quản lý Loại hình tour</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="icon-location-pin"></i> <span class="nav-text">Quản lý Tour</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./diadiem.html">
+                            <i class="icon-map menu-icon"></i> <span class="nav-text">Quản lý Địa điểm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="icon-pie-chart menu-icon"></i> <span class="nav-text">Quản lý Đoàn du lịch</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-people menu-icon"></i> <span class="nav-text">Nhân viên</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                            <li><a href="./nhanvien.html">Quản lý nhân viên</a></li>
+                            <li><a href="#">Thống kê nhân viên</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="./khachhang.html">
+                            <i class="icon-people menu-icon"></i> <span class="nav-text">Quản lý Khách hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-wallet menu-icon"></i> <span class="nav-text">Chi phí</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                            <li><a href="./loaichiphi.html">Loại chi phí</a></li>
+                            <li><a href="#">Thống kê chi phí</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="icon-screen-tablet menu-icon"></i> <span class="nav-text">Thống kê doanh thu</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+        <!--**********************************
+            Content body start
+        ***********************************-->
+
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="./doan.html">Quản lý đoàn</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thiết lập đoàn</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <a href="./doan.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-pills mb-3">
+                                    <li class="nav-item">
+                                        <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Nhân viên của đoàn</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Khách của đoàn</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="false">Chi phí của đoàn</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content br-n pn mt-4">
+                                    <!--*****
+                                    Tab 1
+                                    *****-->
+                                    <div id="navpills-1" class="tab-pane active">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <h4 style="float:left;">DANH SÁCH NHÂN VIÊN - ĐOÀN</h4>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemNhanVien"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <div class="modal fade" id="ThemNhanVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Nhân viên</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post">
+                                                                <div class="form-group">
+                                                                    <label for="nhanvien">Nhân viên <span class="text-danger">*</span></label>
+                                                                    <select class="form-control" name="NhanVienId" required>
+                                                                        <option value="">-- Chọn nhân viên --</option>
+                                                                        <!-- for danh sách nhân viên -->
+                                                                        <option value="Mã">mã - tên</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="nhiemvu">Nhiệm vụ <span class="text-danger">*</span></label>
+                                                                    <input type="text" name="NhiemVu" class="form-control" placeholder="Nhập nhiệm vụ..." required>
+                                                                </div>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                <input type="submit" value="Thêm mới" name="themmoiNV" class="btn btn-success" style="float:right;">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                    <thead class="text-primary">
+                                                        <tr>
+                                                            <th class="th-center-bold">#</th>
+                                                            <th class="th-center-bold">Mã nhân viên</th>
+                                                            <th class="th-center-bold">Tên nhân viên</th>
+                                                            <th class="th-center-bold">SĐT</th>
+                                                            <th class="th-center-bold">Nhiệm vụ</th>
+                                                            <th class="th-center-bold">Sửa</th>
+                                                            <th class="th-center-bold">Xóa</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!--@if (Model.phongBanDTOs.Count == 0)
+    {
+        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+    }
+    else
+    {
+        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+        {-->
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>0000001</td>
+                                                            <td>ABC</td>
+                                                            <td>0909020405</td>
+                                                            <td>Lái xe</td>
+                                                            <td class="td-center">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SuaNVId">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </button>
+                                                            </td>
+                                                            <td class="td-center">
+                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaNVId">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <div class="modal fade" id="SuaNVId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Nhân viên</h3>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="post">
+                                                                            <div class="form-group">
+                                                                                <label for="nhanvien">Nhân viên <span class="text-danger">*</span></label>
+                                                                                <input value="NV000001" type="text" name="NhanVienId" class="form-control" readonly="readonly">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="nhiemvu">Nhiệm vụ <span class="text-danger">*</span></label>
+                                                                                <input value="Lái xe" type="text" name="NhiemVu" class="form-control" placeholder="Nhập nhiệm vụ..." required>
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            <input type="submit" value="Sửa" name="suaNV" class="btn btn-success" style="float:right;">
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="XoaNVId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Are you sure to delete this?</h3>
+                                                                    </div>
+                                                                    <div class="modal-footer" style="margin: auto;">
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                                        <form method="post">
+                                                                            <button name="NhanVienId" type="submit" class="btn btn-danger" value="NhanVienId">Yes, delete it !</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--*****
+                                    Tab 2
+                                    *****-->
+                                    <div id="navpills-2" class="tab-pane">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <h4 style="float:left;">DANH SÁCH KHÁCH HÀNG - ĐOÀN</h4>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemKhachHang"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <div class="modal fade" id="ThemKhachHang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Khách hàng</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="post">
+                                                                <div class="form-group">
+                                                                    <label for="khachhang">Khách hàng <span class="text-danger">*</span></label>
+                                                                    <select class="form-control" name="NhanVienId" required>
+                                                                        <option value="">-- Chọn khách hàng --</option>
+                                                                        <!-- for danh sách khách hàng -->
+                                                                        <option value="Mã">mã - tên</option>
+                                                                    </select>
+                                                                </div>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                <input type="submit" value="Thêm mới" name="themmoiKH" class="btn btn-success" style="float:right;">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                    <thead class="text-primary">
+                                                        <tr>
+                                                            <th class="th-center-bold">#</th>
+                                                            <th class="th-center-bold">Mã khách hàng</th>
+                                                            <th class="th-center-bold">Tên khách hàng</th>
+                                                            <th class="th-center-bold">SĐT</th>
+                                                            <th class="th-center-bold">Xóa</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!--@if (Model.phongBanDTOs.Count == 0)
+                {
+                    <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+                }
+                else
+                {
+                    @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                    {-->
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>0000001</td>
+                                                            <td>ABC</td>
+                                                            <td>0909020405</td>
+                                                            <td class="td-center">
+                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaKHId">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <div class="modal fade" id="XoaKHId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Are you sure to delete this?</h3>
+                                                                    </div>
+                                                                    <div class="modal-footer" style="margin: auto;">
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                                        <form method="post">
+                                                                            <button name="KhachHangId" type="submit" class="btn btn-danger" value="KhachHangId">Yes, delete it !</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--*****
+                                    Tab 3
+                                    *****-->
+                                    <div id="navpills-3" class="tab-pane">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <h4 style="float:left;">DANH SÁCH CHI PHÍ - ĐOÀN</h4>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemChiPhi"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            <div class="modal fade" id="ThemChiPhi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin chi phí</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="themChiPhi" method="post">
+                                                                <div class="form-group">
+                                                                    <label for="machiphi">Mã chi phí <span class="text-danger">*</span></label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" name="ChiPhiId" id="machiphi" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
+                                                                        <div class="input-group-append">
+                                                                            <button id="btn-chi-phi" class="btn btn-outline-dark" type="button" onclick="CapPhatMaChiPhi()"><i class="fa fa-plus"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="loaicp">Loại chi phí <span class="text-danger">*</span></label>
+                                                                    <select class="form-control" name="loaicp" required>
+                                                                        <option value="">-- Chọn loại chi phí --</option>
+                                                                        <!-- for option list loại chi phí -->
+                                                                        <!--<option value="LP000001">LP000001 - tên</option>-->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="thanhtien">Thành tiền <span class="text-danger">*</span></label>
+                                                                    <input type="number" name="ThanhTien" class="form-control" placeholder="Nhập giá..." required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="ghichu">Ghi chú <span class="text-danger">*</span></label>
+                                                                    <textarea class="form-control h-150px" rows="4" id="GhiChu" form="themChiPhi" name="chitiet"></textarea>
+                                                                </div>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-success" style="float:right;">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                    <thead class="text-primary">
+                                                        <tr>
+                                                            <th style="width:5%;" class="th-center-bold">#</th>
+                                                            <th style="width:15%;" class="th-center-bold">Mã chi phí</th>
+                                                            <th style="width:20%;" class="th-center-bold">Loại chi phí</th>
+                                                            <th style="width:15%;" class="th-center-bold">Thành tiền</th>
+                                                            <th style="width:25%;" class="th-center-bold">Ghi chú</th>
+                                                            <th style="width:10%;" class="th-center-bold">Sửa</th>
+                                                            <th style="width:10%;" class="th-center-bold">Xóa</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!--@if (Model.phongBanDTOs.Count == 0)
+                    {
+                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+                    }
+                    else
+                    {
+                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                        {-->
+                                                        <tr>
+                                                            <td style="width:5%;">1</td>
+                                                            <td style="width:15%;">0000001</td>
+                                                            <td style="width:20%;">Tên loại chi phí</td>
+                                                            <td style="width:15%;">400</td>
+                                                            <td style="width:25%;">ghi chú dài dài dài dài dài dài dài dài</td>
+                                                            <td style="width:10%;" class="td-center">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SuaChiPhiId">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </button>
+                                                            </td>
+                                                            <td style="width:10%;" class="td-center">
+                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaChiPhiId">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <div class="modal fade" id="SuaChiPhiId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin chi phí</h3>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form id="suaChiPhi" method="post">
+                                                                            <div class="form-group">
+                                                                                <label for="magia">Mã chi phí <span class="text-danger">*</span></label>
+                                                                                <div class="input-group">
+                                                                                    <input value="CP000001" type="text" name="ChiPhiId" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="loaicp">Loại chi phí <span class="text-danger">*</span></label>
+                                                                                <select class="form-control" name="loaicp" required>
+                                                                                    <!-- làm tương tự như bên tourUpdate -->
+                                                                                    <!-- for option list loại chi phí -->
+                                                                                    <!--<option value="LP000001">LP000001 - tên</option>-->
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="thanhtien">Thành tiền <span class="text-danger">*</span></label>
+                                                                                <input value="400" type="number" name="ThanhTien" class="form-control" placeholder="Nhập giá..." required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="ghichu">Ghi chú <span class="text-danger">*</span></label>
+                                                                                <textarea class="form-control h-150px" rows="4" id="GhiChu" form="themChiPhi" name="chitiet"><!--đưa biến ghi chú vào đây--></textarea>
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            <input type="submit" value="Sửa chi phí" name="SuaChiPhi" class="btn btn-success" style="float:right;">
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="XoaChiPhiId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Are you sure to delete this?</h3>
+                                                                    </div>
+                                                                    <div class="modal-footer" style="margin: auto;">
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                                        <form method="post">
+                                                                            <button name="ChiPhiId" type="submit" class="btn btn-danger" value="ChiPhiId">Yes, delete it !</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <script>
+            function CapPhatMaChiPhi() {
+                $('#machiphi').val('CP000001');
+                $('#btn-chi-phi').prop('disabled', true);
+            }
+        </script>
+
+
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script>
+        function checkDel() {
+            if ($("#checkBoxAll").is(":checked")) {
+                $(".chkCheckBoxId").prop("checked", true);
+                $("#btnDel").prop("disabled", false);
+            }
+            else {
+                $(".chkCheckBoxId").prop("checked", false);
+                $("#btnDel").prop("disabled", true);
+            }
+        }
+        function checkSingleDel() {
+            if ($(".chkCheckBoxId").is(":checked")) {
+                $("#btnDel").prop("disabled", false);
+            }
+            else {
+                $("#btnDel").prop("disabled", true);
+            }
+        }
+    </script>
+
+    <script src="./plugins/common/common.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/gleek.js"></script>
+    <script src="./js/styleSwitcher.js"></script>
+
+    <script src="./plugins/jquery/jquery.min.js"></script>
+    <script src="./js/js-custom.js"></script>
+
+    <script src="./plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="./plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+    <script src="./plugins/moment/moment.js"></script>
+    <script src="./plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="./plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="./plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="./plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="./plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Form Picker Init JavaScript -->
+    <script src="./js/plugins-init/form-pickers-init.js"></script>
+
+    <!-- jQuery UI library -->
+    <script src="./plugins/jqueryui/js/jquery-ui-1-12-1.js"></script>
+</body>
+
+</html>

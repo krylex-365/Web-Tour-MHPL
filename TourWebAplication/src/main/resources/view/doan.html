@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="inc/header">
+    <title>Quản lý Đoàn</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+<div id="main-wrapper">
+    <div th:insert="inc/form-layout"></div>
+
+    <!--**********************************
+        Content body start
+    ***********************************-->
+
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Quản lý đoàn</li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title row">
+                                <div class="col-md-12 mb-4">
+                                    <h3 class="td-center">DANH SÁCH ĐOÀN DU LỊCH</h3>
+                                    <div class="alert alert-primary" role="alert" th:text="${success}"
+                                         th:if="${success}"></div>
+                                    <div class="alert alert-danger" role="alert" th:text="${error}"
+                                         th:if="${error}"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <!--<a asp-controller="QuanLyNhanVien" asp-action="Index" style="float:right;"><button class="btn btn-primary">Quay lại <i class="fa fa-undo" aria-hidden="true"></i></button></a>-->
+                                    <a th:href="@{/doan/them}" style="float:right;">
+                                        <button class="btn btn-primary"><span
+                                                style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="DataTable" class="table table-bordered table-hover zero-configuration">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th style="width:5%;" class="th-center-bold">#</th>
+                                        <th style="width:15%;" class="th-center-bold">Mã đoàn</th>
+                                        <th style="width:20%;" class="th-center-bold">Tên đoàn</th>
+                                        <th style="width:12%;" class="th-center-bold">Giá đoàn</th>
+                                        <th style="width:14%;" class="th-center-bold">Ngày khởi hành</th>
+                                        <th style="width:14%;" class="th-center-bold">Ngày kết thúc</th>
+                                        <th style="width:5%;" class="th-center-bold">Chi tiết</th>
+                                        <th style="width:5%;" class="th-center-bold">Thiết lập</th>
+                                        <th style="width:5%;" class="th-center-bold">Sửa</th>
+                                        <th style="width:5%;" class="th-center-bold">Xóa</th>
+                                    </tr>
+                                    </thead>
+                                    <div th:if="${doanDuLichDTOs}">
+                                        <tbody th:each="doan : ${doanDuLichDTOs}">
+                                        <tr>
+                                            <td th:text="${doanDuLichDTOs.indexOf(doan)} + 1" style="width:5%;"></td>
+                                            <td th:text="${doan.maDoan}" style="width:15%;"></td>
+                                            <td th:text="${doan.tenDoan}" style="width:20%;"></td>
+                                            <td th:text="${doan.giaTour}" style="width:12%;">1500</td>
+                                            <td th:text="${doan.ngayKhoiHanh}" style="width:14%;"></td>
+                                            <td th:text="${doan.ngayKetThuc}" style="width:14%;"></td>
+                                            <td class="td-center" style="width:5%;">
+                                                <a href="#">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                            th:data-target="'#ChiTietDoan' + ${doan.maDoan}"><i class="fa fa-info"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                            <td class="td-center" style="width:5%;">
+                                                <form method="post">
+                                                    <input value="DoanId" type="hidden" name="id"/>
+                                                    <button type="submit" class="btn btn-primary"><i
+                                                            class="fa fa-cog"></i></button>
+                                                </form>
+                                            </td>
+                                            <td class="td-center" style="width:5%;">
+                                                <form method="post">
+                                                    <input value="DoanId" type="hidden" name="id"/>
+                                                    <button type="submit" class="btn btn-primary"><i
+                                                            class="fa fa-pencil"></i></button>
+                                                </form>
+                                            </td>
+                                            <td class="td-center" style="width:5%;">
+                                                <a>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#XoaDoanId"><i class="fa fa-close"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <!-- đưa model vào đây -->
+                                        <div class="modal fade bd-example-modal-lg" th:id="'ChiTietDoan' + ${doan.maDoan}" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalLongTitle" style="color:#7571f9;">Thông tin
+                                                            đoàn</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                                aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Mã đoàn:</h6>
+                                                                        <p th:text="${doan.maDoan}"></p>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Tên đoàn:</h6>
+                                                                        <p th:text="${doan.tenDoan}"></p>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Tour:</h6>
+                                                                        <p th:text="${doan.maTour}"></p>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Giá đoàn:</h6>
+                                                                        <p th:text="${doan.giaTour}"></p>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Ngày khởi hành:</h6>
+                                                                        <p th:text="${doan.ngayKhoiHanh}"></p>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Ngày kết thúc:</h6>
+                                                                        <p th:text="${doan.ngayKetThuc}"></p>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-bottom: 10px">
+                                                                        <h6 style="color:#ea5774;font-weight:500;">Chi tiết:</h6>
+                                                                        <p th:text="${doan.chiTietNoiDung}"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        </tbody>
+                                    </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
+            {-->
+
+            <div class="modal fade" id="XoaDoanId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Are you sure to delete
+                                this: </h3>
+                        </div>
+                        <div class="modal-footer" style="margin: auto;">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            <form method="post">
+                                <button name="id" type="submit" class="btn btn-danger" value="DoanId">Yes, delete it !
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- #/ container -->
+    </div>
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+    <div th:insert="inc/footer"></div>
+</div>
+</body>
+
+</html>
