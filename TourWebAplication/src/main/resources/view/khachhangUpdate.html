@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="inc/header">
+    <title>Sửa khách hàng Tour</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <div th:insert="inc/form-layout"></div>
+        <!--**********************************
+            Content body start
+        ***********************************-->
+
+        <div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="./khachhang.html">Quản lý khách hàng</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Sửa khách hàng</a></li> 
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 mb-3">
+                                <a href="./khachhang.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                            </div>
+                        </div>
+                        <div th:if="${khachHangDTO}">
+                            <form method="post" th:action="@{/khachhang/sua}">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3"><h3>Sửa thông tin khách hàng</h3></div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="maKhachHang">Mã khách hàng <span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input th:value="${khachHangDTO.maKhachHang}" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="maKhachHang" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" >
+                                                <div class="form-group">
+                                                    <label for="tenKhachHang">Họ tên khách hàng <span class="text-danger">*</span></label>
+                                                    <input th:value="${khachHangDTO.tenKhachHang}" type="text" name="tenKhachHang" class="form-control" placeholder="Nhập họ tên..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="gioiTinh">Giới tính <span class="text-danger">*</span></label>
+                                                    <div th:switch="${khachHangDTO.gioiTinh}">
+                                                        <div th:case="'0'">
+                                                            <select class="form-control" name="gioiTinh" required>
+                                                                <option value="0" selected>Nam</option>
+                                                                <option value="1">Nữ</option>
+                                                            </select>
+                                                        </div>
+                                                        <div th:case="'1'">
+                                                            <select class="form-control" name="gioiTinh" required>
+                                                                <option value="0">Nam</option>
+                                                                <option value="1" selected>Nữ</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ngaySinh">Ngày sinh <span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input th:value="${khachHangDTO.ngaySinh}" type="text" class="form-control mydatepicker" name="ngaySinh" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="CMND">Số chứng minh thư <span class="text-danger">*</span></label>
+                                                    <input th:value="${khachHangDTO.CMND}" type="text" name="CMND" class="form-control" placeholder="Nhập số chứng minh thư..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="SDT">Số điện thoại <span class="text-danger">*</span></label>
+                                                    <input th:value="${khachHangDTO.SDT}" type="text" name="SDT" class="form-control" placeholder="Nhập số điện thoại..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="MAIL">Email <span class="text-danger">*</span></label>
+                                                    <input value="123@gmail.com" type="email" name="MAIL" class="form-control" placeholder="Nhập email..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="diaChi">Địa chỉ <span class="text-danger">*</span></label>
+                                                    <input th:value="${khachHangDTO.diaChi}" type="text" name="diaChi" class="form-control" placeholder="Nhập địa chỉ..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="quocTich">Quốc tịch <span class="text-danger">*</span></label>
+                                                    <input th:value="${khachHangDTO.quocTich}" type="text" name="quocTich" class="form-control" placeholder="Nhập quốc tịch..." required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12 td-center">
+                                        <button type="submit" class="btn btn-primary">Sửa khách hàng</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
+
+
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <!--**********************************
+            Footer start
+        ***********************************-->
+
+        <!--**********************************
+            Footer end
+        ***********************************-->
+        <div th:insert="inc/footer"></div>
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    <!--**********************************
+        Scripts
+    ***********************************-->
+
+
+</body>
+
+</html>
