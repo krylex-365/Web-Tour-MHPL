@@ -1,13 +1,8 @@
 package com.example.tourwebaplication.controller;
 
-import com.example.tourwebaplication.model.BUS.DoanDuLichBUS;
-import com.example.tourwebaplication.model.BUS.GiaTourBUS;
-import com.example.tourwebaplication.model.BUS.TourBUS;
-import com.example.tourwebaplication.model.BUS.Utils;
-import com.example.tourwebaplication.model.DTO.DoanDuLichDTO;
-import com.example.tourwebaplication.model.DTO.GiaTourDTO;
-import com.example.tourwebaplication.model.DTO.LoaiHinhTourDTO;
-import com.example.tourwebaplication.model.DTO.TourDTO;
+import com.example.tourwebaplication.model.BUS.*;
+import com.example.tourwebaplication.model.DAO.NhiemVuNhanVienDAO;
+import com.example.tourwebaplication.model.DTO.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -167,9 +162,52 @@ public class DoanController {
         return "redirect:/doan";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/doan/thietlap")
-    public String thietLapDoan(@RequestParam String id){
+    @RequestMapping(method = RequestMethod.GET, value = "/doan/thietlap")
+    public String thietLapDoan(@RequestParam String id, Model model){
+        //DoanDuLichBUS doanDuLichBUS = new DoanDuLichBUS();
+        NhanVienBUS nhanVienBUS = new NhanVienBUS();
+        NhiemVuNhanVienBUS nhiemVuNhanVienBUS = new NhiemVuNhanVienBUS();
+        KhachHangBUS khachHangBUS = new KhachHangBUS();
+        ChiTietDoanBUS chiTietDoanBUS = new ChiTietDoanBUS();
 
+        //ArrayList<DoanDuLichDTO> doanDuLichDTOs = doanDuLichBUS.getDoanDuLichDTOs();
+        ArrayList<NhanVienDTO> nhanVienDTOs = nhanVienBUS.getNhanVienDTOs();
+        ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs = nhiemVuNhanVienBUS.nhiemVuNhanVienDAO.getList();
+        ArrayList<KhachHangDTO> khachHangDTOs = khachHangBUS.getKhachHangDTOs();
+        ArrayList<ChiTietDoanDTO> chiTietDoanDTOs = chiTietDoanBUS.getList();
+
+        ArrayList<DataNhanVien> dataNhanViens = new ArrayList<>();
+        for (NhiemVuNhanVienDTO nhiemVuNhanVienDTO: nhiemVuNhanVienDTOs){
+            if (nhiemVuNhanVienDTO.getMaDoan().equals(id)){
+                DataNhanVien dataNhanVien = new DataNhanVien();
+                dataNhanVien.nhiemVuNhanVienDTO = nhiemVuNhanVienDTO;
+                for (NhanVienDTO nhanVienDTO: nhanVienDTOs){
+                    if(nhanVienDTO.getMaNhanVien().equals(nhiemVuNhanVienDTO.getMaNhanVien())){
+                        dataNhanVien.nhanVienDTO = nhanVienDTO;
+                        break;
+                    }
+                }
+                dataNhanViens.add(dataNhanVien);
+            }
+        }
+
+        ArrayList<DataKhach> dataKhachs = new ArrayList<>();
+        for (ChiTietDoanDTO chiTietDoanDTO: chiTietDoanDTOs){
+            if (chiTietDoanDTO.getMaDoan().equals(id)){
+                DataKhach dataKhach = new DataKhach();
+                dataKhach.chiTietDoanDTO = chiTietDoanDTO;
+                for (KhachHangDTO khachHangDTO: khachHangDTOs){
+                    if(khachHangDTO.getMaKhachHang().equals(chiTietDoanDTO.getMaKhachHang())){
+                        dataKhach.khachHangDTO = khachHangDTO;
+                        break;
+                    }
+                }
+                dataKhachs.add(dataKhach);
+            }
+        }
+
+        model.addAttribute("dataNhanViens", dataNhanViens);
+        model.addAttribute("dataKhachs", dataKhachs);
         return "doanThietlap";
     }
 
@@ -181,5 +219,15 @@ public class DoanController {
     public class Data{
         public TourDTO tourDTO;
         public GiaTourDTO giaTourDTO;
+    }
+
+    public class DataNhanVien{
+        public NhanVienDTO nhanVienDTO;
+        public NhiemVuNhanVienDTO nhiemVuNhanVienDTO;
+    }
+
+    public class DataKhach{
+        public KhachHangDTO khachHangDTO;
+        public ChiTietDoanDTO chiTietDoanDTO;
     }
 }

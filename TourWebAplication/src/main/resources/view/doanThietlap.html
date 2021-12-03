@@ -12,395 +12,500 @@
 <body>
 <div id="main-wrapper">
     <div th:insert="inc/form-layout"></div>
-        <!--**********************************
-            Content body start
-        ***********************************-->
+    <!--**********************************
+        Content body start
+    ***********************************-->
 
-        <div class="content-body">
+    <div class="content-body">
 
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="./doan.html">Quản lý đoàn</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thiết lập đoàn</a></li>
-                    </ol>
-                </div>
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="./doan.html">Quản lý đoàn</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Thiết lập đoàn</a></li>
+                </ol>
             </div>
-            <!-- row -->
+        </div>
+        <!-- row -->
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12 mb-3">
-                                        <a href="./doan.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <a href="./doan.html" style="float:left;">
+                                        <button class="btn btn-primary"><i class="fa fa-arrow-left"
+                                                                           aria-hidden="true"></i> Quay lại
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="nav nav-pills mb-3">
+                                <li class="nav-item">
+                                    <a href="#navpills-1" class="nav-link active" data-toggle="tab"
+                                       aria-expanded="false">Nhân viên của đoàn</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Khách
+                                        của đoàn</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="false">Chi
+                                        phí của đoàn</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content br-n pn mt-4">
+                                <div class="alert alert-primary" role="alert" th:text="${success}"
+                                     th:if="${success}"></div>
+                                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                                <!--*****
+                                Tab 1
+                                *****-->
+                                <div id="navpills-1" class="tab-pane active">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h4 style="float:left;">DANH SÁCH NHÂN VIÊN - ĐOÀN</h4>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary" style="float:right;" data-toggle="modal"
+                                                    data-target="#ThemNhanVien"><span style="margin-right: 10px">Thêm mới </span><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                        <div class="modal fade" id="ThemNhanVien" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                            style="margin: auto;">Nhân viên</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post">
+                                                            <div class="form-group">
+                                                                <label>Nhân viên <span
+                                                                        class="text-danger">*</span></label>
+                                                                <select class="form-control" name="NhanVienId" required>
+                                                                    <option value="">-- Chọn nhân viên --</option>
+                                                                    <!-- for danh sách nhân viên -->
+                                                                    <option value="Mã">mã - tên</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Nhiệm vụ <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="text" name="NhiemVu" class="form-control"
+                                                                       placeholder="Nhập nhiệm vụ..." required>
+                                                            </div>
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Cancel
+                                                            </button>
+                                                            <input type="submit" value="Thêm mới" name="themmoiNV"
+                                                                   class="btn btn-success" style="float:right;">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th class="th-center-bold">#</th>
+                                                    <th class="th-center-bold">Mã nhân viên</th>
+                                                    <th class="th-center-bold">Tên nhân viên</th>
+                                                    <th class="th-center-bold">SĐT</th>
+                                                    <th class="th-center-bold">Nhiệm vụ</th>
+                                                    <th class="th-center-bold">Sửa</th>
+                                                    <th class="th-center-bold">Xóa</th>
+                                                </tr>
+                                                </thead>
+                                                <div th:if="${dataNhanViens}">
+                                                    <tbody th:each="dataNhanVien : ${dataNhanViens}">
+                                                    <tr>
+                                                        <td th:text="${dataNhanViens.indexOf(dataNhanVien)} + 1"></td>
+                                                        <td th:text="${dataNhanVien.nhanVienDTO.maNhanVien}"></td>
+                                                        <td th:text="${dataNhanVien.nhanVienDTO.tenNhanVien}"></td>
+                                                        <td th:text="${dataNhanVien.nhanVienDTO.SDT}"></td>
+                                                        <td th:text="${dataNhanVien.nhiemVuNhanVienDTO.tenNhiemVu}"></td>
+                                                        <td class="td-center">
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-toggle="modal" data-target="#SuaNVId">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td class="td-center">
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-toggle="modal"
+                                                                    data-target="#XoaNVId">
+                                                                <i class="fa fa-close"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <div class="modal fade" id="SuaNVId" tabindex="-1" role="dialog"
+                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                        style="margin: auto;">Nhân viên</h3>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post">
+                                                                        <div class="form-group">
+                                                                            <label for="nhanvien">Nhân viên <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <input value="NV000001" type="text"
+                                                                                   name="NhanVienId"
+                                                                                   class="form-control"
+                                                                                   readonly="readonly">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="nhiemvu">Nhiệm vụ <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <input value="Lái xe" type="text"
+                                                                                   name="NhiemVu"
+                                                                                   class="form-control"
+                                                                                   placeholder="Nhập nhiệm vụ..."
+                                                                                   required>
+                                                                        </div>
+                                                                        <button type="button" class="btn btn-danger"
+                                                                                data-dismiss="modal">Cancel
+                                                                        </button>
+                                                                        <input type="submit" value="Sửa" name="suaNV"
+                                                                               class="btn btn-success"
+                                                                               style="float:right;">
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="XoaNVId" tabindex="-1" role="dialog"
+                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                        style="margin: auto;text-align: center;">Are you
+                                                                        sure to delete this?</h3>
+                                                                </div>
+                                                                <div class="modal-footer" style="margin: auto;">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                            data-dismiss="modal">Cancel
+                                                                    </button>
+                                                                    <form method="post">
+                                                                        <button name="NhanVienId" type="submit"
+                                                                                class="btn btn-danger"
+                                                                                value="NhanVienId">
+                                                                            Yes, delete it !
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </tbody>
+                                                </div>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                                <ul class="nav nav-pills mb-3">
-                                    <li class="nav-item">
-                                        <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Nhân viên của đoàn</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Khách của đoàn</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="false">Chi phí của đoàn</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content br-n pn mt-4">
-                                    <!--*****
-                                    Tab 1
-                                    *****-->
-                                    <div id="navpills-1" class="tab-pane active">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-6">
-                                                <h4 style="float:left;">DANH SÁCH NHÂN VIÊN - ĐOÀN</h4>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemNhanVien"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
-                                            </div>
-                                            <div class="modal fade" id="ThemNhanVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Nhân viên</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post">
-                                                                <div class="form-group">
-                                                                    <label for="nhanvien">Nhân viên <span class="text-danger">*</span></label>
-                                                                    <select class="form-control" name="NhanVienId" required>
-                                                                        <option value="">-- Chọn nhân viên --</option>
-                                                                        <!-- for danh sách nhân viên -->
-                                                                        <option value="Mã">mã - tên</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="nhiemvu">Nhiệm vụ <span class="text-danger">*</span></label>
-                                                                    <input type="text" name="NhiemVu" class="form-control" placeholder="Nhập nhiệm vụ..." required>
-                                                                </div>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                <input type="submit" value="Thêm mới" name="themmoiNV" class="btn btn-success" style="float:right;">
-                                                            </form>
-                                                        </div>
+                                <!--*****
+                                Tab 2
+                                *****-->
+                                <div id="navpills-2" class="tab-pane">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h4 style="float:left;">DANH SÁCH KHÁCH HÀNG - ĐOÀN</h4>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary" style="float:right;" data-toggle="modal"
+                                                    data-target="#ThemKhachHang"><span style="margin-right: 10px">Thêm mới </span><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                        <div class="modal fade" id="ThemKhachHang" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                            style="margin: auto;">Khách hàng</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post">
+                                                            <div class="form-group">
+                                                                <label for="khachhang">Khách hàng <span
+                                                                        class="text-danger">*</span></label>
+                                                                <select class="form-control" name="NhanVienId" required>
+                                                                    <option value="">-- Chọn khách hàng --</option>
+                                                                    <!-- for danh sách khách hàng -->
+                                                                    <option value="Mã">mã - tên</option>
+                                                                </select>
+                                                            </div>
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Cancel
+                                                            </button>
+                                                            <input type="submit" value="Thêm mới" name="themmoiKH"
+                                                                   class="btn btn-success" style="float:right;">
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover zero-configuration dataTable">
-                                                    <thead class="text-primary">
-                                                        <tr>
-                                                            <th class="th-center-bold">#</th>
-                                                            <th class="th-center-bold">Mã nhân viên</th>
-                                                            <th class="th-center-bold">Tên nhân viên</th>
-                                                            <th class="th-center-bold">SĐT</th>
-                                                            <th class="th-center-bold">Nhiệm vụ</th>
-                                                            <th class="th-center-bold">Sửa</th>
-                                                            <th class="th-center-bold">Xóa</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!--@if (Model.phongBanDTOs.Count == 0)
-    {
-        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
-    }
-    else
-    {
-        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
-        {-->
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>0000001</td>
-                                                            <td>ABC</td>
-                                                            <td>0909020405</td>
-                                                            <td>Lái xe</td>
-                                                            <td class="td-center">
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SuaNVId">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </button>
-                                                            </td>
-                                                            <td class="td-center">
-                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaNVId">
-                                                                    <i class="fa fa-close"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <div class="modal fade" id="SuaNVId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Nhân viên</h3>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form method="post">
-                                                                            <div class="form-group">
-                                                                                <label for="nhanvien">Nhân viên <span class="text-danger">*</span></label>
-                                                                                <input value="NV000001" type="text" name="NhanVienId" class="form-control" readonly="readonly">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="nhiemvu">Nhiệm vụ <span class="text-danger">*</span></label>
-                                                                                <input value="Lái xe" type="text" name="NhiemVu" class="form-control" placeholder="Nhập nhiệm vụ..." required>
-                                                                            </div>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                            <input type="submit" value="Sửa" name="suaNV" class="btn btn-success" style="float:right;">
-                                                                        </form>
-                                                                    </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th class="th-center-bold">#</th>
+                                                    <th class="th-center-bold">Mã khách hàng</th>
+                                                    <th class="th-center-bold">Tên khách hàng</th>
+                                                    <th class="th-center-bold">SĐT</th>
+                                                    <th class="th-center-bold">Xóa</th>
+                                                </tr>
+                                                </thead>
+                                                <div th:if="${dataKhachs}">
+                                                    <tbody th:each="dataKhach : ${dataKhachs}">
+                                                    {-->
+                                                    <tr>
+                                                        <td th:text="${dataKhachs.indexOf(dataKhach)} + 1"></td>
+                                                        <td th:text="${dataKhach.khachHangDTO.maKhachHang}"></td>
+                                                        <td th:text="${dataKhach.khachHangDTO.tenKhachHang}"></td>
+                                                        <td th:text="${dataKhach.khachHangDTO.SDT}"></td>
+                                                        <td class="td-center">
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-toggle="modal"
+                                                                    data-target="#XoaKHId">
+                                                                <i class="fa fa-close"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <div class="modal fade" id="XoaKHId" tabindex="-1" role="dialog"
+                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                        style="margin: auto;text-align: center;">Are you
+                                                                        sure to delete this?</h3>
+                                                                </div>
+                                                                <div class="modal-footer" style="margin: auto;">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                            data-dismiss="modal">Cancel
+                                                                    </button>
+                                                                    <form method="post">
+                                                                        <button name="KhachHangId" type="submit"
+                                                                                class="btn btn-danger"
+                                                                                value="KhachHangId">
+                                                                            Yes, delete it !
+                                                                        </button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal fade" id="XoaNVId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Are you sure to delete this?</h3>
-                                                                    </div>
-                                                                    <div class="modal-footer" style="margin: auto;">
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                                                        <form method="post">
-                                                                            <button name="NhanVienId" type="submit" class="btn btn-danger" value="NhanVienId">Yes, delete it !</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    </div>
                                                     </tbody>
-                                                </table>
-                                            </div>
+                                                </div>
+                                            </table>
                                         </div>
                                     </div>
-                                    <!--*****
-                                    Tab 2
-                                    *****-->
-                                    <div id="navpills-2" class="tab-pane">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-6">
-                                                <h4 style="float:left;">DANH SÁCH KHÁCH HÀNG - ĐOÀN</h4>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemKhachHang"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
-                                            </div>
-                                            <div class="modal fade" id="ThemKhachHang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Khách hàng</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post">
-                                                                <div class="form-group">
-                                                                    <label for="khachhang">Khách hàng <span class="text-danger">*</span></label>
-                                                                    <select class="form-control" name="NhanVienId" required>
-                                                                        <option value="">-- Chọn khách hàng --</option>
-                                                                        <!-- for danh sách khách hàng -->
-                                                                        <option value="Mã">mã - tên</option>
-                                                                    </select>
+                                </div>
+                                <!--*****
+                                Tab 3
+                                *****-->
+                                <div id="navpills-3" class="tab-pane">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <h4 style="float:left;">DANH SÁCH CHI PHÍ - ĐOÀN</h4>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary" style="float:right;" data-toggle="modal"
+                                                    data-target="#ThemChiPhi"><span
+                                                    style="margin-right: 10px">Thêm mới </span><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div>
+                                        <div class="modal fade" id="ThemChiPhi" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                            style="margin: auto;">Thông tin chi phí</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="themChiPhi" method="post">
+                                                            <div class="form-group">
+                                                                <label for="machiphi">Mã chi phí <span
+                                                                        class="text-danger">*</span></label>
+                                                                <div class="input-group">
+                                                                    <input type="text" name="ChiPhiId" id="machiphi"
+                                                                           class="form-control"
+                                                                           placeholder="Số liệu tự cấp phát.."
+                                                                           readonly="readonly">
+                                                                    <div class="input-group-append">
+                                                                        <button id="btn-chi-phi"
+                                                                                class="btn btn-outline-dark"
+                                                                                type="button"
+                                                                                onclick="CapPhatMaChiPhi()"><i
+                                                                                class="fa fa-plus"></i></button>
+                                                                    </div>
                                                                 </div>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                <input type="submit" value="Thêm mới" name="themmoiKH" class="btn btn-success" style="float:right;">
-                                                            </form>
-                                                        </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="loaicp">Loại chi phí <span
+                                                                        class="text-danger">*</span></label>
+                                                                <select class="form-control" name="loaicp" required>
+                                                                    <option value="">-- Chọn loại chi phí --</option>
+                                                                    <!-- for option list loại chi phí -->
+                                                                    <!--<option value="LP000001">LP000001 - tên</option>-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="thanhtien">Thành tiền <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="number" name="ThanhTien"
+                                                                       class="form-control" placeholder="Nhập giá..."
+                                                                       required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ghichu">Ghi chú <span
+                                                                        class="text-danger">*</span></label>
+                                                                <textarea class="form-control h-150px" rows="4"
+                                                                          id="GhiChu" form="themChiPhi"
+                                                                          name="chitiet"></textarea>
+                                                            </div>
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Cancel
+                                                            </button>
+                                                            <input type="submit" value="Thêm mới" name="themmoi"
+                                                                   class="btn btn-success" style="float:right;">
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover zero-configuration dataTable">
-                                                    <thead class="text-primary">
-                                                        <tr>
-                                                            <th class="th-center-bold">#</th>
-                                                            <th class="th-center-bold">Mã khách hàng</th>
-                                                            <th class="th-center-bold">Tên khách hàng</th>
-                                                            <th class="th-center-bold">SĐT</th>
-                                                            <th class="th-center-bold">Xóa</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!--@if (Model.phongBanDTOs.Count == 0)
-                {
-                    <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
-                }
-                else
-                {
-                    @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
-                    {-->
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>0000001</td>
-                                                            <td>ABC</td>
-                                                            <td>0909020405</td>
-                                                            <td class="td-center">
-                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaKHId">
-                                                                    <i class="fa fa-close"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <div class="modal fade" id="XoaKHId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Are you sure to delete this?</h3>
-                                                                    </div>
-                                                                    <div class="modal-footer" style="margin: auto;">
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                                                        <form method="post">
-                                                                            <button name="KhachHangId" type="submit" class="btn btn-danger" value="KhachHangId">Yes, delete it !</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </tbody>
-                                                </table>
-                                            </div>
                                         </div>
-                                    </div>
-                                    <!--*****
-                                    Tab 3
-                                    *****-->
-                                    <div id="navpills-3" class="tab-pane">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-6">
-                                                <h4 style="float:left;">DANH SÁCH CHI PHÍ - ĐOÀN</h4>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#ThemChiPhi"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
-                                            </div>
-                                            <div class="modal fade" id="ThemChiPhi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin chi phí</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form id="themChiPhi" method="post">
-                                                                <div class="form-group">
-                                                                    <label for="machiphi">Mã chi phí <span class="text-danger">*</span></label>
-                                                                    <div class="input-group">
-                                                                        <input type="text" name="ChiPhiId" id="machiphi" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
-                                                                        <div class="input-group-append">
-                                                                            <button id="btn-chi-phi" class="btn btn-outline-dark" type="button" onclick="CapPhatMaChiPhi()"><i class="fa fa-plus"></i></button>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover zero-configuration dataTable">
+                                                <thead class="text-primary">
+                                                <tr>
+                                                    <th style="width:5%;" class="th-center-bold">#</th>
+                                                    <th style="width:15%;" class="th-center-bold">Mã chi phí</th>
+                                                    <th style="width:20%;" class="th-center-bold">Loại chi phí</th>
+                                                    <th style="width:15%;" class="th-center-bold">Thành tiền</th>
+                                                    <th style="width:25%;" class="th-center-bold">Ghi chú</th>
+                                                    <th style="width:10%;" class="th-center-bold">Sửa</th>
+                                                    <th style="width:10%;" class="th-center-bold">Xóa</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!--@if (Model.phongBanDTOs.Count == 0)
+            {
+                <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
+            }
+            else
+            {
+                @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
+                {-->
+                                                <tr>
+                                                    <td style="width:5%;">1</td>
+                                                    <td style="width:15%;">0000001</td>
+                                                    <td style="width:20%;">Tên loại chi phí</td>
+                                                    <td style="width:15%;">400</td>
+                                                    <td style="width:25%;">ghi chú dài dài dài dài dài dài dài dài</td>
+                                                    <td style="width:10%;" class="td-center">
+                                                        <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal" data-target="#SuaChiPhiId">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td style="width:10%;" class="td-center">
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                                data-target="#XoaChiPhiId">
+                                                            <i class="fa fa-close"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <div class="modal fade" id="SuaChiPhiId" tabindex="-1" role="dialog"
+                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3 class="modal-title" id="exampleModalLabel"
+                                                                    style="margin: auto;">Thông tin chi phí</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form id="suaChiPhi" method="post">
+                                                                    <div class="form-group">
+                                                                        <label for="magia">Mã chi phí <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <div class="input-group">
+                                                                            <input value="CP000001" type="text"
+                                                                                   name="ChiPhiId" class="form-control"
+                                                                                   placeholder="Số liệu tự cấp phát.."
+                                                                                   readonly="readonly">
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="loaicp">Loại chi phí <span class="text-danger">*</span></label>
-                                                                    <select class="form-control" name="loaicp" required>
-                                                                        <option value="">-- Chọn loại chi phí --</option>
-                                                                        <!-- for option list loại chi phí -->
-                                                                        <!--<option value="LP000001">LP000001 - tên</option>-->
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="thanhtien">Thành tiền <span class="text-danger">*</span></label>
-                                                                    <input type="number" name="ThanhTien" class="form-control" placeholder="Nhập giá..." required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="ghichu">Ghi chú <span class="text-danger">*</span></label>
-                                                                    <textarea class="form-control h-150px" rows="4" id="GhiChu" form="themChiPhi" name="chitiet"></textarea>
-                                                                </div>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                <input type="submit" value="Thêm mới" name="themmoi" class="btn btn-success" style="float:right;">
-                                                            </form>
+                                                                    <div class="form-group">
+                                                                        <label for="loaicp">Loại chi phí <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <select class="form-control" name="loaicp"
+                                                                                required>
+                                                                            <!-- làm tương tự như bên tourUpdate -->
+                                                                            <!-- for option list loại chi phí -->
+                                                                            <!--<option value="LP000001">LP000001 - tên</option>-->
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="thanhtien">Thành tiền <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <input value="400" type="number"
+                                                                               name="ThanhTien" class="form-control"
+                                                                               placeholder="Nhập giá..." required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="ghichu">Ghi chú <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <textarea class="form-control h-150px" rows="4"
+                                                                                  id="GhiChu" form="themChiPhi"
+                                                                                  name="chitiet"><!--đưa biến ghi chú vào đây--></textarea>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                            data-dismiss="modal">Cancel
+                                                                    </button>
+                                                                    <input type="submit" value="Sửa chi phí"
+                                                                           name="SuaChiPhi" class="btn btn-success"
+                                                                           style="float:right;">
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover zero-configuration dataTable">
-                                                    <thead class="text-primary">
-                                                        <tr>
-                                                            <th style="width:5%;" class="th-center-bold">#</th>
-                                                            <th style="width:15%;" class="th-center-bold">Mã chi phí</th>
-                                                            <th style="width:20%;" class="th-center-bold">Loại chi phí</th>
-                                                            <th style="width:15%;" class="th-center-bold">Thành tiền</th>
-                                                            <th style="width:25%;" class="th-center-bold">Ghi chú</th>
-                                                            <th style="width:10%;" class="th-center-bold">Sửa</th>
-                                                            <th style="width:10%;" class="th-center-bold">Xóa</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!--@if (Model.phongBanDTOs.Count == 0)
-                    {
-                        <tr><th colspan="6"><p class="td-center" style="color:red;">Not found</p></th></tr>
-                    }
-                    else
-                    {
-                        @foreach (PhongBanDTO phongban in Model.phongBanDTOs)
-                        {-->
-                                                        <tr>
-                                                            <td style="width:5%;">1</td>
-                                                            <td style="width:15%;">0000001</td>
-                                                            <td style="width:20%;">Tên loại chi phí</td>
-                                                            <td style="width:15%;">400</td>
-                                                            <td style="width:25%;">ghi chú dài dài dài dài dài dài dài dài</td>
-                                                            <td style="width:10%;" class="td-center">
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SuaChiPhiId">
-                                                                    <i class="fa fa-pencil"></i>
+                                                <div class="modal fade" id="XoaChiPhiId" tabindex="-1" role="dialog"
+                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3 class="modal-title" id="exampleModalLabel"
+                                                                    style="margin: auto;text-align: center;">Are you
+                                                                    sure to delete this?</h3>
+                                                            </div>
+                                                            <div class="modal-footer" style="margin: auto;">
+                                                                <button type="button" class="btn btn-primary"
+                                                                        data-dismiss="modal">Cancel
                                                                 </button>
-                                                            </td>
-                                                            <td style="width:10%;" class="td-center">
-                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#XoaChiPhiId">
-                                                                    <i class="fa fa-close"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <div class="modal fade" id="SuaChiPhiId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Thông tin chi phí</h3>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form id="suaChiPhi" method="post">
-                                                                            <div class="form-group">
-                                                                                <label for="magia">Mã chi phí <span class="text-danger">*</span></label>
-                                                                                <div class="input-group">
-                                                                                    <input value="CP000001" type="text" name="ChiPhiId" class="form-control" placeholder="Số liệu tự cấp phát.." readonly="readonly">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="loaicp">Loại chi phí <span class="text-danger">*</span></label>
-                                                                                <select class="form-control" name="loaicp" required>
-                                                                                    <!-- làm tương tự như bên tourUpdate -->
-                                                                                    <!-- for option list loại chi phí -->
-                                                                                    <!--<option value="LP000001">LP000001 - tên</option>-->
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="thanhtien">Thành tiền <span class="text-danger">*</span></label>
-                                                                                <input value="400" type="number" name="ThanhTien" class="form-control" placeholder="Nhập giá..." required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ghichu">Ghi chú <span class="text-danger">*</span></label>
-                                                                                <textarea class="form-control h-150px" rows="4" id="GhiChu" form="themChiPhi" name="chitiet"><!--đưa biến ghi chú vào đây--></textarea>
-                                                                            </div>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                            <input type="submit" value="Sửa chi phí" name="SuaChiPhi" class="btn btn-success" style="float:right;">
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
+                                                                <form method="post">
+                                                                    <button name="ChiPhiId" type="submit"
+                                                                            class="btn btn-danger" value="ChiPhiId">Yes,
+                                                                        delete it !
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                         </div>
-                                                        <div class="modal fade" id="XoaChiPhiId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;text-align: center;">Are you sure to delete this?</h3>
-                                                                    </div>
-                                                                    <div class="modal-footer" style="margin: auto;">
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                                                        <form method="post">
-                                                                            <button name="ChiPhiId" type="submit" class="btn btn-danger" value="ChiPhiId">Yes, delete it !</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </div>
+                                                </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -409,19 +514,20 @@
                     </div>
                 </div>
             </div>
-            <!-- #/ container -->
         </div>
-        <script>
-            function CapPhatMaChiPhi() {
-                $('#machiphi').val('CP000001');
-                $('#btn-chi-phi').prop('disabled', true);
-            }
-        </script>
+        <!-- #/ container -->
+    </div>
+    <script>
+        function CapPhatMaChiPhi() {
+            $('#machiphi').val('CP000001');
+            $('#btn-chi-phi').prop('disabled', true);
+        }
+    </script>
 
 
-        <!--**********************************
-            Content body end
-        ***********************************-->
+    <!--**********************************
+        Content body end
+    ***********************************-->
     <div th:insert="inc/footer"></div>
 </div>
 </body>

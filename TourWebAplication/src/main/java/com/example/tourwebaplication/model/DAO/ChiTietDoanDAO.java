@@ -47,4 +47,43 @@ public class ChiTietDoanDAO {
         return dsChiTietDoan;
     }
     
+    public boolean Add(String maDoan,String maKhachHang){
+        conn = new Connect();
+        conn.getConnection();
+        System.out.println(maDoan + " " + maKhachHang);
+        String query = " IF EXISTS (SELECT * FROM ChiTietDoan WHERE MaDoan='"+maDoan+"' AND MaKhachHang='"+maKhachHang+"' ) "+
+        " BEGIN "+
+        " UPDATE ChiTietDoan SET Status=1 WHERE MaDoan='"+maDoan+"' AND MaKhachHang='"+maKhachHang+"'"+
+        " END "+
+        " ELSE "+
+        " BEGIN "+
+        " INSERT INTO ChiTietDoan (MaDoan,MaKhachHang) VALUES ('"+maDoan+"','"+maKhachHang+"') "+
+        " END";
+        
+        try{
+            if(conn.executeUpdate(query)){
+                conn.getConn().close();
+                return true;
+            }
+            return false;
+        }catch (SQLException e){
+            System.out.println("ChiTietDoanDAO.add.fail error.");
+        }
+        return false;
+    }
+    
+    public boolean Delete(String maDoan,String maKhachHang){
+        conn = new Connect();
+        conn.getConnection();
+        String query = "update ChiTietDoan " +
+                        "set Status=0 " +"where MaDoan='"+maDoan+"'"+"and MaKhachHang='"+maKhachHang+"'";
+        if(conn.executeUpdate(query)){
+            System.out.println("ChiTietDoanDAO delete success.");
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
 }

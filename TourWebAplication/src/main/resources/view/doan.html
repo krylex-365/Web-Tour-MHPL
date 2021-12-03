@@ -84,8 +84,8 @@
                                                 </a>
                                             </td>
                                             <td class="td-center" style="width:5%;">
-                                                <form method="post" th:action="@{/doan/thietlap}">
-                                                    <input value="DoanId" type="hidden" name="id"/>
+                                                <form method="get" th:action="@{/doan/thietlap}">
+                                                    <input th:value="${doan.maDoan}" type="hidden" name="id"/>
                                                     <button type="submit" class="btn btn-primary"><i
                                                             class="fa fa-cog"></i></button>
                                                 </form>
