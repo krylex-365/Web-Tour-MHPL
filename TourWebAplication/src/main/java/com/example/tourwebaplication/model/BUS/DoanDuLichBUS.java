@@ -110,7 +110,7 @@ public class DoanDuLichBUS {
         return false;
     }
 
-    public boolean suaDoan(DoanDuLichDTO doanDuLichDTO, ArrayList<DoanDuLichDTO> doanDuLichDTOs, String maTourHH) {
+    public boolean suaDoan(DoanDuLichDTO doanDuLichDTO, /*ArrayList<DoanDuLichDTO> doanDuLichDTOs,*/ String maTourHH) {
         int index = indexDoan(doanDuLichDTOs, doanDuLichDTO.getMaDoan());
         if (index == -1) {
             return false;
@@ -132,9 +132,9 @@ public class DoanDuLichBUS {
         return false;
     }
 
-    public boolean xoaDoan(DoanDuLichDTO doanDuLichDTO, ArrayList<DoanDuLichDTO> doanDuLichDTOs) {
-        if (doanDuLichDAO.deleteDoan(doanDuLichDTO.getMaDoan())) {
-            doanDuLichDTOs.remove(doanDuLichDTO);
+    public boolean xoaDoan(String maDoan/*, ArrayList<DoanDuLichDTO> doanDuLichDTOs*/) {
+        if (doanDuLichDAO.deleteDoan(maDoan)) {
+            //doanDuLichDTOs.remove(doanDuLichDTO);
             System.out.println("Xóa thành công suaDoanDuLichBUS");
             return true;
         }

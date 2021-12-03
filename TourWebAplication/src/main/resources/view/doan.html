@@ -84,15 +84,15 @@
                                                 </a>
                                             </td>
                                             <td class="td-center" style="width:5%;">
-                                                <form method="post">
+                                                <form method="post" th:action="@{/doan/thietlap}">
                                                     <input value="DoanId" type="hidden" name="id"/>
                                                     <button type="submit" class="btn btn-primary"><i
                                                             class="fa fa-cog"></i></button>
                                                 </form>
                                             </td>
                                             <td class="td-center" style="width:5%;">
-                                                <form method="post">
-                                                    <input value="DoanId" type="hidden" name="id"/>
+                                                <form method="get" th:action="@{/doan/sua}">
+                                                    <input th:value="${doan.maDoan}" type="hidden" name="id"/>
                                                     <button type="submit" class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></button>
                                                 </form>
@@ -100,7 +100,7 @@
                                             <td class="td-center" style="width:5%;">
                                                 <a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                            data-target="#XoaDoanId"><i class="fa fa-close"></i>
+                                                            th:data-target="'#XoaDoanId' + ${doan.maDoan}"><i class="fa fa-close"></i>
                                                     </button>
                                                 </a>
                                             </td>
@@ -159,6 +159,25 @@
                                             </div>
                                         </div>
 
+                                        <div class="modal fade" th:id="'XoaDoanId' + ${doan.maDoan}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Are you sure to delete
+                                                            this: </h3>
+                                                    </div>
+                                                    <div class="modal-footer" style="margin: auto;">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                        <form method="post" th:action="@{/doan/xoa}">
+                                                            <button name="id" type="submit" class="btn btn-danger" th:value="${doan.maDoan}">Yes, delete it !
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         </tbody>
                                     </div>
                                 </table>
@@ -169,25 +188,6 @@
             </div>
             <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
             {-->
-
-            <div class="modal fade" id="XoaDoanId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Are you sure to delete
-                                this: </h3>
-                        </div>
-                        <div class="modal-footer" style="margin: auto;">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                            <form method="post">
-                                <button name="id" type="submit" class="btn btn-danger" value="DoanId">Yes, delete it !
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
         <!-- #/ container -->
