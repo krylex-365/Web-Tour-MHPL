@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Dashboard</title>
+    <title>Thống kê nhân viên</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -219,110 +219,133 @@
 
         <div class="content-body">
 
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="./khachhang.html">Quản lý khách hàng</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Sửa khách hàng</a></li> 
-            </ol>
-        </div>
-    </div>
-    <!-- row -->
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="./index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Thống kê nhân viên</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12 mb-3">
-                                <a href="./khachhang.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title row">
+                                    <div class="col-md-12 mb-4">
+                                        <h3 class="td-center">THỐNG KÊ NHÂN VIÊN ĐI TOUR</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ngaybd">Ngày bắt đầu <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker" name="NgayBD" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ngaykt">Ngày kết thúc <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker" name="NgayKT" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 td-center">
+                                                    <!--<a asp-controller="QuanLyNhanVien" asp-action="Index" style="float:right;"><button class="btn btn-primary">Quay lại <i class="fa fa-undo" aria-hidden="true"></i></button></a>-->
+                                                    <input type="submit" value="Thống kê" name="thongke" class="btn btn-primary">
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="DataTable" class="table table-bordered table-hover zero-configuration">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th style="width:15%;" class="th-center-bold">#</th>
+                                                <th style="width:25%;" class="th-center-bold">Mã nhân viên</th>
+                                                <th style="width:30%;" class="th-center-bold">Tên nhân viên</th>
+                                                <th style="width:15%;" class="th-center-bold">Số lần đi</th>
+                                                <th style="width:15%;" class="th-center-bold">Chi tiết</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="td-center" style="width:15%;">1</td>
+                                                <td style="width:25%;">NhanVienId</td>
+                                                <td style="width:30%;">TenNhanVien</td>
+                                                <td class="td-center" style="width:15%;">3</td>
+                                                <td class="td-center" style="width:15%;">
+                                                    <a href="#">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChiTietId"><i class="fa fa-info"></i></button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <!-- đưa model vào đây -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <form method="post">
-                            <div class="row">
-                                <div class="col-lg-12 mb-3"><h3>Sửa thông tin khách hàng</h3></div>
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="makh">Mã khách hàng <span class="text-danger">*</span></label>
-                                                <div class="input-group">
-                                                    <input value="KhachHangId" id="makh" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="KhachHangId" readonly="readonly">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="hoten">Họ tên khách hàng <span class="text-danger">*</span></label>
-                                                <input value="Tên khách" type="text" name="HoTenKhachHang" class="form-control" placeholder="Nhập họ tên..." required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="gioitinh">Giới tính <span class="text-danger">*</span></label>
-                                                <select class="form-control" name="GioiTinh" required>
-                                                    <option value="Nam">Nam</option>
-                                                    <option value="Nữ">Nữ</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="ngaysinh">Ngày sinh <span class="text-danger">*</span></label>
-                                                <div class="input-group">
-                                                    <input value="12/04/1977" type="text" class="form-control mydatepicker" name="NgaySinh" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="cmnd">Số chứng minh thư <span class="text-danger">*</span></label>
-                                                <input value="332244887799" type="text" name="Cmnd" class="form-control" placeholder="Nhập số chứng minh thư..." required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="sdt">Số điện thoại <span class="text-danger">*</span></label>
-                                                <input value="0205079080" type="text" name="SDT" class="form-control" placeholder="Nhập số điện thoại..." required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="mail">Email <span class="text-danger">*</span></label>
-                                                <input value="123@gmail.com" type="email" name="mail" class="form-control" placeholder="Nhập email..." required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="diachi">Địa chỉ <span class="text-danger">*</span></label>
-                                                <input value="Việt Nam" type="text" name="DiaChi" class="form-control" placeholder="Nhập địa chỉ..." required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="quoctich">Quốc tịch <span class="text-danger">*</span></label>
-                                                <input value="Việt Nam" type="text" name="QuocTich" class="form-control" placeholder="Nhập quốc tịch..." required>
+                    </div>
+                </div>
+                <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
+                {-->
+                <div class="modal fade bd-example-modal-lg" id="ChiTietId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitle" style="color:#7571f9;">Chi tiết lần đi</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover">
+                                                    <thead class="text-primary">
+                                                        <tr>
+                                                            <th style="width:15%;" class="th-center-bold">#</th>
+                                                            <th style="width:20%;" class="th-center-bold">Mã đoàn</th>
+                                                            <th style="width:25%;" class="th-center-bold">Tên đoàn</th>
+                                                            <th style="width:20%;" class="th-center-bold">Ngày khởi hành</th>
+                                                            <th style="width:20%;" class="th-center-bold">Ngày kết thúc</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="td-center" style="width:15%;">1</td>
+                                                            <td class="td-center" style="width:20%;">DoanId</td>
+                                                            <td style="width:25%;">TenDoan</td>
+                                                            <td class="td-center" style="width:20%;">01/24/2022</td>
+                                                            <td class="td-center" style="width:20%;">02/04/2022</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-lg-12 td-center">
-                                    <button type="submit" class="btn btn-primary">Sửa khách hàng</button>
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- #/ container -->
-</div>
 
+            </div>
+            <!-- #/ container -->
+        </div>
 
         <!--**********************************
             Content body end
