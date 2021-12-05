@@ -177,6 +177,7 @@ public class DoanController {
         ArrayList<ChiTietDoanDTO> chiTietDoanDTOs = chiTietDoanBUS.getList();
 
         ArrayList<DataNhanVien> dataNhanViens = new ArrayList<>();
+        ArrayList<NhanVienDTO> dsNhanVienKhongThuocDoan = (ArrayList<NhanVienDTO>) nhanVienDTOs.clone();
         for (NhiemVuNhanVienDTO nhiemVuNhanVienDTO: nhiemVuNhanVienDTOs){
             if (nhiemVuNhanVienDTO.getMaDoan().equals(id)){
                 DataNhanVien dataNhanVien = new DataNhanVien();
@@ -184,6 +185,7 @@ public class DoanController {
                 for (NhanVienDTO nhanVienDTO: nhanVienDTOs){
                     if(nhanVienDTO.getMaNhanVien().equals(nhiemVuNhanVienDTO.getMaNhanVien())){
                         dataNhanVien.nhanVienDTO = nhanVienDTO;
+                        dsNhanVienKhongThuocDoan.remove(nhanVienDTO);
                         break;
                     }
                 }
@@ -191,6 +193,7 @@ public class DoanController {
             }
         }
 
+        ArrayList<KhachHangDTO> dsKhachHangKhongThuocDoan = (ArrayList<KhachHangDTO>) khachHangDTOs.clone();
         ArrayList<DataKhach> dataKhachs = new ArrayList<>();
         for (ChiTietDoanDTO chiTietDoanDTO: chiTietDoanDTOs){
             if (chiTietDoanDTO.getMaDoan().equals(id)){
@@ -199,6 +202,7 @@ public class DoanController {
                 for (KhachHangDTO khachHangDTO: khachHangDTOs){
                     if(khachHangDTO.getMaKhachHang().equals(chiTietDoanDTO.getMaKhachHang())){
                         dataKhach.khachHangDTO = khachHangDTO;
+                        dsKhachHangKhongThuocDoan.remove(khachHangDTO);
                         break;
                     }
                 }
@@ -206,8 +210,11 @@ public class DoanController {
             }
         }
 
+        model.addAttribute("maDoan", id);
+        model.addAttribute("dsNhanVienKhongThuocDoan", dsNhanVienKhongThuocDoan);
         model.addAttribute("dataNhanViens", dataNhanViens);
         model.addAttribute("dataKhachs", dataKhachs);
+        model.addAttribute("dsKhachHangKhongThuocDoan", dsKhachHangKhongThuocDoan);
         return "doanThietlap";
     }
 

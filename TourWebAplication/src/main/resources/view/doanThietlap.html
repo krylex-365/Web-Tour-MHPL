@@ -83,28 +83,37 @@
                                                             style="margin: auto;">Nhân viên</h3>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="post">
-                                                            <div class="form-group">
-                                                                <label>Nhân viên <span
-                                                                        class="text-danger">*</span></label>
-                                                                <select class="form-control" name="NhanVienId" required>
-                                                                    <option value="">-- Chọn nhân viên --</option>
-                                                                    <!-- for danh sách nhân viên -->
-                                                                    <option value="Mã">mã - tên</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Nhiệm vụ <span
-                                                                        class="text-danger">*</span></label>
-                                                                <input type="text" name="NhiemVu" class="form-control"
-                                                                       placeholder="Nhập nhiệm vụ..." required>
-                                                            </div>
-                                                            <button type="button" class="btn btn-danger"
-                                                                    data-dismiss="modal">Cancel
-                                                            </button>
-                                                            <input type="submit" value="Thêm mới" name="themmoiNV"
-                                                                   class="btn btn-success" style="float:right;">
-                                                        </form>
+                                                        <div th:if="${maDoan} and ${dsNhanVienKhongThuocDoan}">
+                                                            <form method="post"
+                                                                  th:action="@{/doan/thietlap/themNhiemVuNhanVien}">
+                                                                <div class="form-group">
+                                                                    <label>Nhân viên <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <select class="form-control" name="maNhanVien"
+                                                                            required>
+                                                                        <option value="">-- Chọn nhân viên --</option>
+                                                                        <!-- for danh sách nhân viên -->
+                                                                        <option th:each="nv : ${dsNhanVienKhongThuocDoan}"
+                                                                                th:value="${nv.maNhanVien}"
+                                                                                th:text="${nv.maNhanVien} + ' - ' + ${nv.tenNhanVien}"></option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Nhiệm vụ <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input th:value="${maDoan}" type="hidden"
+                                                                           name="maDoan">
+                                                                    <input type="text" name="nhiemVu"
+                                                                           class="form-control"
+                                                                           placeholder="Nhập nhiệm vụ..." required>
+                                                                </div>
+                                                                <button type="button" class="btn btn-danger"
+                                                                        data-dismiss="modal">Cancel
+                                                                </button>
+                                                                <input type="submit" value="Thêm mới" name="themmoiNV"
+                                                                       class="btn btn-success" style="float:right;">
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,19 +141,22 @@
                                                         <td th:text="${dataNhanVien.nhiemVuNhanVienDTO.tenNhiemVu}"></td>
                                                         <td class="td-center">
                                                             <button type="button" class="btn btn-primary"
-                                                                    data-toggle="modal" data-target="#SuaNVId">
+                                                                    data-toggle="modal"
+                                                                    th:data-target="'#SuaNVId' + ${dataNhanVien.nhanVienDTO.maNhanVien}">
                                                                 <i class="fa fa-pencil"></i>
                                                             </button>
                                                         </td>
                                                         <td class="td-center">
                                                             <button type="button" class="btn btn-danger"
                                                                     data-toggle="modal"
-                                                                    data-target="#XoaNVId">
+                                                                    th:data-target="'#XoaNVId' + ${dataNhanVien.nhanVienDTO.maNhanVien}">
                                                                 <i class="fa fa-close"></i>
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="SuaNVId" tabindex="-1" role="dialog"
+                                                    <div class="modal fade"
+                                                         th:id="'SuaNVId' + ${dataNhanVien.nhanVienDTO.maNhanVien}"
+                                                         tabindex="-1" role="dialog"
                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -153,20 +165,25 @@
                                                                         style="margin: auto;">Nhân viên</h3>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form method="post">
+                                                                    <form method="post"
+                                                                          th:action="@{/doan/thietlap/suaNhiemVuNhanVien}">
                                                                         <div class="form-group">
-                                                                            <label for="nhanvien">Nhân viên <span
+                                                                            <label>Nhân viên <span
                                                                                     class="text-danger">*</span></label>
-                                                                            <input value="NV000001" type="text"
-                                                                                   name="NhanVienId"
+                                                                            <input th:value="${dataNhanVien.nhanVienDTO.maNhanVien}"
+                                                                                   type="text"
+                                                                                   name="maNhanVien"
                                                                                    class="form-control"
                                                                                    readonly="readonly">
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="nhiemvu">Nhiệm vụ <span
+                                                                            <label>Nhiệm vụ <span
                                                                                     class="text-danger">*</span></label>
-                                                                            <input value="Lái xe" type="text"
-                                                                                   name="NhiemVu"
+                                                                            <input th:value="${dataNhanVien.nhiemVuNhanVienDTO.maDoan}"
+                                                                                   type="hidden" name="maDoan">
+                                                                            <input th:value="${dataNhanVien.nhiemVuNhanVienDTO.tenNhiemVu}"
+                                                                                   type="text"
+                                                                                   name="tenNhiemVu"
                                                                                    class="form-control"
                                                                                    placeholder="Nhập nhiệm vụ..."
                                                                                    required>
@@ -182,7 +199,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="XoaNVId" tabindex="-1" role="dialog"
+                                                    <div class="modal fade"
+                                                         th:id="'XoaNVId' + ${dataNhanVien.nhanVienDTO.maNhanVien}"
+                                                         tabindex="-1" role="dialog"
                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -195,10 +214,13 @@
                                                                     <button type="button" class="btn btn-primary"
                                                                             data-dismiss="modal">Cancel
                                                                     </button>
-                                                                    <form method="post">
-                                                                        <button name="NhanVienId" type="submit"
+                                                                    <form method="post"
+                                                                          th:action="@{/doan/thietlap/xoaNhiemVuNhanVien}">
+                                                                        <input th:value="${dataNhanVien.nhiemVuNhanVienDTO.maDoan}"
+                                                                               type="hidden" name="maDoan">
+                                                                        <button name="maNhanVien" type="submit"
                                                                                 class="btn btn-danger"
-                                                                                value="NhanVienId">
+                                                                                th:value="${dataNhanVien.nhanVienDTO.maNhanVien}">
                                                                             Yes, delete it !
                                                                         </button>
                                                                     </form>
@@ -234,22 +256,29 @@
                                                             style="margin: auto;">Khách hàng</h3>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="post">
-                                                            <div class="form-group">
-                                                                <label for="khachhang">Khách hàng <span
-                                                                        class="text-danger">*</span></label>
-                                                                <select class="form-control" name="NhanVienId" required>
-                                                                    <option value="">-- Chọn khách hàng --</option>
-                                                                    <!-- for danh sách khách hàng -->
-                                                                    <option value="Mã">mã - tên</option>
-                                                                </select>
-                                                            </div>
-                                                            <button type="button" class="btn btn-danger"
-                                                                    data-dismiss="modal">Cancel
-                                                            </button>
-                                                            <input type="submit" value="Thêm mới" name="themmoiKH"
-                                                                   class="btn btn-success" style="float:right;">
-                                                        </form>
+                                                        <div th:if="${maDoan} and ${dsKhachHangKhongThuocDoan}">
+                                                            <form method="post" th:action="@{/doan/thietlap/themChiTietDoan}">
+                                                                <div class="form-group">
+                                                                    <label>Khách hàng <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <select class="form-control" name="maKhachHang"
+                                                                            required>
+                                                                        <option value="">-- Chọn khách hàng --</option>
+                                                                        <!-- for danh sách khách hàng -->
+                                                                        <option th:each="kh : ${dsKhachHangKhongThuocDoan}"
+                                                                                th:value="${kh.maKhachHang}"
+                                                                                th:text="${kh.maKhachHang} + ' - ' + ${kh.tenKhachHang}"></option>
+                                                                    </select>
+                                                                </div>
+                                                                <input th:value="${maDoan}" type="hidden"
+                                                                       name="maDoan">
+                                                                <button type="button" class="btn btn-danger"
+                                                                        data-dismiss="modal">Cancel
+                                                                </button>
+                                                                <input type="submit" value="Thêm mới" name="themmoiKH"
+                                                                       class="btn btn-success" style="float:right;">
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,7 +296,6 @@
                                                 </thead>
                                                 <div th:if="${dataKhachs}">
                                                     <tbody th:each="dataKhach : ${dataKhachs}">
-                                                    {-->
                                                     <tr>
                                                         <td th:text="${dataKhachs.indexOf(dataKhach)} + 1"></td>
                                                         <td th:text="${dataKhach.khachHangDTO.maKhachHang}"></td>
@@ -276,12 +304,12 @@
                                                         <td class="td-center">
                                                             <button type="button" class="btn btn-danger"
                                                                     data-toggle="modal"
-                                                                    data-target="#XoaKHId">
+                                                                    th:data-target="'#XoaKHId' + ${dataKhach.khachHangDTO.maKhachHang}">
                                                                 <i class="fa fa-close"></i>
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" id="XoaKHId" tabindex="-1" role="dialog"
+                                                    <div class="modal fade" th:id="'XoaKHId' + ${dataKhach.khachHangDTO.maKhachHang}" tabindex="-1" role="dialog"
                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -294,10 +322,12 @@
                                                                     <button type="button" class="btn btn-primary"
                                                                             data-dismiss="modal">Cancel
                                                                     </button>
-                                                                    <form method="post">
-                                                                        <button name="KhachHangId" type="submit"
+                                                                    <form method="post" th:action="@{/doan/thietlap/xoaChiTietDoan}">
+                                                                        <input th:value="${maDoan}" type="hidden"
+                                                                               name="maDoan">
+                                                                        <button name="maKhachHang" type="submit"
                                                                                 class="btn btn-danger"
-                                                                                value="KhachHangId">
+                                                                                th:value="${dataKhach.khachHangDTO.maKhachHang}">
                                                                             Yes, delete it !
                                                                         </button>
                                                                     </form>

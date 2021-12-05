@@ -53,7 +53,7 @@ public class NhiemVuNhanVienDAO {
         conn.getConnection();
         String query = " IF EXISTS (SELECT * FROM NhiemVuNhanVien WHERE MaNhanVien='"+maNhanVien+"' AND MaDoan='"+maDoan+"')"+
         " BEGIN "+
-        " UPDATE NhiemVuNhanVien SET Status=1 WHERE MaNhanVien='"+maNhanVien+"' AND MaDoan='"+maDoan+"'" +
+        " UPDATE NhiemVuNhanVien SET Status=1, TenNhiemVu = '"+ tenNhiemVu +"' WHERE MaNhanVien='"+maNhanVien+"' AND MaDoan='"+maDoan+"'" +
         " END "+
         " ELSE "+
         " BEGIN "+

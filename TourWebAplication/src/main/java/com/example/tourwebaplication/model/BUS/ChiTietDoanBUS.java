@@ -32,27 +32,28 @@ public class ChiTietDoanBUS {
         return result;
     }
     
-    public boolean add(String maDoan, String maKhachHang,ArrayList<ChiTietDoanDTO> chiTietDoanDTOs){
-        for(ChiTietDoanDTO a : chiTietDoanDTOs){
-            if(a.getMaDoan().equals(maDoan)&&a.getMaKhachHang().equals(maKhachHang)){
-                return false;
-            }
-        }
+    public boolean add(String maDoan, String maKhachHang/*,ArrayList<ChiTietDoanDTO> chiTietDoanDTOs*/){
+//        for(ChiTietDoanDTO a : chiTietDoanDTOs){
+//            if(a.getMaDoan().equals(maDoan)&&a.getMaKhachHang().equals(maKhachHang)){
+//                return false;
+//            }
+//        }
         if(chiTietDoanDAO.Add(maDoan, maKhachHang)){
-            chiTietDoanDTOs.add(new ChiTietDoanDTO(maDoan,maKhachHang));
+            //chiTietDoanDTOs.add(new ChiTietDoanDTO(maDoan,maKhachHang));
             return true;
         }
         return false;
     }
     
-    public boolean delete(String maDoan, String maKhachHang,ArrayList<ChiTietDoanDTO> chiTietDoanDTOs){
+    public boolean delete(String maDoan, String maKhachHang/*,ArrayList<ChiTietDoanDTO> chiTietDoanDTOs*/){
         if(chiTietDoanDAO.Delete(maDoan, maKhachHang)){
-            for(int i = 0; i < chiTietDoanDTOs.size(); i++){
-                if(chiTietDoanDTOs.get(i).getMaDoan().equals(maDoan)&&chiTietDoanDTOs.get(i).getMaKhachHang().equals(maKhachHang)){
-                    chiTietDoanDTOs.remove(i);
-                    return true;
-                }
-            }
+//            for(int i = 0; i < chiTietDoanDTOs.size(); i++){
+//                if(chiTietDoanDTOs.get(i).getMaDoan().equals(maDoan)&&chiTietDoanDTOs.get(i).getMaKhachHang().equals(maKhachHang)){
+//                    chiTietDoanDTOs.remove(i);
+//                    return true;
+//                }
+//            }
+            return true;
         }
         return false;
     }

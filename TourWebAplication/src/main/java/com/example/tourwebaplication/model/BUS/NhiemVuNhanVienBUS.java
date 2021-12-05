@@ -20,40 +20,46 @@ public class NhiemVuNhanVienBUS {
         nhiemVuNhanVienDAO = new NhiemVuNhanVienDAO();
     }
     
-    public boolean add(String maNhanVien, String maDoan, String nhiemVuNhanVien, ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs){
-        for(NhiemVuNhanVienDTO a : nhiemVuNhanVienDTOs){
+    public boolean add(String maNhanVien, String maDoan, String nhiemVuNhanVien/*, ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs*/){
+        /*for(NhiemVuNhanVienDTO a : nhiemVuNhanVienDTOs){
             if(a.getMaDoan().equals(maDoan)&&a.getMaNhanVien().equals(maNhanVien)){
                 return false;
             }
-        }
+        }*/
         if(nhiemVuNhanVienDAO.Add(maNhanVien, maDoan, nhiemVuNhanVien)){
-            nhiemVuNhanVienDTOs.add(new NhiemVuNhanVienDTO(maNhanVien,maDoan,nhiemVuNhanVien));
+            //nhiemVuNhanVienDTOs.add(new NhiemVuNhanVienDTO(maNhanVien,maDoan,nhiemVuNhanVien));
             return true;
         }
         return false;
     }
     
-    public boolean delete(String maNhanVien, String maDoan,ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs){
+    public boolean delete(String maNhanVien, String maDoan/*,ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs*/){
         if(nhiemVuNhanVienDAO.delete(maNhanVien, maDoan)){
-            for(int i = 0; i < nhiemVuNhanVienDTOs.size();i++){
-                if(nhiemVuNhanVienDTOs.get(i).getMaDoan().equals(maDoan)&&nhiemVuNhanVienDTOs.get(i).getMaNhanVien().equals(maNhanVien)){
-                    nhiemVuNhanVienDTOs.remove(i);
-                    return true;
-                }
-            }
+//            for(int i = 0; i < nhiemVuNhanVienDTOs.size();i++){
+//                if(nhiemVuNhanVienDTOs.get(i).getMaDoan().equals(maDoan)&&nhiemVuNhanVienDTOs.get(i).getMaNhanVien().equals(maNhanVien)){
+//                    nhiemVuNhanVienDTOs.remove(i);
+//                    return true;
+//                }
+//            }
+            return true;
         }
         return false;
     }
     
-    public boolean update(String maNhanVien, String maDoan, String nhiemVuNhanVien,ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs){
+    public boolean update(String maNhanVien, String maDoan, String nhiemVuNhanVien/*,ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs*/){
         if(nhiemVuNhanVienDAO.update(maNhanVien, maDoan, nhiemVuNhanVien)){
-            for(NhiemVuNhanVienDTO a : nhiemVuNhanVienDTOs){
+            /*for(NhiemVuNhanVienDTO a : nhiemVuNhanVienDTOs){
                 if(a.getMaDoan().equals(maDoan)&&a.getMaNhanVien().equals(maNhanVien)){
                     a.setTenNhiemVu(nhiemVuNhanVien);
                     return true;
                 }
-            }
+            }*/
+            return true;
         }
         return false;
+    }
+
+    public ArrayList<NhiemVuNhanVienDTO> getList(){
+        return nhiemVuNhanVienDAO.getList();
     }
 }
