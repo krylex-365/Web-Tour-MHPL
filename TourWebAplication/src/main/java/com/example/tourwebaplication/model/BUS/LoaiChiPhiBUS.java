@@ -7,6 +7,7 @@ package com.example.tourwebaplication.model.BUS;
 
 import com.example.tourwebaplication.model.DAO.LoaiChiPhiDAO;
 import com.example.tourwebaplication.model.DAO.MaDuLieuCuoiDAO;
+import com.example.tourwebaplication.model.DTO.DiaDiemDTO;
 import com.example.tourwebaplication.model.DTO.DiaDiemThamQuanDTO;
 import com.example.tourwebaplication.model.DTO.LoaiChiPhiDTO;
 
@@ -21,15 +22,38 @@ public class LoaiChiPhiBUS
     private LoaiChiPhiDAO loaiChiPhiDAO;
     private Utils utl = new Utils();
     private MaDuLieuCuoiDAO maLast = new MaDuLieuCuoiDAO();
+    private ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs;
 
-    public LoaiChiPhiBUS(LoaiChiPhiDAO loaiChiPhiDAO)
-    {
-        this.loaiChiPhiDAO = loaiChiPhiDAO;
+//    public LoaiChiPhiBUS(LoaiChiPhiDAO loaiChiPhiDAO, ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs) {
+//        this.loaiChiPhiDAO = loaiChiPhiDAO;
+//        this.loaiChiPhiDTOs = loaiChiPhiDTOs;
+//    }
+//
+//    public LoaiChiPhiDAO getLoaiChiPhiDAO() {
+//        return loaiChiPhiDAO;
+//    }
+//
+//    public void setLoaiChiPhiDAO(LoaiChiPhiDAO loaiChiPhiDAO) {
+//        this.loaiChiPhiDAO = loaiChiPhiDAO;
+//    }
+
+    public ArrayList<LoaiChiPhiDTO> getLoaiChiPhiDTOs() {
+        return loaiChiPhiDTOs;
     }
+
+    public void setLoaiChiPhiDTOs(ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs) {
+        this.loaiChiPhiDTOs = loaiChiPhiDTOs;
+    }
+
+//    public LoaiChiPhiBUS(LoaiChiPhiDAO loaiChiPhiDAO)
+//    {
+//        this.loaiChiPhiDAO = loaiChiPhiDAO;
+//    }
 
     public LoaiChiPhiBUS()
     {
         loaiChiPhiDAO = new LoaiChiPhiDAO();
+     this.loaiChiPhiDTOs =loaiChiPhiDAO.getList();
     }
 
     public String searchTenLoaiChiPhiByMaLoaiChiPhi(String maLoaiChiPhi, ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs)
