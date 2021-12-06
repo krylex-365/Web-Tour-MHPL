@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="inc/header">
+    <title>Sửa nhân viên</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+<body>
+
+    *-->
+    <div id="main-wrapper">
+
+        <div th:insert="inc/form-layout"></div>
+            Content body start
+        ***********************************-->
+
+        <div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="./nhanvien.html">Quản lý nhân viên</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Sửa nhân viên</a></li> 
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 mb-3">
+                                <a href="./nhanvien.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                            </div>
+                        </div>
+                        <div th:if="${nhanVienDTO}">
+                            <form method="post" th:action="@{/nhanvien/sua}">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3"><h3>Sửa thông tin nhân viên</h3></div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="maNhanVien">Mã nhân viên <span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input th:value="${nhanVienDTO.maNhanVien}" id="maNhanVien" class="form-control" type="text" placeholder="Dữ liệu cấp phát…" name="maNhanVien" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="tenNhanVien">Họ tên nhân viên <span class="text-danger">*</span></label>
+                                                    <input th:value="${nhanVienDTO.tenNhanVien}" type="text" name="tenNhanVien" class="form-control" placeholder="Nhập họ tên..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="gioiTinh">Giới tính <span class="text-danger">*</span></label>
+                                                    <div th:switch="${nhanVienDTO.gioiTinh}">
+                                                        <div th:case="'0'">
+                                                            <select class="form-control" name="gioiTinh" required>
+                                                                <option value="0" selected>Nam</option>
+                                                                <option value="1">Nữ</option>
+                                                            </select>
+                                                        </div>
+                                                        <div th:case="'1'">
+                                                            <select class="form-control" name="gioiTinh" required>
+                                                                <option value="0">Nam</option>
+                                                                <option value="1" selected>Nữ</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ngaySinh">Ngày sinh <span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input th:value="${nhanVienDTO.ngaySinh}" type="text" class="form-control mydatepicker" name="ngaySinh" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="SDT">Số điện thoại <span class="text-danger">*</span></label>
+                                                    <input th:value="${nhanVienDTO.SDT}" type="text" name="SDT" class="form-control" placeholder="Nhập số điện thoại..." required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="diaChi">Địa chỉ <span class="text-danger">*</span></label>
+                                                    <input th:value="${nhanVienDTO.diaChi}" type="text" name="diaChi" class="form-control" placeholder="Nhập địa chỉ..." required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12 td-center">
+                                        <button type="submit" class="btn btn-primary">Sửa nhân viên</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
+
+
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+        <div th:insert="inc/footer"></div>
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    <!--**********************************
+        Scripts
+    ***********************************-->
+<!--    <script>-->
+<!--        function checkDel() {-->
+<!--            if ($("#checkBoxAll").is(":checked")) {-->
+<!--                $(".chkCheckBoxId").prop("checked", true);-->
+<!--                $("#btnDel").prop("disabled", false);-->
+<!--            }-->
+<!--            else {-->
+<!--                $(".chkCheckBoxId").prop("checked", false);-->
+<!--                $("#btnDel").prop("disabled", true);-->
+<!--            }-->
+<!--        }-->
+<!--        function checkSingleDel() {-->
+<!--            if ($(".chkCheckBoxId").is(":checked")) {-->
+<!--                $("#btnDel").prop("disabled", false);-->
+<!--            }-->
+<!--            else {-->
+<!--                $("#btnDel").prop("disabled", true);-->
+<!--            }-->
+<!--        }-->
+
+</body>
+
+</html>

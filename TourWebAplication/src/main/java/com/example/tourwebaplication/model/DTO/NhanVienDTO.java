@@ -76,6 +76,6 @@ public class NhanVienDTO {
 
     @Override
     public String toString() {
-        return "NhanVienDTO{" + "MaNhanVien=" + MaNhanVien + ", TenNhanVien=" + TenNhanVien + ", SDT=" + SDT + ", DiaChi=" + DiaChi + '}';
+        return "NhanVienDTO{" + "MaNhanVien=" + MaNhanVien + ", TenNhanVien="+", GioiTinh="+ GioiTinh+", NgaySinh="+NgaySinh + TenNhanVien + ", SDT=" + SDT + ", DiaChi=" + DiaChi + '}';
     } 
 }

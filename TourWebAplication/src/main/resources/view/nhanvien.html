@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+<head th:insert="inc/header">
+    <title>Quan lý nhân viên</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+        <div th:insert="inc/form-layout"></div>
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+
+<div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Quản lý nhân viên</li>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title row">
+                            <div class="col-md-12 mb-4">
+                                <h3 class="td-center">DANH SÁCH NHÂN VIÊN</h3>
+                                <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+                                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                            </div>
+                            <div class="col-md-12">
+                                    <!--<a asp-controller="QuanLyNhanVien" asp-action="Index" style="float:right;"><button class="btn btn-primary">Quay lại <i class="fa fa-undo" aria-hidden="true"></i></button></a>-->
+                                    <a th:href="@{/nhanvien/them}" style="float:right;">
+                                        <button class="btn btn-primary"><span style="margin-right: 10px">Thêm mới </span><i class="fa fa-plus"></i></button>
+                                    </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="DataTable" class="table table-bordered table-hover zero-configuration">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th style="width:5%;" class="th-center-bold">#</th>
+                                        <th style="width:15%;" class="th-center-bold">Mã nhân viên</th>
+                                        <th style="width:20%;" class="th-center-bold">Tên nhân viên</th>
+                                        <th style="width:15%;" class="th-center-bold">Giới tính</th>
+                                        <th style="width:15%;" class="th-center-bold">Ngày sinh</th>
+                                        <th style="width:15%;" class="th-center-bold">Số điện thoại</th>
+                                        <th style="width:5%;" class="th-center-bold">Chi tiết</th>
+                                        <th style="width:5%;" class="th-center-bold">Sửa</th>
+                                        <th style="width:5%;" class="th-center-bold">Xóa</th>
+                                    </tr>
+                                </thead>
+                                <div th:if="${list}">
+                                    <tbody th:each="data : ${list}">
+                                    <tr>
+                                        <td th:text="${list.indexOf(data)}">1</td>
+                                        <td th:text="${data.nhanVienDTO.MaNhanVien}">NhanVienId</td>
+                                        <td th:text="${data.nhanVienDTO.TenNhanVien}">TenNhanVien</td>
+                                        <div th:switch="${data.nhanVienDTO.GioiTinh}">
+                                            <td th:case="'0'" th:text="Nam">Nam</td>
+                                            <td th:case="'1'" th:text="Nữ">Nữ</td>
+                                        </div>
+                                        <td th:text="${data.nhanVienDTO.NgaySinh}">01/02/2003</td>
+                                        <td th:text="${data.nhanVienDTO.SDT}">0909090807</td>
+                                        <td class="td-center">
+                                            <a href="#" >
+                                                <button  type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#ChiTietNV' + ${data.nhanVienDTO.MaNhanVien}"><i class="fa fa-info"></i></button>
+                                            </a>
+                                        </td>
+                                        <td class="td-center">
+                                            <form method="get" th:action="@{/nhanvien/sua}">
+                                                <input th:value="${data.nhanVienDTO.MaNhanVien}" type="hidden" name="id" />
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                                            </form>
+                                        </td>
+                                        <td class="td-center">
+                                            <a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#XoaNhanVienId' + ${data.nhanVienDTO.MaNhanVien}"><i class="fa fa-close"></i></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <div class="modal fade bd-example-modal-lg" th:id="'ChiTietNV' + ${data.nhanVienDTO.MaNhanVien}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="exampleModalLongTitle" style="color:#7571f9;">Thông tin nhân viên</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6" style="margin-bottom: 10px">
+                                                                    <h6 style="color:#ea5774;font-weight:500;">Mã nhân viên:</h6>
+                                                                    <p th:text="${data.nhanVienDTO.MaNhanVien}"> @quanLyNhanVien1.NhanVienId </p>
+                                                                </div>
+                                                                <div class="col-md-6" style="margin-bottom: 10px">
+                                                                    <h6 style="color:#ea5774;font-weight:500;">Họ tên nhân viên:</h6>
+                                                                    <p th:text="${data.nhanVienDTO.TenNhanVien}"> @quanLyNhanVien1.TenNhanVien </p>
+                                                                </div>
+                                                                <div class="col-md-6" style="margin-bottom: 10px">
+                                                                    <h6 style="color:#ea5774;font-weight:500;">Giới tính:</h6>
+                                                                    <div th:switch="${data.nhanVienDTO.GioiTinh}">
+                                                                        <p th:case="'0'" th:text="Nam"></p>
+                                                                        <p th:case="'1'" th:text="Nữ"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6" style="margin-bottom: 10px">
+                                                                    <h6 style="color:#ea5774;font-weight:500;">Ngày sinh:</h6>
+                                                                    <p th:text="${data.nhanVienDTO.NgaySinh}"> @quanLyNhanVien1.NgaySinh </p>
+                                                                </div>
+                                                                <div class="col-md-6" style="margin-bottom: 10px">
+                                                                    <h6 style="color:#ea5774;font-weight:500;">Số điện thoại:</h6>
+                                                                    <p th:text="${data.nhanVienDTO.SDT}"> @quanLyNhanVien1.SDT </p>
+                                                                </div>
+                                                                <div class="col-md-6" style="margin-bottom: 10px">
+                                                                    <h6 style="color:#ea5774;font-weight:500;">Địa chỉ:</h6>
+                                                                    <p th:text="${data.nhanVienDTO.DiaChi}"> @quanLyNhanVien1.DiaChi </p>
+                                                                </div >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" th:id="'XoaNhanVienId' + ${data.nhanVienDTO.MaNhanVien}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="exampleModalLabel" style="margin: auto;">Are you sure to delete this: </h3>
+                                                </div>
+                                                <div class="modal-footer" style="margin: auto;">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                    <form method="post" th:action="@{/nhanvien/xoa}">
+                                                        <button name="id" type="submit" class="btn btn-danger" th:value="${data.nhanVienDTO.MaNhanVien}">Yes, delete it !</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </tbody>
+                                </div>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
+        {-->
+
+
+        </div>
+    <!-- #/ container -->
+    </div>
+
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <!--**********************************
+            Footer start
+        ***********************************-->
+
+        <!--**********************************
+            Footer end
+        ***********************************-->
+        <div th:insert="inc/footer"></div>
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    <!--**********************************
+        Scripts
+    ***********************************-->
+<!--    <script>-->
+<!--        function checkDel() {-->
+<!--            if ($("#checkBoxAll").is(":checked")) {-->
+<!--                $(".chkCheckBoxId").prop("checked", true);-->
+<!--                $("#btnDel").prop("disabled", false);-->
+<!--            }-->
+<!--            else {-->
+<!--                $(".chkCheckBoxId").prop("checked", false);-->
+<!--                $("#btnDel").prop("disabled", true);-->
+<!--            }-->
+<!--        }-->
+<!--        function checkSingleDel() {-->
+<!--            if ($(".chkCheckBoxId").is(":checked")) {-->
+<!--                $("#btnDel").prop("disabled", false);-->
+<!--            }-->
+<!--            else {-->
+<!--                $("#btnDel").prop("disabled", true);-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+
+</body>
+
+</html>
