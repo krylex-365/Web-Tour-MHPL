@@ -103,7 +103,7 @@
                                                 <div class="col-md-6"></div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label >Ngày khởi hành <span
+                                                        <label>Ngày khởi hành <span
                                                                 class="text-danger">*</span></label>
                                                         <div class="input-group">
                                                             <input type="text" class="form-control mydatepicker"
@@ -116,7 +116,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label >Ngày kết thúc <span
+                                                        <label>Ngày kết thúc <span
                                                                 class="text-danger">*</span></label>
                                                         <div class="input-group">
                                                             <input type="text" class="form-control mydatepicker"
@@ -151,16 +151,15 @@
         }
 
         function setGia() {
-            var option = $('#giaTour').find(':selected').text();
-            var text = option.split("-")
-            var gia = text[3]
+            let option = $('#giaTour').find(':selected').text();
+            let text = option.split("-")
+            let gia = text[text.length - 1]
             console.log(gia)
             if (gia === ' Chọn tour ') {
                 $('#giaDoan').val('');
             } else {
                 $('#giaDoan').val(parseInt(gia));
             }
-
         }
     </script>
 
