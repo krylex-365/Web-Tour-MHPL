@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <head th:insert="inc/header">
@@ -72,7 +70,7 @@
                                 <div th:if="${list}">
                                     <tbody th:each="data : ${list}">
                                     <tr>
-                                        <td th:text="${list.indexOf(data)}">1</td>
+                                        <td th:text="${list.indexOf(data)+1}">1</td>
                                         <td th:text="${data.nhanVienDTO.MaNhanVien}">NhanVienId</td>
                                         <td th:text="${data.nhanVienDTO.TenNhanVien}">TenNhanVien</td>
                                         <div th:switch="${data.nhanVienDTO.GioiTinh}">
