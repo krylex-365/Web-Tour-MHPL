@@ -37,9 +37,9 @@ public class ChiPhiBUS {
         return -1;
     }
     
-    public boolean themChiPhi(ChiPhiDTO chiPhiDTO, ArrayList<ChiPhiDTO> chiPhiDTOs){
+    public boolean themChiPhi(ChiPhiDTO chiPhiDTO/*, ArrayList<ChiPhiDTO> chiPhiDTOs*/){
         if (chiPhiDAO.insertChiPhi(chiPhiDTO)) {
-            chiPhiDTOs.add(chiPhiDTO);
+            //chiPhiDTOs.add(chiPhiDTO);
             maLast.updateMaChiPhi(chiPhiDTO.getMaChiPhi());
             System.out.println("Them ChiPhiBUS thanh cong");
             return true;
@@ -48,21 +48,21 @@ public class ChiPhiBUS {
         return false;
     }
     
-    public boolean suaChiPhi(ChiPhiDTO chiPhiDTO, ArrayList<ChiPhiDTO> chiPhiDTOs, String maLoaiCPHH){
-        int index = indexChiPhi(chiPhiDTOs, chiPhiDTO.getMaChiPhi());
-        if (index == -1) {
-            return false;
-        }
-        boolean checkLoaiCP;
+    public boolean suaChiPhi(ChiPhiDTO chiPhiDTO/*, ArrayList<ChiPhiDTO> chiPhiDTOs*//*, String maLoaiCPHH*/){
+        //int index = indexChiPhi(chiPhiDTOs, chiPhiDTO.getMaChiPhi());
+//        if (index == -1) {
+//            return false;
+//        }
+        /*boolean checkLoaiCP;
         if (maLoaiCPHH.equals(chiPhiDTO.getMaLoaiChiPhi())){
             // NẾU KHÔNG SỬA LOẠI CP
             checkLoaiCP = false;
         } else {
             // NẾU SỬA LOẠI CP
             checkLoaiCP = true;
-        }
-        if (chiPhiDAO.updateChiPhi(chiPhiDTO, checkLoaiCP)) {
-            chiPhiDTOs.set(index, chiPhiDTO);
+        }*/
+        if (chiPhiDAO.updateChiPhi(chiPhiDTO/*, checkLoaiCP*/)) {
+            //chiPhiDTOs.set(index, chiPhiDTO);
             System.out.println("Sửa thành công ChiPhiBUS");
             return true;
         }
@@ -70,13 +70,17 @@ public class ChiPhiBUS {
         return false;
     }
     
-    public boolean xoaChiPhi(ChiPhiDTO chiPhiDTO, ArrayList<ChiPhiDTO> chiPhiDTOs){
-        if (chiPhiDAO.deleteChiPhi(chiPhiDTO.getMaChiPhi())) {
-            chiPhiDTOs.remove(chiPhiDTO);
+    public boolean xoaChiPhi(String maChiPhi){
+        if (chiPhiDAO.deleteChiPhi(maChiPhi)) {
+           // chiPhiDTOs.remove(chiPhiDTO);
             System.out.println("Xóa thành công ChiPhiBUS");
             return true;
         }
         System.out.println("Xóa thất bại ChiPhiBUS");
         return false;
+    }
+
+    public ArrayList<ChiPhiDTO> getList(){
+        return chiPhiDAO.getList();
     }
 }

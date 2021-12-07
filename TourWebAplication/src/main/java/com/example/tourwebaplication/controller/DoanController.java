@@ -169,12 +169,16 @@ public class DoanController {
         NhiemVuNhanVienBUS nhiemVuNhanVienBUS = new NhiemVuNhanVienBUS();
         KhachHangBUS khachHangBUS = new KhachHangBUS();
         ChiTietDoanBUS chiTietDoanBUS = new ChiTietDoanBUS();
+        ChiPhiBUS chiPhiBUS = new ChiPhiBUS();
+        LoaiChiPhiBUS loaiChiPhiBUS = new LoaiChiPhiBUS();
 
         //ArrayList<DoanDuLichDTO> doanDuLichDTOs = doanDuLichBUS.getDoanDuLichDTOs();
         ArrayList<NhanVienDTO> nhanVienDTOs = nhanVienBUS.getNhanVienDTOs();
         ArrayList<NhiemVuNhanVienDTO> nhiemVuNhanVienDTOs = nhiemVuNhanVienBUS.nhiemVuNhanVienDAO.getList();
         ArrayList<KhachHangDTO> khachHangDTOs = khachHangBUS.getKhachHangDTOs();
         ArrayList<ChiTietDoanDTO> chiTietDoanDTOs = chiTietDoanBUS.getList();
+        ArrayList<ChiPhiDTO> chiPhiDTOs = chiPhiBUS.getList();
+        ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs = loaiChiPhiBUS.getLoaiChiPhiDTOs();
 
         ArrayList<DataNhanVien> dataNhanViens = new ArrayList<>();
         ArrayList<NhanVienDTO> dsNhanVienKhongThuocDoan = (ArrayList<NhanVienDTO>) nhanVienDTOs.clone();
@@ -210,8 +214,25 @@ public class DoanController {
             }
         }
 
+        ArrayList<DataChiPhi> dataChiPhis = new ArrayList<>();
+        for (ChiPhiDTO chiPhiDTO: chiPhiDTOs){
+            if(chiPhiDTO.getMaDoan().equals(id)){
+                DataChiPhi dataChiPhi = new DataChiPhi();
+                dataChiPhi.chiPhiDTO = chiPhiDTO;
+                for (LoaiChiPhiDTO loaiChiPhiDTO: loaiChiPhiDTOs){
+                    if (loaiChiPhiDTO.getMaLoaiChiPhi().equals(chiPhiDTO.getMaLoaiChiPhi())){
+                        dataChiPhi.loaiChiPhiDTO = loaiChiPhiDTO;
+                    }
+                }
+                dataChiPhis.add(dataChiPhi);
+            }
+        }
+
         model.addAttribute("maDoan", id);
         model.addAttribute("dsNhanVienKhongThuocDoan", dsNhanVienKhongThuocDoan);
+        model.addAttribute("dataChiPhis", dataChiPhis);
+        model.addAttribute("loaiChiPhiDTOs", loaiChiPhiDTOs);
+        model.addAttribute("capPhatMaChiPhi", capPhatMaChiPhi());
         model.addAttribute("dataNhanViens", dataNhanViens);
         model.addAttribute("dataKhachs", dataKhachs);
         model.addAttribute("dsKhachHangKhongThuocDoan", dsKhachHangKhongThuocDoan);
@@ -221,6 +242,11 @@ public class DoanController {
     public String capPhatMaDoan(){
         Utils utils = new Utils();
         return utils.initMaDoanDuLich();
+    }
+
+    public String capPhatMaChiPhi(){
+        Utils utils = new Utils();
+        return utils.initMaChiPhi();
     }
 
     public class Data{
@@ -236,5 +262,10 @@ public class DoanController {
     public class DataKhach{
         public KhachHangDTO khachHangDTO;
         public ChiTietDoanDTO chiTietDoanDTO;
+    }
+
+    public class DataChiPhi{
+        public ChiPhiDTO chiPhiDTO;
+        public LoaiChiPhiDTO loaiChiPhiDTO;
     }
 }

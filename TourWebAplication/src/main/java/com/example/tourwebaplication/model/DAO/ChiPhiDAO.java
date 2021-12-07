@@ -70,23 +70,23 @@ public class ChiPhiDAO {
         return false;
     }
 
-    public boolean updateChiPhi(ChiPhiDTO chiPhiDTO, boolean checkLoaiCP) {
+    public boolean updateChiPhi(ChiPhiDTO chiPhiDTO/*, boolean checkLoaiCP*/) {
         conn = new Connect();
         conn.getConnection();
         String sql;
-        if (checkLoaiCP) {
+       /* if (checkLoaiCP) {*/
             sql = "UPDATE ChiPhi SET"
                     + " MaLoaiChiPhi='" + chiPhiDTO.getMaLoaiChiPhi()+ "',"
                     + " SoTien='" + chiPhiDTO.getSoTien()+ "',"
                     + " GhiChu='" + chiPhiDTO.getGhiChu()+ "'"
                     + " WHERE MaChiPhi='" + chiPhiDTO.getMaChiPhi()+ "';";
             System.out.println("ChiPhiDAO update maLoaiCP");
-        } else {
+        /*} else {
             sql = "UPDATE ChiPhi SET"
                     + " SoTien='" + chiPhiDTO.getSoTien()+ "',"
                     + " GhiChu='" + chiPhiDTO.getGhiChu()+ "'"
                     + " WHERE MaChiPhi='" + chiPhiDTO.getMaChiPhi()+ "';";
-        }
+        }*/
         if (conn.executeUpdate(sql)) {
             conn.close();
             System.out.println("ChiPhiDAO update success.");
