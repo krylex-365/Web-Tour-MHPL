@@ -19,15 +19,21 @@ public class ChiPhiBUS {
     private ChiPhiDAO chiPhiDAO;
     private Utils utl = new Utils();
     private MaDuLieuCuoiDAO maLast = new MaDuLieuCuoiDAO();
+    private ArrayList<ChiPhiDTO> chiPhiDTOS;
 
     public ChiPhiBUS() {
         chiPhiDAO = new ChiPhiDAO();
+        chiPhiDTOS = chiPhiDAO.getList();
     }
-    
-    public ChiPhiBUS(ChiPhiDAO chiPhiDAO) {
-        this.chiPhiDAO = chiPhiDAO;
+
+//    public ChiPhiBUS(ChiPhiDAO chiPhiDAO) {
+//        this.chiPhiDAO = chiPhiDAO;
+//    }
+
+    public ArrayList<ChiPhiDTO> getChiPhiDTOS() {
+        return chiPhiDTOS;
     }
-    
+
     private int indexChiPhi(ArrayList<ChiPhiDTO> chiPhiDTOs, String maChiPhi) {
         for (int i = 0; i < chiPhiDTOs.size(); i++) {
             if (maChiPhi.equals(chiPhiDTOs.get(i).getMaChiPhi())) {
