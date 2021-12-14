@@ -21,9 +21,9 @@
         <div class="row page-titles mx-0">
             <div class="col p-md-0">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="./nhanvien.html">Quản lý tour</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
+                    <li class="breadcrumb-item"><a>Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/tour}">Quản lý tour</a></li>
+                    <li class="breadcrumb-item active"><a>Thêm tour</a></li>
                 </ol>
             </div>
         </div>
@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12 mb-3">
-                                    <a href="./tour.html" style="float:left;">
+                                    <a th:href="@{/tour}" style="float:left;">
                                         <button class="btn btn-primary"><i class="fa fa-arrow-left"
                                                                            aria-hidden="true"></i> Quay lại
                                         </button>

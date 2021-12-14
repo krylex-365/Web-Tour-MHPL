@@ -67,10 +67,6 @@
                                         <li>
                                             <a href="#"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
-                                        <hr class="my-2">
-                                        <li>
-                                            <a href="#"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                        </li>
                                         <li><a href="../login.html"><i class="icon-key"></i> <span>Logout</span></a>
                                         </li>
                                     </ul>
@@ -108,7 +104,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="../diadiem.html">
+                        <a th:href="@{/diadiem}">
                             <i class="icon-map menu-icon"></i> <span class="nav-text">Quản lý Địa điểm</span>
                         </a>
                     </li>
@@ -118,11 +114,11 @@
                         </a>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" aria-expanded="false">
                             <i class="icon-people menu-icon"></i> <span class="nav-text">Nhân viên</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="#">Quản lý nhân viên</a></li>
+                            <li><a th:href="@{/nhanvien}">Quản lý nhân viên</a></li>
                             <li><a href="#">Thống kê nhân viên</a></li>
                         </ul>
                     </li>
@@ -132,16 +128,16 @@
                         </a>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" aria-expanded="false">
                             <i class="icon-wallet menu-icon"></i> <span class="nav-text">Chi phí</span>
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                            <li><a href="../loaichiphi.html">Loại chi phí</a></li>
+                            <li><a th:href="@{/loaichiphi}">Loại chi phí</a></li>
                             <li><a href="#">Thống kê chi phí</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a>
+                        <a th:href="@{/thongkeDoanhthu}">
                             <i class="icon-screen-tablet menu-icon"></i> <span
                                 class="nav-text">Thống kê doanh thu</span>
                         </a>

@@ -46,7 +46,7 @@
                                     </div>
 
                                     <input type="submit" value="Sửa thông tin" name="sua" class="btn btn-primary">
-                                    <a href="loaichiphi" style="float: right;"><button type="button" class="btn btn-danger">Hủy</button></a>
+                                    <a href="loaichiphi" style="float: right;"><button type="button" class="btn btn-outline-dark">Hủy</button></a>
                                 </form>
                        </div>
                             <div th:unless="${loaiChiPhiDTO}" method="post">
@@ -139,15 +139,15 @@
                                                 <div class="modal-header">
                                                     <h3 class="modal-title" id="exampleModalLabel"
                                                         style="margin: auto;text-align: center;">Bạn chắc chắn muốn
-                                                        xoá<br th:text="'Loại chi phí'+ ${loaichiphi.maLoaiChiPhi}+'?'"></h3>
+                                                        xoá <br th:text="'Loại chi phí'+ ${loaichiphi.maLoaiChiPhi}+'?'"></h3>
                                                 </div>
                                                 <div class="modal-footer" style="margin: auto;">
-                                                    <button type="button" class="btn btn-primary"
+                                                    <button type="button" class="btn btn-outline-dark"
                                                             data-dismiss="modal">
                                                         Hủy
                                                     </button>
                                                     <form th:action="@{/loaichiphi/xoa}"method="post" >
-                                                        <button name="id" type="submit" class="btn btn-danger"
+                                                        <button name="id" type="submit" class="btn btn-primary"
                                                                 th:value="${loaichiphi.maLoaiChiPhi}">Xóa loại chi phí
                                                         </button>
                                                     </form>

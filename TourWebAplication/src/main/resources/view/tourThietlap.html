@@ -22,9 +22,9 @@
         <div class="row page-titles mx-0">
             <div class="col p-md-0">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a>Dashboard</a></li>
                     <li class="breadcrumb-item"><a th:href="@{/tour}">Quản lý tour</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm tour</a></li>
+                    <li class="breadcrumb-item active"><a>Thiết lập tour</a></li>
                 </ol>
             </div>
         </div>
@@ -78,7 +78,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                        <h3 class="modal-title" id="exampleModalLabelThemGia"
                                                             style="margin: auto;">Thông tin giá</h3>
                                                     </div>
                                                     <div class="modal-body">
@@ -130,8 +130,8 @@
                                                                         class="mdi mdi-calendar-check"></i></span></span>
                                                                 </div>
                                                             </div>
-                                                            <button type="button" class="btn btn-danger"
-                                                                    data-dismiss="modal">Cancel
+                                                            <button type="button" class="btn btn-outline-dark"
+                                                                    data-dismiss="modal">Hủy
                                                             </button>
                                                             <input type="submit" value="Thêm mới" name="themmoi"
                                                                    class="btn btn-primary" style="float:right;">
@@ -194,7 +194,7 @@
                                                             </button>
                                                         </td>
                                                         <td class="td-center">
-                                                            <button type="button" class="btn btn-danger"
+                                                            <button type="button" class="btn btn-primary"
                                                                     data-toggle="modal"
                                                                     th:data-target="'#XoaGiaTourId' + ${giatour.maGia}">
                                                                 <i class="fa fa-close"></i>
@@ -208,7 +208,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                    <h3 class="modal-title" id="exampleModalLabelSuaGia"
                                                                         style="margin: auto;">Thông tin giá</h3>
                                                                 </div>
                                                                 <div class="modal-body">
@@ -222,7 +222,7 @@
                                                                                        type="hidden" name="maTour"/>
                                                                                 <input th:value="${giatour.maGia}"
                                                                                        type="text"
-                                                                                       name="maGia" id="maGia"
+                                                                                       name="maGia"
                                                                                        class="form-control"
                                                                                        placeholder="Số liệu tự cấp phát.."
                                                                                        readonly="readonly">
@@ -268,8 +268,8 @@
                                                                                        type="hidden" name="hienHanh"/>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn btn-danger"
-                                                                                data-dismiss="modal">Cancel
+                                                                        <button type="button" class="btn btn-outline-dark"
+                                                                                data-dismiss="modal">Hủy
                                                                         </button>
                                                                         <input type="submit" value="Sửa thông tin"
                                                                                name="themmoi" class="btn btn-primary"
@@ -286,14 +286,14 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                    <h3 class="modal-title" id="exampleModalLabelXoaGia"
                                                                         style="margin: auto;text-align: center;">Bạn
-                                                                        chắc chắn muốn xoá<br
-                                                                                th:text="'loại chi phí ' + ${giatour.maGia} + '?'">
+                                                                        chắc chắn muốn xoá <br
+                                                                                th:text="'mã giá ' + ${giatour.maGia} + '?'">
                                                                     </h3>
                                                                 </div>
                                                                 <div class="modal-footer" style="margin: auto;">
-                                                                    <button type="button" class="btn btn-primary"
+                                                                    <button type="button" class="btn btn-outline-dark"
                                                                             data-dismiss="modal">Hủy
                                                                     </button>
                                                                     <form method="post"
@@ -301,7 +301,7 @@
                                                                         <input th:value="${giatour.maTour}"
                                                                                type="hidden" name="maTour"/>
                                                                         <button name="maGia" type="submit"
-                                                                                class="btn btn-danger"
+                                                                                class="btn btn-primary"
                                                                                 th:value="${giatour.maGia}">Xóa loại chi
                                                                             phí
                                                                         </button>
@@ -337,7 +337,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                        <h3 class="modal-title" id="exampleModalLabelThemDiaDiem"
                                                             style="margin: auto;">Thông tin địa điểm</h3>
                                                     </div>
                                                     <div class="modal-body">
@@ -355,8 +355,8 @@
                                                                             th:text="${diaDiem.maDiaDiem} + ' - ' + ${diaDiem.tenDiaDiem}"></option>
                                                                 </select>
                                                             </div>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    data-dismiss="modal">Cancel
+                                                            <button type="button" class="btn btn-outline-dark"
+                                                                    data-dismiss="modal">Hủy
                                                             </button>
                                                             <input type="submit" value="Thêm mới" name="themmoi"
                                                                    class="btn btn-primary" style="float:right;">
@@ -392,7 +392,7 @@
                                                         <td th:text="${data.diaDiemDTO.tenDiaDiem}"></td>
                                                         <td th:text="${data.diaDiemThamQuanDTO.thuTu}"></td>
                                                         <td class="td-center">
-                                                            <button type="button" class="btn btn-danger"
+                                                            <button type="button" class="btn btn-primary"
                                                                     data-toggle="modal"
                                                                     th:data-target="'#XoaDiaDiemId' + ${data.diaDiemDTO.maDiaDiem}">
                                                                 <i class="fa fa-close"></i>
@@ -405,19 +405,19 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
-                                                                        style="margin: auto;text-align: center;"
-                                                                        th:text="'Bạn chắc chắn muốn xoá<br>địa điểm ' + ${data.diaDiemDTO.maDiaDiem} + '?'"></h3>
+                                                                    <h3 class="modal-title" id="exampleModalLabelXoaDiaDiem"
+                                                                        style="margin: auto;text-align: center;">Bạn chắc chắn muốn xoá
+                                                                    <br th:text="'địa điểm ' + ${data.diaDiemDTO.maDiaDiem} + '?'"></h3>
                                                                 </div>
                                                                 <div class="modal-footer" style="margin: auto;">
-                                                                    <button type="button" class="btn btn-primary"
+                                                                    <button type="button" class="btn btn-outline-dark"
                                                                             data-dismiss="modal">Hủy
                                                                     </button>
                                                                     <form method="post" th:action="@{/tour/thietlap/xoaDiaDiemThamQuan}">
                                                                         <input th:value="${data.diaDiemThamQuanDTO.maTour}"
                                                                                type="hidden" name="maTour"/>
                                                                         <button name="maDiaDiem" type="submit"
-                                                                                class="btn btn-danger"
+                                                                                class="btn btn-primary"
                                                                                 th:value="${data.diaDiemThamQuanDTO.maDiaDiem}">Xóa địa điểm
                                                                         </button>
                                                                         <input th:value="${data.diaDiemThamQuanDTO.thuTu}"
