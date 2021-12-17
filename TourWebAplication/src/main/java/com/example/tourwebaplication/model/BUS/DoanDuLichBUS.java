@@ -8,7 +8,7 @@ package com.example.tourwebaplication.model.BUS;
 import com.example.tourwebaplication.model.DAO.DoanDuLichDAO;
 import com.example.tourwebaplication.model.DAO.MaDuLieuCuoiDAO;
 import com.example.tourwebaplication.model.DTO.DoanDuLichDTO;
-
+import java.util.Date;
 import java.util.ArrayList;
 //import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 
@@ -21,6 +21,7 @@ public class DoanDuLichBUS {
     private DoanDuLichDAO doanDuLichDAO;
     private ArrayList<DoanDuLichDTO> doanDuLichDTOs;
     private MaDuLieuCuoiDAO maLast = new MaDuLieuCuoiDAO();
+    private Utils utl = new Utils();
 
     public DoanDuLichBUS(DoanDuLichDAO doanDuLichDAO, ArrayList<DoanDuLichDTO> doanDuLichDTOs) {
         this.doanDuLichDAO = doanDuLichDAO;
@@ -140,6 +141,19 @@ public class DoanDuLichBUS {
         }
         System.out.println("Xóa thất bại suaDoanDuLichBUS");
         return false;
+    }
+
+    public ArrayList<DoanDuLichDTO> searchDoanByDate(Date start,Date end){
+        ArrayList<DoanDuLichDTO> arr = new ArrayList<>();
+        System.out.println(start +"        " + end);
+        for(DoanDuLichDTO a : doanDuLichDTOs){
+            System.out.println(a);
+            if(utl.stringToDate(a.getNgayKetThuc()).after(start)&&utl.stringToDate(a.getNgayKetThuc()).before(end)){
+                System.out.println(a);
+                arr.add(a);
+            }
+        }
+        return arr;
     }
 
 }

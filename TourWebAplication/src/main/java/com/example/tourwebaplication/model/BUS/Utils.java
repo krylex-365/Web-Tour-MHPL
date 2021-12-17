@@ -310,6 +310,17 @@ public class Utils {
         }
     }
 
+    ////////////////String to date
+    public Date stringToDate(String strDate){
+        try{
+            SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = myFormat.parse(strDate);
+            return date;
+        }catch(ParseException e){
+            return new Date(0, 0, 0);
+        }
+    }
+
     ////////////////Tháng -> ngày cuối cùng của tháng
     public int lastDayOfMonth(String date) {
         int monthcheck = Integer.parseInt(getMonth(date));

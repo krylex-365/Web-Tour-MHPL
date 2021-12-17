@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="inc/header">
+    <title>Thêm nhân viên</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+<div th:insert="inc/form-layout"></div>
+    <!--*******************
+        Preloader start
+    ********************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="./index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Thống kê nhân viên</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title row">
+                                    <div class="col-md-12 mb-4">
+                                        <h3 class="td-center">THỐNG KÊ NHÂN VIÊN ĐI TOUR</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <form method="post" th:action="@{/thongkeNhanVien}">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ngayBD">Ngày bắt đầu <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker" name="ngayBD" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ngayKT">Ngày kết thúc <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control mydatepicker" name="ngayKT" placeholder="mm/dd/yyyy" required> <span class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar-check"></i></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 td-center">
+                                                    <!--<a asp-controller="QuanLyNhanVien" asp-action="Index" style="float:right;"><button class="btn btn-primary">Quay lại <i class="fa fa-undo" aria-hidden="true"></i></button></a>-->
+                                                    <input type="submit" value="Thống kê" name="thongke" class="btn btn-primary">
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="DataTable" class="table table-bordered table-hover zero-configuration">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th style="width:15%;" class="th-center-bold">#</th>
+                                                <th style="width:25%;" class="th-center-bold">Mã nhân viên</th>
+                                                <th style="width:30%;" class="th-center-bold">Tên nhân viên</th>
+                                                <th style="width:15%;" class="th-center-bold">Số lần đi</th>
+                                                <th style="width:15%;" class="th-center-bold">Chi tiết</th>
+                                            </tr>
+                                        </thead>
+                                        <div th:if="${list}">
+                                            <tbody th:each="data : ${list}"  >
+                                            <tr>
+                                                <td  class="td-center" style="width:15%;">1</td>
+                                                <td th:text="${data.nhanVienDTO.MaNhanVien}" style="width:25%;">NhanVienId</td>
+                                                <td th:text="${data.nhanVienDTO.TenNhanVien}" style="width:30%;">TenNhanVien</td>
+                                                <td th:text="${data.soLanDi}" class="td-center" style="width:15%;">3</td>
+                                                <td class="td-center" style="width:15%;">
+                                                    <a href="#">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#ChiTietId'+${data.nhanVienDTO.MaNhanVien}"><i class="fa fa-info"></i></button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <!-- đưa model vào đây -->
+
+
+                                            </tbody>
+
+
+                                        </div>
+
+                                    </table>
+
+                                </div>
+                                <div th:if="${list}">
+                                    <div th:each="data : ${list}">
+                                        <div class="modal fade bd-example-modal-lg" th:id="'ChiTietId'+${data.nhanVienDTO.MaNhanVien}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalLongTitle" style="color:#7571f9;">Chi tiết lần đi</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="table-responsive">
+                                                                        <table  class="table table-bordered table-hover">
+                                                                            <thead class="text-primary">
+                                                                            <tr>
+                                                                                <th style="width:15%;" class="th-center-bold">#</th>
+                                                                                <th style="width:20%;" class="th-center-bold">Mã đoàn</th>
+                                                                                <th style="width:25%;" class="th-center-bold">Tên đoàn</th>
+                                                                                <th style="width:20%;" class="th-center-bold">Ngày khởi hành</th>
+                                                                                <th style="width:20%;" class="th-center-bold">Ngày kết thúc</th>
+                                                                            </tr>
+                                                                            </thead>
+
+                                                                            <tbody th:each="doan : ${data.doanDuLichDTOS}" >
+                                                                            <tr>
+                                                                                <td th:text="${data.doanDuLichDTOS.indexOf(doan)+1}" class="td-center" style="width:15%;">1</td>
+                                                                                <td th:text="${doan.maDoan}" class="td-center" style="width:20%;">DoanId</td>
+                                                                                <td th:text="${doan.tenDoan}" style="width:25%;">TenDoan</td>
+                                                                                <td th:text="${doan.ngayKhoiHanh}" class="td-center" style="width:20%;">01/24/2022</td>
+                                                                                <td th:text="${doan.ngayKetThuc}" class="td-center" style="width:20%;">02/04/2022</td>
+                                                                            </tr>
+                                                                            </tbody>
+
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
+                {-->
+
+
+            </div>
+            <!-- #/ container -->
+        </div>
+
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <!--**********************************
+            Footer end
+        ***********************************-->
+        <div th:insert="inc/footer"></div>
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+    <!--**********************************
+        Scripts
+    ***********************************-->
+
+
+
+</body>
+
+</html>
