@@ -625,7 +625,7 @@ OS:
  Windows 10 , 64 bit Build 19041 (10.0.19041.1348)
 OS uptime: 18 days 3:05 hours
 
-CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 158 stepping 10 microcode 0xb4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, vzeroupper, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma, clflush, clflushopt
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 doanModel 158 stepping 10 microcode 0xb4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, vzeroupper, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma, clflush, clflushopt
 
 Memory: 4k page, system-wide physical 8034M (1515M free)
 TotalPageFile size 16086M (AvailPageFile size 5500M)

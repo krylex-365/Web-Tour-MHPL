@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="inc/header">
+    <title>Thống kê chi phí</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+<div id="main-wrapper">
+    <div th:insert="inc/form-layout"></div>
+
+    <!--**********************************
+    Content body start
+***********************************-->
+
+    <div class="content-body">
+
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Thống kê chi phí</li>
+                </ol>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title row">
+                                <div class="col-md-12 mb-4">
+                                    <h3 class="td-center">THỐNG KÊ CHI PHÍ ĐOÀN</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <form method="post" th:action="@{/thongkeChiPhi/thongketheotg}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ngaybd">Ngày bắt đầu <span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control mydatepicker"
+                                                               name="NgayBD" placeholder="mm/dd/yyyy" required> <span
+                                                            class="input-group-append"><span class="input-group-text"><i
+                                                            class="mdi mdi-calendar-check"></i></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ngaykt">Ngày kết thúc <span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control mydatepicker"
+                                                               name="NgayKT" placeholder="mm/dd/yyyy" required> <span
+                                                            class="input-group-append"><span class="input-group-text"><i
+                                                            class="mdi mdi-calendar-check"></i></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 td-center">
+                                                <!--<a asp-controller="QuanLyNhanVien" asp-action="Index" style="float:right;"><button class="btn btn-primary">Quay lại <i class="fa fa-undo" aria-hidden="true"></i></button></a>-->
+                                                <input type="submit" value="Thống kê" name="thongke"
+                                                       class="btn btn-primary">
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+                            <div class="table-responsive">
+                                <table id="DataTable" class="table table-bordered table-hover zero-configuration">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th style="width:5%;" class="th-center-bold">#</th>
+                                        <th style="width:12%;" class="th-center-bold">Mã đoàn</th>
+                                        <th style="width:22%;" class="th-center-bold">Tên đoàn</th>
+                                        <th style="width:18%;" class="th-center-bold">Ngày khởi hành</th>
+                                        <th style="width:18%;" class="th-center-bold">Ngày kết thúc</th>
+                                        <th style="width:15%;" class="th-center-bold">Tổng chi phí</th>
+                                        <th style="width:10%;" class="th-center-bold">Chi tiết</th>
+                                    </tr>
+                                    </thead>
+                                    <div th:if="${listDoan}">
+                                    <tbody th:each="doan : ${listDoan}">
+                                    <tr>
+                                        <td class="td-center" style="width:5%;" th:text="${listDoan.indexOf(doan)} + 1"></td>
+                                        <td class="td-center" style="width:12%;" th:text="${doan.doanDuLichDTO.maDoan}"></td>
+                                        <td style="width:22%;" th:text="${doan.doanDuLichDTO.tenDoan}"></td>
+                                        <td class="td-center" style="width:18%;" th:text="${doan.doanDuLichDTO.ngayKhoiHanh}"></td>
+                                        <td class="td-center" style="width:18%;" th:text="${doan.doanDuLichDTO.ngayKetThuc}"></td>
+                                        <td class="td-center" style="width:15%;" th:text="${doan.tongChiPhi}"></td>
+                                        <td class="td-center" style="width:10%;">
+                                            <a href="#">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        th:data-target="'#ChiTietChiPhi' + ${doan.doanDuLichDTO.maDoan}"><i class="fa fa-info"></i></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <!-- đưa doanModel vào đây -->
+
+                                    </tbody>
+                                    </div>
+                                </table>
+                            </div>
+                            <div th:if="${listDoan}">
+                                <div th:each="doan : ${listDoan}">
+                                    <div class="modal fade bd-example-modal-lg" th:id="'ChiTietChiPhi' + ${doan.doanDuLichDTO.maDoan}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="exampleModalLongTitle" style="color:#7571f9;">Chi tiết chi
+                                                        phí</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-bordered table-hover">
+                                                                        <thead class="text-primary">
+                                                                        <tr>
+                                                                            <th style="width:15%;" class="th-center-bold">#</th>
+                                                                            <th style="width:25%;" class="th-center-bold">Mã chi phí</th>
+                                                                            <th style="width:35%;" class="th-center-bold">Loại chi phí</th>
+                                                                            <th style="width:25%;" class="th-center-bold">Thành tiền</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody th:each="chiphi : ${doan.chiPhiModels}">
+                                                                        <tr>
+                                                                            <td class="td-center" style="width:15%;" th:text="${doan.chiPhiModels.indexOf(chiphi)} + 1"></td>
+                                                                            <td class="td-center" style="width:25%;" th:text="${chiphi.chiphiDTO.maChiPhi}"></td>
+                                                                            <td class="td-center" style="width:35%;" th:text="${chiphi.tenLoaiChiphi}"></td>
+                                                                            <td class="td-center" style="width:25%;" th:text="${chiphi.chiphiDTO.soTien}"></td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Đóng</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--@foreach (QuanLyNhanVien quanLyNhanVien1 in Model)
+            {-->
+
+
+        </div>
+        <!-- #/ container -->
+    </div>
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+    <div th:insert="inc/footer"></div>
+</div>
+</body>
+
+</html>
