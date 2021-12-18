@@ -55,7 +55,7 @@ public class ThongKeChiPhiController
 				}
 				catch (ParseException ex)
 				{
-					 System.out.println ("Lỗi lấy dữ liệu!!" + ex.getMessage ());
+					 System.out.println ("Lỗi format String to Date!!" + ex.getMessage ());
 				}
 				if (dateDoan != null
 						 && (dateDoan.after (tgBD) || dateDoan.equals (tgBD))
