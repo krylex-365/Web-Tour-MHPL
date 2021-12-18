@@ -28,7 +28,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="../index.html">
+                <a th:href="@{/index}">
                     <b class="logo-abbr"><img src="../../static/images/logo.png" th:src="@{/images/logo.png}" alt="">
                     </b>
                     <span class="logo-compact"><img src="../../static/images/logo-compact.png"
@@ -119,7 +119,7 @@
                         </a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a th:href="@{/nhanvien}">Quản lý nhân viên</a></li>
-                            <li><a href="#">Thống kê nhân viên</a></li>
+                            <li><a th:href="@{/thongkeNhanVien}">Thống kê nhân viên</a></li>
                         </ul>
                     </li>
                     <li>
