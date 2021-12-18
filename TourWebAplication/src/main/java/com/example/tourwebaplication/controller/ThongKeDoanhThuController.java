@@ -42,8 +42,8 @@ public class ThongKeDoanhThuController {
         ArrayList<DoanDuLichDTO> doanDuLichDTOS = doanDuLichBUS.getDoanDuLichDTOs();
         ArrayList<thongkeTour> thongkeTours = new ArrayList<>();
 
-
         ThongKeDoanhThuController.thongkeTour tkt;
+        Date tgDoanKT = null;
         for (TourDTO tourDTO : tourDTOS) {
             boolean tmp = false;
             tkt = new thongkeTour();
@@ -55,8 +55,14 @@ public class ThongKeDoanhThuController {
             int sokhach = 0;
             double DoanhthuD = 0;
             for (DoanDuLichDTO doanDuLichDTO : doanDuLichDTOS) {
-                Date tgDoanKT = simpleDateFormat1.parse(doanDuLichDTO.getNgayKetThuc());
-
+                try
+                {
+                    tgDoanKT = simpleDateFormat1.parse(doanDuLichDTO.getNgayKetThuc());
+                }
+                catch (ParseException ex)
+                {
+                    System.out.println ("Lỗi format String to Date!!" + ex.getMessage ());
+                }
                 if ((tgDoanKT.after(tgBD) || tgDoanKT.equals(tgBD)) &&
                         (tgDoanKT.before(tgKT) || tgDoanKT.equals(tgKT))) {
                     if (doanDuLichDTO.getMaTour().equals(tourDTO.getMaTour())) {
@@ -82,24 +88,23 @@ public class ThongKeDoanhThuController {
                         tkd.ChiPhi = tongCPD;
                         // tour
                         tkt.listDoan.add(tkd);
-                        tkt.SoDoan = sodoan;
-                        tkt.TongDoanhThu = tongdoanhthuTour + DoanhthuD;
-                        tkt.TongChiPhi = tongchiphiTour + tongCPD;
+                        tongdoanhthuTour += DoanhthuD;
+                        tongchiphiTour += tongCPD;
                         tmp = true;
-
                     }
                 }
             }
             if (tmp == true) {
+                tkt.SoDoan = sodoan;
+                tkt.TongDoanhThu = tongdoanhthuTour;
+                tkt.TongChiPhi = tongchiphiTour;
                 thongkeTours.add(tkt);
             }
             tmp = false;
-
         }
         model.addAttribute("thongkeTours", thongkeTours);
         return "thongkeDoanhthu";
     }
-
 
     public class thongkeTour {
         public TourDTO tourDTO;
@@ -107,7 +112,6 @@ public class ThongKeDoanhThuController {
         public long TongChiPhi;
         public Double TongDoanhThu;
         public ArrayList<thongkeDoan> listDoan;
-
     }
 
     public class thongkeDoan {
