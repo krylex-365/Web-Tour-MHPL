@@ -21,9 +21,9 @@
         <div class="row page-titles mx-0">
             <div class="col p-md-0">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="./doan.html">Quản lý đoàn</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Thiết lập đoàn</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/index}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/doan}">Quản lý đoàn</a></li>
+                    <li class="breadcrumb-item active"><a>Thiết lập đoàn</a></li>
                 </ol>
             </div>
         </div>
@@ -79,7 +79,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                        <h3 class="modal-title"
                                                             style="margin: auto;">Nhân viên</h3>
                                                     </div>
                                                     <div class="modal-body">
@@ -107,11 +107,11 @@
                                                                            class="form-control"
                                                                            placeholder="Nhập nhiệm vụ..." required>
                                                                 </div>
-                                                                <button type="button" class="btn btn-danger"
+                                                                <button type="button" class="btn btn-outline-dark"
                                                                         data-dismiss="modal">Cancel
                                                                 </button>
                                                                 <input type="submit" value="Thêm mới" name="themmoiNV"
-                                                                       class="btn btn-success" style="float:right;">
+                                                                       class="btn btn-primary" style="float:right;">
                                                             </form>
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@
                                                             </button>
                                                         </td>
                                                         <td class="td-center">
-                                                            <button type="button" class="btn btn-danger"
+                                                            <button type="button" class="btn btn-primary"
                                                                     data-toggle="modal"
                                                                     th:data-target="'#XoaNVId' + ${dataNhanVien.nhanVienDTO.maNhanVien}">
                                                                 <i class="fa fa-close"></i>
@@ -161,7 +161,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                    <h3 class="modal-title"
                                                                         style="margin: auto;">Nhân viên</h3>
                                                                 </div>
                                                                 <div class="modal-body">
@@ -188,11 +188,12 @@
                                                                                    placeholder="Nhập nhiệm vụ..."
                                                                                    required>
                                                                         </div>
-                                                                        <button type="button" class="btn btn-danger"
-                                                                                data-dismiss="modal">Cancel
+                                                                        <button type="button"
+                                                                                class="btn btn-outline-dark"
+                                                                                data-dismiss="modal">Hủy
                                                                         </button>
                                                                         <input type="submit" value="Sửa" name="suaNV"
-                                                                               class="btn btn-success"
+                                                                               class="btn btn-primary"
                                                                                style="float:right;">
                                                                     </form>
                                                                 </div>
@@ -206,22 +207,23 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
-                                                                        style="margin: auto;text-align: center;">Are you
-                                                                        sure to delete this?</h3>
+                                                                    <h3 class="modal-title"
+                                                                        style="margin: auto;text-align: center;">
+                                                                        Bạn chắc chắn muốn xoá <br
+                                                                            th:text="'nhân viên ' + ${dataNhanVien.nhanVienDTO.maNhanVien}">khỏi đoàn này?</h3>
                                                                 </div>
                                                                 <div class="modal-footer" style="margin: auto;">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            data-dismiss="modal">Cancel
+                                                                    <button type="button" class="btn btn-outline-dark"
+                                                                            data-dismiss="modal">Hủy
                                                                     </button>
                                                                     <form method="post"
                                                                           th:action="@{/doan/thietlap/xoaNhiemVuNhanVien}">
                                                                         <input th:value="${dataNhanVien.nhiemVuNhanVienDTO.maDoan}"
                                                                                type="hidden" name="maDoan">
                                                                         <button name="maNhanVien" type="submit"
-                                                                                class="btn btn-danger"
+                                                                                class="btn btn-primary"
                                                                                 th:value="${dataNhanVien.nhanVienDTO.maNhanVien}">
-                                                                            Yes, delete it !
+                                                                            Xóa nhân viên
                                                                         </button>
                                                                     </form>
                                                                 </div>
@@ -252,7 +254,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel"
+                                                        <h3 class="modal-title"
                                                             style="margin: auto;">Khách hàng</h3>
                                                     </div>
                                                     <div class="modal-body">
@@ -273,11 +275,11 @@
                                                                 </div>
                                                                 <input th:value="${maDoan}" type="hidden"
                                                                        name="maDoan">
-                                                                <button type="button" class="btn btn-danger"
+                                                                <button type="button" class="btn btn-outline-dark"
                                                                         data-dismiss="modal">Cancel
                                                                 </button>
                                                                 <input type="submit" value="Thêm mới" name="themmoiKH"
-                                                                       class="btn btn-success" style="float:right;">
+                                                                       class="btn btn-primary" style="float:right;">
                                                             </form>
                                                         </div>
                                                     </div>
@@ -303,7 +305,7 @@
                                                         <td th:text="${dataKhach.khachHangDTO.tenKhachHang}"></td>
                                                         <td th:text="${dataKhach.khachHangDTO.SDT}"></td>
                                                         <td class="td-center">
-                                                            <button type="button" class="btn btn-danger"
+                                                            <button type="button" class="btn btn-primary"
                                                                     data-toggle="modal"
                                                                     th:data-target="'#XoaKHId' + ${dataKhach.khachHangDTO.maKhachHang}">
                                                                 <i class="fa fa-close"></i>
@@ -317,22 +319,23 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
-                                                                        style="margin: auto;text-align: center;">Are you
-                                                                        sure to delete this?</h3>
+                                                                    <h3 class="modal-title"
+                                                                        style="margin: auto;text-align: center;">
+                                                                        Bạn chắc chắn muốn xoá <br
+                                                                            th:text="'khách hàng ' + ${dataKhach.khachHangDTO.maKhachHang}">khỏi đoàn này?</h3>
                                                                 </div>
                                                                 <div class="modal-footer" style="margin: auto;">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            data-dismiss="modal">Cancel
+                                                                    <button type="button" class="btn btn-outline-dark"
+                                                                            data-dismiss="modal">Hủy
                                                                     </button>
                                                                     <form method="post"
                                                                           th:action="@{/doan/thietlap/xoaChiTietDoan}">
                                                                         <input th:value="${maDoan}" type="hidden"
                                                                                name="maDoan">
                                                                         <button name="maKhachHang" type="submit"
-                                                                                class="btn btn-danger"
+                                                                                class="btn btn-primary"
                                                                                 th:value="${dataKhach.khachHangDTO.maKhachHang}">
-                                                                            Yes, delete it !
+                                                                            Xóa khách
                                                                         </button>
                                                                     </form>
                                                                 </div>
@@ -355,26 +358,29 @@
                                         </div>
                                         <div class="col-md-6">
                                             <button class="btn btn-primary" style="float:right;" data-toggle="modal"
-                                                    data-target="#ThemChiPhi"><span
+                                                    data-target="#ThemChiPhiModal"><span
                                                     style="margin-right: 10px">Thêm mới </span><i
                                                     class="fa fa-plus"></i></button>
                                         </div>
                                         <div th:if="${maDoan} and ${loaiChiPhiDTOs} and ${capPhatMaChiPhi}">
-                                            <div class="modal fade" id="ThemChiPhi" tabindex="-1" role="dialog"
+                                            <div class="modal fade" id="ThemChiPhiModal" tabindex="-1" role="dialog"
                                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h3 class="modal-title" id="exampleModalLabel"
+                                                            <h3 class="modal-title"
                                                                 style="margin: auto;">Thông tin chi phí</h3>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form id="themChiPhi" th:action="@{/doan/thietlap/themChiPhi}" method="post">
+                                                            <form id="themChiPhi"
+                                                                  th:action="@{/doan/thietlap/themChiPhi}"
+                                                                  method="post">
                                                                 <div class="form-group">
                                                                     <label for="machiphi">Mã chi phí <span
                                                                             class="text-danger">*</span></label>
                                                                     <div class="input-group">
-                                                                        <input type="hidden" name="maDoan" th:value="${maDoan}">
+                                                                        <input type="hidden" name="maDoan"
+                                                                               th:value="${maDoan}">
                                                                         <input type="text" name="maChiPhi" id="machiphi"
                                                                                class="form-control"
                                                                                placeholder="Số liệu tự cấp phát.."
@@ -389,10 +395,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label >Loại chi phí <span
+                                                                    <label>Loại chi phí <span
                                                                             class="text-danger">*</span></label>
-                                                                    <select class="form-control" name="maloaiChiPhi" required>
-                                                                        <option value="">-- Chọn loại chi phí --</option>
+                                                                    <select class="form-control" name="maloaiChiPhi"
+                                                                            required>
+                                                                        <option value="">-- Chọn loại chi phí --
+                                                                        </option>
                                                                         <!-- for option list loại chi phí -->
                                                                         <option th:each="l : ${loaiChiPhiDTOs}"
                                                                                 th:value="${l.maLoaiChiPhi}"
@@ -400,7 +408,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label >Thành tiền <span
+                                                                    <label>Thành tiền <span
                                                                             class="text-danger">*</span></label>
                                                                     <input type="number" name="thanhTien"
                                                                            class="form-control"
@@ -408,17 +416,17 @@
                                                                            required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label >Ghi chú <span
+                                                                    <label>Ghi chú <span
                                                                             class="text-danger">*</span></label>
                                                                     <textarea class="form-control h-150px" rows="4"
                                                                               id="GhiChu" form="themChiPhi"
                                                                               name="chiTiet"></textarea>
                                                                 </div>
-                                                                <button type="button" class="btn btn-danger"
-                                                                        data-dismiss="modal">Cancel
+                                                                <button type="button" class="btn btn-outline-dark"
+                                                                        data-dismiss="modal">Hủy
                                                                 </button>
                                                                 <input type="submit" value="Thêm mới" name="themmoi"
-                                                                       class="btn btn-success" style="float:right;">
+                                                                       class="btn btn-primary" style="float:right;">
                                                             </form>
                                                         </div>
                                                     </div>
@@ -450,34 +458,40 @@
                                                         <td th:text="${cp.chiPhiDTO.ghiChu}" style="width:25%;"></td>
                                                         <td style="width:10%;" class="td-center">
                                                             <button type="button" class="btn btn-primary"
-                                                                    data-toggle="modal" th:data-target="'#SuaChiPhiId' + ${cp.chiPhiDTO.maChiPhi}">
+                                                                    data-toggle="modal"
+                                                                    th:data-target="'#SuaChiPhiId' + ${cp.chiPhiDTO.maChiPhi}">
                                                                 <i class="fa fa-pencil"></i>
                                                             </button>
                                                         </td>
                                                         <td style="width:10%;" class="td-center">
-                                                            <button type="button" class="btn btn-danger"
+                                                            <button type="button" class="btn btn-primary"
                                                                     data-toggle="modal"
                                                                     th:data-target="'#XoaChiPhiId' + ${cp.chiPhiDTO.maChiPhi}">
                                                                 <i class="fa fa-close"></i>
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <div class="modal fade" th:id="'SuaChiPhiId' +  ${cp.chiPhiDTO.maChiPhi}" tabindex="-1" role="dialog"
+                                                    <div class="modal fade"
+                                                         th:id="'SuaChiPhiId' +  ${cp.chiPhiDTO.maChiPhi}" tabindex="-1"
+                                                         role="dialog"
                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
+                                                                    <h3 class="modal-title"
                                                                         style="margin: auto;">Thông tin chi phí</h3>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form id="suaChiPhi" method="post" th:action="@{/doan/thietlap/suaChiPhi}">
+                                                                    <form id="suaChiPhi" method="post"
+                                                                          th:action="@{/doan/thietlap/suaChiPhi}">
                                                                         <div class="form-group">
-                                                                            <label >Mã chi phí <span
+                                                                            <label>Mã chi phí <span
                                                                                     class="text-danger">*</span></label>
                                                                             <div class="input-group">
-                                                                                <input type="hidden" name="maDoan" th:value="${cp.chiPhiDTO.maDoan}">
-                                                                                <input th:value="${cp.chiPhiDTO.maChiPhi}" type="text"
+                                                                                <input type="hidden" name="maDoan"
+                                                                                       th:value="${cp.chiPhiDTO.maDoan}">
+                                                                                <input th:value="${cp.chiPhiDTO.maChiPhi}"
+                                                                                       type="text"
                                                                                        name="maChiPhi"
                                                                                        class="form-control"
                                                                                        placeholder="Số liệu tự cấp phát.."
@@ -485,9 +499,10 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label >Loại chi phí <span
+                                                                            <label>Loại chi phí <span
                                                                                     class="text-danger">*</span></label>
-                                                                            <select class="form-control" name="maLoaiChiPhi"
+                                                                            <select class="form-control"
+                                                                                    name="maLoaiChiPhi"
                                                                                     required>
                                                                                 <!-- làm tương tự như bên tourUpdate -->
                                                                                 <option th:each="l : ${loaiChiPhiDTOs}"
@@ -503,48 +518,57 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label >Thành tiền <span
+                                                                            <label>Thành tiền <span
                                                                                     class="text-danger">*</span></label>
-                                                                            <input th:value="${cp.chiPhiDTO.soTien}" type="number"
+                                                                            <input th:value="${cp.chiPhiDTO.soTien}"
+                                                                                   type="number"
                                                                                    name="thanhTien" class="form-control"
                                                                                    placeholder="Nhập giá..." required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label >Ghi chú <span class="text-danger">*</span></label>
+                                                                            <label>Ghi chú <span
+                                                                                    class="text-danger">*</span></label>
                                                                             <!--Không dùng được textarea-->
                                                                             <input class="form-control h-150px" rows="4"
-                                                                                      name="chiTiet" th:value="${cp.chiPhiDTO.ghiChu}"></input>
+                                                                                   name="chiTiet"
+                                                                                   th:value="${cp.chiPhiDTO.ghiChu}">
                                                                         </div>
-                                                                        <button type="button" class="btn btn-danger"
-                                                                                data-dismiss="modal">Cancel
+                                                                        <button type="button"
+                                                                                class="btn btn-outline-dark"
+                                                                                data-dismiss="modal">Hủy
                                                                         </button>
                                                                         <input type="submit" value="Sửa chi phí"
-                                                                               name="suaChiPhi" class="btn btn-success"
+                                                                               name="suaChiPhi" class="btn btn-primary"
                                                                                style="float:right;">
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" th:id="'XoaChiPhiId' + ${cp.chiPhiDTO.maChiPhi}" tabindex="-1" role="dialog"
+                                                    <div class="modal fade"
+                                                         th:id="'XoaChiPhiId' + ${cp.chiPhiDTO.maChiPhi}" tabindex="-1"
+                                                         role="dialog"
                                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h3 class="modal-title" id="exampleModalLabel"
-                                                                        style="margin: auto;text-align: center;">Are you
-                                                                        sure to delete this?</h3>
+                                                                    <h3 class="modal-title"
+                                                                        style="margin: auto;text-align: center;">
+                                                                        Bạn chắc chắn muốn xoá <br
+                                                                            th:text="'chi phí ' + ${cp.chiPhiDTO.maChiPhi}">khỏi đoàn này?</h3>
                                                                 </div>
                                                                 <div class="modal-footer" style="margin: auto;">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            data-dismiss="modal">Cancel
+                                                                    <button type="button" class="btn btn-outline-dark"
+                                                                            data-dismiss="modal">Hủy
                                                                     </button>
-                                                                    <form th:action="@{/doan/thietlap/xoaChiPhi}" method="post">
-                                                                        <input type="hidden" name="maDoan" th:value="${maDoan}">
+                                                                    <form th:action="@{/doan/thietlap/xoaChiPhi}"
+                                                                          method="post">
+                                                                        <input type="hidden" name="maDoan"
+                                                                               th:value="${maDoan}">
                                                                         <button name="maChiPhi" type="submit"
-                                                                                class="btn btn-danger" th:value="${cp.chiPhiDTO.maChiPhi}">
-                                                                            Yes,
-                                                                            delete it !
+                                                                                class="btn btn-primary"
+                                                                                th:value="${cp.chiPhiDTO.maChiPhi}">
+                                                                            Xóa chi phí
                                                                         </button>
                                                                     </form>
                                                                 </div>

@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Controller
 public class HomeController {
-    @RequestMapping(method = RequestMethod.GET, value = "/index")
+    @RequestMapping(method = RequestMethod.GET, value = {"/index", "/"})
     public String dashboard(Model model) {
         TourBUS tourBUS = new TourBUS();
         int soTour = tourBUS.getTourDTOS().size();

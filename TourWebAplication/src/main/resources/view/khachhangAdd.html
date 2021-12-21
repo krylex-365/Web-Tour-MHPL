@@ -24,9 +24,9 @@
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="./khachhang.html">Quản lý khách hàng</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm khách hàng</a></li> 
+                <li class="breadcrumb-item"><a th:href="@{/index}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/khachhang}">Quản lý khách hàng</a></li>
+                <li class="breadcrumb-item active"><a>Thêm khách hàng</a></li>
             </ol>
         </div>
     </div>
@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12 mb-3">
-                                <a href="./khachhang.html" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                                <a th:href="@{/khachhang}" style="float:left;"><button class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
                             </div>
                         </div>
                         <form method="post" th:action="@{/khachhang/them}">
