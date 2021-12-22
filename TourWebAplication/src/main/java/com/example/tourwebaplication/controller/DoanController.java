@@ -56,21 +56,23 @@ public class DoanController {
     public String themDoan(@RequestParam String maDoan, String tenDoan, String maTour, String chiTiet, String giaTour,
                            String ngayKH, String ngayKT, RedirectAttributes redirectAttributes){
 
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            Date tgBD = simpleDateFormat.parse(ngayKH);
-            Date tgKT = simpleDateFormat.parse(ngayKT);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            ngayKH = format.format(tgBD);
-            ngayKT = format.format(tgKT);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        if(maDoan != null && !maDoan.equals("")) {
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date tgBD = simpleDateFormat.parse(ngayKH);
+                Date tgKT = simpleDateFormat.parse(ngayKT);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                ngayKH = format.format(tgBD);
+                ngayKT = format.format(tgKT);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-        DoanDuLichBUS doanDuLichBUS = new DoanDuLichBUS();
-        if(doanDuLichBUS.themDoan(new DoanDuLichDTO(maDoan, maTour, tenDoan, giaTour, ngayKH, ngayKT, chiTiet))){
-            redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
-            return "redirect:/doan";
+            DoanDuLichBUS doanDuLichBUS = new DoanDuLichBUS();
+            if (doanDuLichBUS.themDoan(new DoanDuLichDTO(maDoan, maTour, tenDoan, giaTour, ngayKH, ngayKT, chiTiet))) {
+                redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
+                return "redirect:/doan";
+            }
         }
         redirectAttributes.addFlashAttribute("error", "Thêm thất bại!");
         return "redirect:/doan";
@@ -193,7 +195,9 @@ public class DoanController {
                         break;
                     }
                 }
-                dataNhanViens.add(dataNhanVien);
+                if(dataNhanVien.nhiemVuNhanVienDTO != null && dataNhanVien.nhanVienDTO != null) {
+                    dataNhanViens.add(dataNhanVien);
+                }
             }
         }
 
@@ -210,7 +214,9 @@ public class DoanController {
                         break;
                     }
                 }
-                dataKhachs.add(dataKhach);
+                if(dataKhach.khachHangDTO != null && dataKhach.chiTietDoanDTO != null) {
+                    dataKhachs.add(dataKhach);
+                }
             }
         }
 
@@ -224,7 +230,9 @@ public class DoanController {
                         dataChiPhi.loaiChiPhiDTO = loaiChiPhiDTO;
                     }
                 }
-                dataChiPhis.add(dataChiPhi);
+                if(dataChiPhi.loaiChiPhiDTO != null && dataChiPhi.loaiChiPhiDTO != null) {
+                    dataChiPhis.add(dataChiPhi);
+                }
             }
         }
 

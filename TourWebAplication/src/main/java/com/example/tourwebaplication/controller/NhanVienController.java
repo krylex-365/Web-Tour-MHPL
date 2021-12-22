@@ -96,11 +96,12 @@ public class NhanVienController {
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-
-        NhanVienBUS nhanVienBUS = new NhanVienBUS();
-        if(nhanVienBUS.add(new NhanVienDTO(maNhanVien,tenNhanVien,gioiTinh,ngaySinh,SDT,diaChi))){
-            redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
-            return "redirect:/nhanvien";
+        if(maNhanVien != null && !maNhanVien.equals("")) {
+            NhanVienBUS nhanVienBUS = new NhanVienBUS();
+            if (nhanVienBUS.add(new NhanVienDTO(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, SDT, diaChi))) {
+                redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
+                return "redirect:/nhanvien";
+            }
         }
 
         redirectAttributes.addFlashAttribute("error", "Thêm thất bại!");

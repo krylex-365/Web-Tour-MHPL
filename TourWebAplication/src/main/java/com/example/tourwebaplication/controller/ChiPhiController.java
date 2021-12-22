@@ -14,10 +14,12 @@ public class ChiPhiController {
     @RequestMapping(method = RequestMethod.POST, value = "/doan/thietlap/themChiPhi")
     public String themChiPhi(@RequestParam String maDoan, String maChiPhi, String maloaiChiPhi, String thanhTien,
                              String chiTiet, RedirectAttributes redirectAttributes) {
-        ChiPhiBUS chiPhiBUS = new ChiPhiBUS();
-        if(chiPhiBUS.themChiPhi(new ChiPhiDTO(maChiPhi, maDoan, maloaiChiPhi, thanhTien, chiTiet))){
-            redirectAttributes.addFlashAttribute("success", "Đã thêm.");
-            return "redirect:/doan/thietlap?id=" + maDoan;
+        if(maChiPhi != null && !maChiPhi.equals("")) {
+            ChiPhiBUS chiPhiBUS = new ChiPhiBUS();
+            if (chiPhiBUS.themChiPhi(new ChiPhiDTO(maChiPhi, maDoan, maloaiChiPhi, thanhTien, chiTiet))) {
+                redirectAttributes.addFlashAttribute("success", "Đã thêm.");
+                return "redirect:/doan/thietlap?id=" + maDoan;
+            }
         }
         redirectAttributes.addFlashAttribute("error", "Lỗi thêm!");
         return "redirect:/doan/thietlap?id=" + maDoan;

@@ -61,11 +61,14 @@ public class LoaiHinhTourController {
     //submit them
     @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/them")
     public String themLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model) {
+
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
-        if(!maLoai.equals("") && !tenLoai.equals("")) {
-            if (loaiHinhTourBUS.themLoaiHinhTour(maLoai, tenLoai)) {
-                return "redirect:/loaihinhtour";
+        if(maLoai != null && !maLoai.equals("")) {
+            if (!maLoai.equals("") && !tenLoai.equals("")) {
+                if (loaiHinhTourBUS.themLoaiHinhTour(maLoai, tenLoai)) {
+                    return "redirect:/loaihinhtour";
+                }
             }
         }
         //that bai lam gi do

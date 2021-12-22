@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -51,18 +52,20 @@ public class LoaiChiPhiController {
         return "loaichiphi";
     }
     @RequestMapping(method = RequestMethod.POST, value = "/loaichiphi/them")
-    public String themLoaiChiPhi(@RequestParam String maLoaiChiPhi, String tenLoaiChiPhi, Model model) {
+    public String themLoaiChiPhi(@RequestParam String maLoaiChiPhi, String tenLoaiChiPhi, Model model, RedirectAttributes redirectAttributes) {
         LoaiChiPhiBUS loaiChiPhiBUS = new LoaiChiPhiBUS();
         ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs = loaiChiPhiBUS.getLoaiChiPhiDTOs();
-        if(!maLoaiChiPhi.equals("") && !tenLoaiChiPhi.equals("")) {
-            if (loaiChiPhiBUS.themLoaiChiPhi(maLoaiChiPhi,tenLoaiChiPhi,loaiChiPhiBUS.getLoaiChiPhiDTOs())) {
-                return "redirect:/loaichiphi";
+        if(maLoaiChiPhi != null && !maLoaiChiPhi.equals("")) {
+            if (!maLoaiChiPhi.equals("") && !tenLoaiChiPhi.equals("")) {
+                if (loaiChiPhiBUS.themLoaiChiPhi(maLoaiChiPhi, tenLoaiChiPhi, loaiChiPhiBUS.getLoaiChiPhiDTOs())) {
+                    return "redirect:/loaichiphi";
+                }
             }
         }
-        model.addAttribute("maLoai", capPhatId());
-        model.addAttribute("message","false");
-        model.addAttribute("loaiChiPhiDTOs", loaiChiPhiDTOs);
-        return "loaichiphi";
+        redirectAttributes.addFlashAttribute("maLoai", capPhatId());
+        redirectAttributes.addFlashAttribute("message","false");
+        redirectAttributes.addFlashAttribute("loaiChiPhiDTOs", loaiChiPhiDTOs);
+        return "redirect:/loaichiphi";
     }
     @RequestMapping(method = RequestMethod.POST, value = "/loaichiphi/xoa")
     public String xoaLoaiChiPhi(@RequestParam("id") String id, Model model) {

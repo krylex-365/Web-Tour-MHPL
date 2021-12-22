@@ -57,22 +57,26 @@ public class GiaTourController {
     @RequestMapping(method = RequestMethod.POST, value = "/tour/thietlap/themGia")
     public String themGia(@RequestParam String maTour, String maGia, String giaTour, String ngayBD, String ngayKT,
                          RedirectAttributes redirectAttributes) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            Date tgBD = simpleDateFormat.parse(ngayBD);
-            Date tgKT = simpleDateFormat.parse(ngayKT);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            ngayBD = format.format(tgBD);
-            ngayKT = format.format(tgKT);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        GiaTourBUS giaTourBUS = new GiaTourBUS();
+        if(maGia != null && !maGia.equals("")) {
 
-        if(giaTourBUS.themGiaTour(maGia, maTour, giaTour, ngayBD, ngayKT)){
-            redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
-            return "redirect:/tour/thietlap?id=" + maTour;
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date tgBD = simpleDateFormat.parse(ngayBD);
+                Date tgKT = simpleDateFormat.parse(ngayKT);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                ngayBD = format.format(tgBD);
+                ngayKT = format.format(tgKT);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            GiaTourBUS giaTourBUS = new GiaTourBUS();
+
+            if (giaTourBUS.themGiaTour(maGia, maTour, giaTour, ngayBD, ngayKT)) {
+                redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
+                return "redirect:/tour/thietlap?id=" + maTour;
+            }
         }
         redirectAttributes.addFlashAttribute("error", "Thêm thất bại!");
         return "redirect:/tour/thietlap?id=" + maTour;

@@ -56,15 +56,16 @@ public class DiaDiemController {
     }
     @RequestMapping(method = RequestMethod.POST, value = "/diadiem/them")
     public String themDiaDiem(@RequestParam String maDiaDiem, String tenDiaDiem, Model model) {
-        DiaDiemBUS diaDiemBUS= new DiaDiemBUS();
-        ArrayList<DiaDiemDTO> diaDiemDTOs= diaDiemBUS.getDiaDiemDTOs();
-            if (!maDiaDiem.equals("")&&!tenDiaDiem.equals("")){
-                if (diaDiemBUS.themDiaDiem(maDiaDiem,tenDiaDiem)){
+        DiaDiemBUS diaDiemBUS = new DiaDiemBUS();
+        ArrayList<DiaDiemDTO> diaDiemDTOs = diaDiemBUS.getDiaDiemDTOs();
+        if(maDiaDiem != null && !maDiaDiem.equals("")) {
+            if (!maDiaDiem.equals("") && !tenDiaDiem.equals("")) {
+                if (diaDiemBUS.themDiaDiem(maDiaDiem, tenDiaDiem)) {
                     return "redirect:/diadiem";
                 }
 
             }
-
+        }
         model.addAttribute("maDiaDiem", capPhatId());
         model.addAttribute("message", "false");
         model.addAttribute("diaDiemDTOs", diaDiemDTOs);

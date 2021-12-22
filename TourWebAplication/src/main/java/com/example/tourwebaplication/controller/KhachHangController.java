@@ -98,11 +98,12 @@ public class KhachHangController {
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-
-        KhachHangBUS khachHangBUS = new KhachHangBUS();
-        if(khachHangBUS.addKhachHang(new KhachHangDTO(maKhachHang,tenKhachHang,gioiTinh,ngaySinh,CMND,SDT,MAIL,diaChi,quocTich))){
-            redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
-            return "redirect:/khachhang";
+        if(maKhachHang != null && !maKhachHang.equals("")) {
+            KhachHangBUS khachHangBUS = new KhachHangBUS();
+            if (khachHangBUS.addKhachHang(new KhachHangDTO(maKhachHang, tenKhachHang, gioiTinh, ngaySinh, CMND, SDT, MAIL, diaChi, quocTich))) {
+                redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
+                return "redirect:/khachhang";
+            }
         }
 
         redirectAttributes.addFlashAttribute("error", "Thêm thất bại!");

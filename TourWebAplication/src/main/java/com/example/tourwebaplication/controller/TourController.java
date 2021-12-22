@@ -125,21 +125,25 @@ public class TourController {
     @RequestMapping(method = RequestMethod.POST, value = "/tour/them")
     public String themTour(@RequestParam String maTour, String tenTour, String loaiHinh, String dacDiem,
                            String giaTour, String ngayBD, String ngayKT, RedirectAttributes redirectAttributes) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            Date tgBD = simpleDateFormat.parse(ngayBD);
-            Date tgKT = simpleDateFormat.parse(ngayKT);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            ngayBD = format.format(tgBD);
-            ngayKT = format.format(tgKT);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        TourBUS tourBUS = new TourBUS();
-        if(tourBUS.themTour(maTour, loaiHinh, tenTour, dacDiem, giaTour, ngayBD, ngayKT)){
-            redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
-            return "redirect:/tour";
+        if(maTour != null && !maTour.equals("")) {
+
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date tgBD = simpleDateFormat.parse(ngayBD);
+                Date tgKT = simpleDateFormat.parse(ngayKT);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                ngayBD = format.format(tgBD);
+                ngayKT = format.format(tgKT);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            TourBUS tourBUS = new TourBUS();
+            if (tourBUS.themTour(maTour, loaiHinh, tenTour, dacDiem, giaTour, ngayBD, ngayKT)) {
+                redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
+                return "redirect:/tour";
+            }
         }
 
         redirectAttributes.addFlashAttribute("error", "Thêm thất bại!");
