@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,6 @@ public class LoaiHinhTourController {
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
         model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
-        //capPhatId truoc khi tao page
         model.addAttribute("maLoai", capPhatId());
         return "loaihinhtour";
     }
@@ -42,57 +42,54 @@ public class LoaiHinhTourController {
 
     //submit sua
     @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/sua")
-    public String suaLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model) {
+    public String suaLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model, RedirectAttributes redirectAttributes) {
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
         if(!maLoai.equals("") && !tenLoai.equals("")) {
             if (loaiHinhTourBUS.suaLoaiHinhTour(maLoai, tenLoai)) {
+                redirectAttributes.addFlashAttribute("success", "Sửa thành công.");
                 return "redirect:/loaihinhtour";
             }
         }
-        //that bai lam gi do
-        //capPhatId truoc khi tao page
+        redirectAttributes.addFlashAttribute("error", "Sửa thất bại!");
         model.addAttribute("maLoai", capPhatId());
-        model.addAttribute("message", "false");
         model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
         return "loaihinhtour";
     }
 
     //submit them
     @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/them")
-    public String themLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model) {
+    public String themLoaiHinhTuor(@RequestParam String maLoai, String tenLoai, Model model, RedirectAttributes redirectAttributes) {
 
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
         if(maLoai != null && !maLoai.equals("")) {
             if (!maLoai.equals("") && !tenLoai.equals("")) {
                 if (loaiHinhTourBUS.themLoaiHinhTour(maLoai, tenLoai)) {
+                    redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
                     return "redirect:/loaihinhtour";
                 }
             }
         }
-        //that bai lam gi do
-        //capPhatId truoc khi tao page
-        model.addAttribute("maLoai", capPhatId());
-        model.addAttribute("message", "false");
-        model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
-        return "loaihinhtour";
+        redirectAttributes.addFlashAttribute("maLoai", capPhatId());
+        redirectAttributes.addFlashAttribute("error","Thêm thất bại!");
+        redirectAttributes.addFlashAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
+        return "redirect:/loaihinhtour";
     }
 
     //Xoa
     @RequestMapping(method = RequestMethod.POST, value = "/loaihinhtour/xoa")
-    public String xoaLoaiHinhTuor(@RequestParam("id") String id, Model model) {
+    public String xoaLoaiHinhTuor(@RequestParam("id") String id, Model model, RedirectAttributes redirectAttributes) {
         LoaiHinhTourBUS loaiHinhTourBUS = new LoaiHinhTourBUS();
         ArrayList<LoaiHinhTourDTO> loaiHinhTourDTOs = loaiHinhTourBUS.getLoaiHinhTourDTOs();
         if(!id.equals("")) {
             if (loaiHinhTourBUS.xoaLoaiHinhTour(id)) {
+                redirectAttributes.addFlashAttribute("success", "Xoá thành công.");
                 return "redirect:/loaihinhtour";
             }
         }
-        //that bai lam gi do
-        //capPhatId truoc khi tao page
+        redirectAttributes.addFlashAttribute("error", "Xoá thất bại!");
         model.addAttribute("maLoai", capPhatId());
-        model.addAttribute("message", "false");
         model.addAttribute("loaiHinhTourDTOs", loaiHinhTourDTOs);
         return "loaihinhtour";
     }
