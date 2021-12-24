@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -40,50 +41,52 @@ public class DiaDiemController {
        return "redirect:/diadiem";
     }
     @RequestMapping(method = RequestMethod.POST, value = "/diadiem/sua")
-    public String suaDiaDiem(@RequestParam String maDiaDiem, String tenDiaDiem, Model model) {
+    public String suaDiaDiem(@RequestParam String maDiaDiem, String tenDiaDiem, Model model, RedirectAttributes redirectAttributes) {
         DiaDiemBUS diaDiemBUS= new DiaDiemBUS();
         ArrayList<DiaDiemDTO> diaDiemDTOs= diaDiemBUS.getDiaDiemDTOs();
             if (!maDiaDiem.equals("")&&!tenDiaDiem.equals("")){
                if (diaDiemBUS.suaDiaDiem(maDiaDiem,tenDiaDiem)){
+                   redirectAttributes.addFlashAttribute("success", "Sửa thành công.");
                    return "redirect:/diadiem";
                }
         }
+        redirectAttributes.addFlashAttribute("error", "Sửa thất bại!");
         model.addAttribute("maDiaDiem", capPhatId());
-        model.addAttribute("message", "false");
         model.addAttribute("diaDiemDTOs", diaDiemDTOs);
         return "diadiem";
 
     }
     @RequestMapping(method = RequestMethod.POST, value = "/diadiem/them")
-    public String themDiaDiem(@RequestParam String maDiaDiem, String tenDiaDiem, Model model) {
+    public String themDiaDiem(@RequestParam String maDiaDiem, String tenDiaDiem, Model model, RedirectAttributes redirectAttributes) {
         DiaDiemBUS diaDiemBUS = new DiaDiemBUS();
         ArrayList<DiaDiemDTO> diaDiemDTOs = diaDiemBUS.getDiaDiemDTOs();
         if(maDiaDiem != null && !maDiaDiem.equals("")) {
             if (!maDiaDiem.equals("") && !tenDiaDiem.equals("")) {
                 if (diaDiemBUS.themDiaDiem(maDiaDiem, tenDiaDiem)) {
+                    redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
                     return "redirect:/diadiem";
                 }
 
             }
         }
-        model.addAttribute("maDiaDiem", capPhatId());
-        model.addAttribute("message", "false");
-        model.addAttribute("diaDiemDTOs", diaDiemDTOs);
-        return "diadiem";
+        redirectAttributes.addFlashAttribute("maDiaDiem", capPhatId());
+        redirectAttributes.addFlashAttribute("error","Thêm thất bại!");
+        redirectAttributes.addFlashAttribute("diaDiemDTOs", diaDiemDTOs);
+        return "redirect:/diadiem";
 
     }
     @RequestMapping(method = RequestMethod.POST, value = "/diadiem/xoa")
-    public String xoaDiaDiem(@RequestParam("id") String id, Model model) {
+    public String xoaDiaDiem(@RequestParam("id") String id, Model model, RedirectAttributes redirectAttributes) {
         DiaDiemBUS diaDiemBUS= new DiaDiemBUS();
         ArrayList<DiaDiemDTO> diaDiemDTOs= diaDiemBUS.getDiaDiemDTOs();
         if(!id.equals("")) {
             if (diaDiemBUS.xoaDiaDiem(id)) {
+                redirectAttributes.addFlashAttribute("success", "Xoá thành công.");
                 return "redirect:/diadiem";
             }
         }
-
+        redirectAttributes.addFlashAttribute("error", "Xoá thất bại");
         model.addAttribute("id", capPhatId());
-        model.addAttribute("message", "false");
         model.addAttribute("diaDiemDTOs", diaDiemDTOs);
         return "diadiem";
     }

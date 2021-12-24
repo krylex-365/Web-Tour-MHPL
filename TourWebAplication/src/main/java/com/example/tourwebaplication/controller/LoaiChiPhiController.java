@@ -38,16 +38,17 @@ public class LoaiChiPhiController {
         return "redirect:/loaichiphi";
     }
     @RequestMapping(method = RequestMethod.POST, value = "/loaichiphi/sua")
-    public String suaLoaiChiPhi(@RequestParam String maLoaiChiPhi, String tenLoaiChiPhi, Model model) {
+    public String suaLoaiChiPhi(@RequestParam String maLoaiChiPhi, String tenLoaiChiPhi, Model model, RedirectAttributes redirectAttributes) {
         LoaiChiPhiBUS loaiChiPhiBUS = new LoaiChiPhiBUS();
         ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs = loaiChiPhiBUS.getLoaiChiPhiDTOs();
         if(!maLoaiChiPhi.equals("") && !tenLoaiChiPhi.equals("")) {
             if (loaiChiPhiBUS.suaLoaiChiPhi(maLoaiChiPhi,tenLoaiChiPhi,loaiChiPhiBUS.getLoaiChiPhiDTOs())) {
+                redirectAttributes.addFlashAttribute("success", "Sửa thành công.");
                 return "redirect:/loaichiphi";
             }
         }
+        redirectAttributes.addFlashAttribute("error", "Sửa thất bại!");
         model.addAttribute("maLoai", capPhatId());
-        model.addAttribute("message","false");
         model.addAttribute("loaiChiPhiDTOs", loaiChiPhiDTOs);
         return "loaichiphi";
     }
@@ -58,26 +59,29 @@ public class LoaiChiPhiController {
         if(maLoaiChiPhi != null && !maLoaiChiPhi.equals("")) {
             if (!maLoaiChiPhi.equals("") && !tenLoaiChiPhi.equals("")) {
                 if (loaiChiPhiBUS.themLoaiChiPhi(maLoaiChiPhi, tenLoaiChiPhi, loaiChiPhiBUS.getLoaiChiPhiDTOs())) {
+                    redirectAttributes.addFlashAttribute("success", "Thêm thành công.");
                     return "redirect:/loaichiphi";
                 }
             }
         }
+
         redirectAttributes.addFlashAttribute("maLoai", capPhatId());
-        redirectAttributes.addFlashAttribute("message","false");
+        redirectAttributes.addFlashAttribute("error","Thêm thất bại!");
         redirectAttributes.addFlashAttribute("loaiChiPhiDTOs", loaiChiPhiDTOs);
         return "redirect:/loaichiphi";
     }
     @RequestMapping(method = RequestMethod.POST, value = "/loaichiphi/xoa")
-    public String xoaLoaiChiPhi(@RequestParam("id") String id, Model model) {
+    public String xoaLoaiChiPhi(@RequestParam("id") String id, Model model, RedirectAttributes redirectAttributes) {
         LoaiChiPhiBUS loaiChiPhiBUS = new LoaiChiPhiBUS();
         ArrayList<LoaiChiPhiDTO> loaiChiPhiDTOs = loaiChiPhiBUS.getLoaiChiPhiDTOs();
         if (!id.equals("")) {
             if (loaiChiPhiBUS.xoaLoaiChiPhi(id,loaiChiPhiBUS.getLoaiChiPhiDTOs())) {
+                redirectAttributes.addFlashAttribute("success", "Xóa thành công.");
                 return "redirect:/loaichiphi";
             }
         }
+        redirectAttributes.addFlashAttribute("error","Xóa thất bại!");
         model.addAttribute("maLoai", capPhatId());
-        model.addAttribute("message","false");
         model.addAttribute("loaiChiPhiDTOs", loaiChiPhiDTOs);
         return "loaichiphi";
     }
