@@ -44,49 +44,60 @@ public class ThongKeChiPhiController
 		  Date tgBD = simpleDateFormat.parse (NgayBD);
 		  Date tgKT = simpleDateFormat.parse (NgayKT);
 		  Date dateDoan = null;
+
+
 		  SimpleDateFormat myFormat = new SimpleDateFormat ("yyyy-MM-dd");
 		  DoanModel m;
 		  ChiPhiModel chiPhiModel;
-		  for (DoanDuLichDTO doan : doanDuLichDTOS)
-		  {
-				try
-				{
-					 dateDoan = myFormat.parse (doan.getNgayKetThuc ());
-				}
-				catch (ParseException ex)
-				{
-					 System.out.println ("Lỗi format String to Date!!" + ex.getMessage ());
-				}
-				if (dateDoan != null
-						 && (dateDoan.after (tgBD) || dateDoan.equals (tgBD))
-						 && (dateDoan.before (tgKT) || dateDoan.equals (tgKT)))
-				{
-					 m = new DoanModel ();
-					 m.doanDuLichDTO = doan;
-					 m.chiPhiModels = new ArrayList<> ();
-					 long tongCP = 0;
-					 for (ChiPhiDTO chiPhi : chiPhiDTOs)
-					 {
+
+
+		  if(tgBD.before(tgKT)){
+			  for (DoanDuLichDTO doan : doanDuLichDTOS)
+			  {
+				  try
+				  {
+					  dateDoan = myFormat.parse (doan.getNgayKetThuc ());
+				  }
+				  catch (ParseException ex)
+				  {
+					  System.out.println ("Lỗi format String to Date!!" + ex.getMessage ());
+				  }
+				  if (dateDoan != null
+						  && (dateDoan.after (tgBD) || dateDoan.equals (tgBD))
+						  && (dateDoan.before (tgKT) || dateDoan.equals (tgKT)))
+				  {
+					  m = new DoanModel ();
+					  m.doanDuLichDTO = doan;
+					  m.chiPhiModels = new ArrayList<> ();
+					  long tongCP = 0;
+					  for (ChiPhiDTO chiPhi : chiPhiDTOs)
+					  {
 						  if (chiPhi.getMaDoan ().equals (doan.getMaDoan ()))
 						  {
-								for (LoaiChiPhiDTO loaiChiPhi : loaiChiPhiDTOS)
-								{
-									 if (loaiChiPhi.getMaLoaiChiPhi ().equals (chiPhi.getMaLoaiChiPhi ()))
-									 {
-										  chiPhiModel = new ChiPhiModel ();
-										  chiPhiModel.chiphiDTO = chiPhi;
-										  chiPhiModel.tenLoaiChiphi = loaiChiPhi.getTenLoai ();
-										  m.chiPhiModels.add (chiPhiModel);
-									 }
-								}
-								tongCP += Long.parseLong (chiPhi.getSoTien ());
-								m.tongChiPhi = tongCP;
-								
+							  for (LoaiChiPhiDTO loaiChiPhi : loaiChiPhiDTOS)
+							  {
+								  if (loaiChiPhi.getMaLoaiChiPhi ().equals (chiPhi.getMaLoaiChiPhi ()))
+								  {
+									  chiPhiModel = new ChiPhiModel ();
+									  chiPhiModel.chiphiDTO = chiPhi;
+									  chiPhiModel.tenLoaiChiphi = loaiChiPhi.getTenLoai ();
+									  m.chiPhiModels.add (chiPhiModel);
+								  }
+							  }
+							  tongCP += Long.parseLong (chiPhi.getSoTien ());
+							  m.tongChiPhi = tongCP;
+
 						  }
-					 }
-					 listDoan.add (m);
-				}
+					  }
+					  listDoan.add (m);
+				  }
+			  }
+			  model.addAttribute ("listDoan", listDoan);
+			  model.addAttribute ("success", "Thống kê thành công");
+		  }else{
+			  model.addAttribute ("error", "Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc");
 		  }
+
 		  model.addAttribute ("listDoan", listDoan);
 		  return "thongkeChiPhi";
 	 }

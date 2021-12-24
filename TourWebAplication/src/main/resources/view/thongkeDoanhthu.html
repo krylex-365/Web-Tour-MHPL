@@ -37,6 +37,8 @@
                             <div class="card-title row">
                                 <div class="col-md-12 mb-4">
                                     <h3 class="td-center">THỐNG KÊ DOANH THU</h3>
+                                    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+                                    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                                 </div>
                                 <div class="col-md-12">
                                     <form method="post" th:action="@{/thongkeDoanhthu/thongketheotg}">
