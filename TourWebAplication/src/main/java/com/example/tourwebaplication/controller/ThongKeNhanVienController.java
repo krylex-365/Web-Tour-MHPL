@@ -37,8 +37,13 @@ public class ThongKeNhanVienController {
     @RequestMapping(method = RequestMethod.POST, value = "/thongkeNhanVien")
     public String thongKeNhanVien(@RequestParam Date ngayBD,Date ngayKT, Model model) {
         //gan du lieu truoc khi gui cho view
-        ArrayList<Data> thongKeNhanVien = thongKeNhanVien(ngayBD,ngayKT);
-        model.addAttribute("list", thongKeNhanVien);
+        if(ngayKT.after(ngayBD)){
+            ArrayList<Data> thongKeNhanVien = thongKeNhanVien(ngayBD,ngayKT);
+            model.addAttribute("success", "Thong ke thanh cong");
+            model.addAttribute("list", thongKeNhanVien);
+        }else{
+            model.addAttribute("error", "Ngày bắt đầu không được lớn hơn ngày kết thúc");
+        }
         return "thongkeNhanVien";
     }
 

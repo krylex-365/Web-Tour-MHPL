@@ -60,7 +60,7 @@ public class KhachHangController {
                 return "khachhangUpdate";
             }
         }
-        redirectAttributes.addFlashAttribute("error", "Không tìm thấy tour");
+        redirectAttributes.addFlashAttribute("error", "Không tìm thấy khách hàng");
         return "redirect:/khachhang";
     }
 
@@ -74,7 +74,7 @@ public class KhachHangController {
             redirectAttributes.addFlashAttribute("success", "Sửa thành công.");
             return "redirect:/khachhang";
         }
-        redirectAttributes.addFlashAttribute("error", "Không tìm thấy tour!");
+        redirectAttributes.addFlashAttribute("error", "Không tìm thấy khách hàng!");
         return "redirect:/khachhang";
     }
 
