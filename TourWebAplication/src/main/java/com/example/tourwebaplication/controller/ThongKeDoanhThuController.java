@@ -44,65 +44,74 @@ public class ThongKeDoanhThuController {
 
         ThongKeDoanhThuController.thongkeTour tkt;
         Date tgDoanKT = null;
-        for (TourDTO tourDTO : tourDTOS) {
-            boolean tmp = false;
-            tkt = new thongkeTour();
-            tkt.listDoan = new ArrayList<>();
-            int sodoan = 0;
-            long tongchiphiTour = 0;
-            double tongdoanhthuTour = 0;
-            long tongCPD = 0;
-            int sokhach = 0;
-            double DoanhthuD = 0;
-            for (DoanDuLichDTO doanDuLichDTO : doanDuLichDTOS) {
-                try
-                {
-                    tgDoanKT = simpleDateFormat1.parse(doanDuLichDTO.getNgayKetThuc());
-                }
-                catch (ParseException ex)
-                {
-                    System.out.println ("Lỗi format String to Date!!" + ex.getMessage ());
-                }
-                if ((tgDoanKT.after(tgBD) || tgDoanKT.equals(tgBD)) &&
-                        (tgDoanKT.before(tgKT) || tgDoanKT.equals(tgKT))) {
-                    if (doanDuLichDTO.getMaTour().equals(tourDTO.getMaTour())) {
-                        tkt.tourDTO = tourDTO;
-                        sodoan++;
-                        //tính doanh thu đoàn
-                        tkd = new thongkeDoan();
-                        tkd.doanDuLichDTO = doanDuLichDTO;
-                        for (ChiPhiDTO chiPhiDTO : chiPhiDTOS) {
-                            if (doanDuLichDTO.getMaDoan().equals(chiPhiDTO.getMaDoan())) {
-                                tongCPD += Long.parseLong(chiPhiDTO.getSoTien());
+
+
+        if(tgBD.before(tgKT)){
+            for (TourDTO tourDTO : tourDTOS) {
+                boolean tmp = false;
+                tkt = new thongkeTour();
+                tkt.listDoan = new ArrayList<>();
+                int sodoan = 0;
+                long tongchiphiTour = 0;
+                double tongdoanhthuTour = 0;
+                long tongCPD = 0;
+                int sokhach = 0;
+                double DoanhthuD = 0;
+                for (DoanDuLichDTO doanDuLichDTO : doanDuLichDTOS) {
+                    try
+                    {
+                        tgDoanKT = simpleDateFormat1.parse(doanDuLichDTO.getNgayKetThuc());
+                    }
+                    catch (ParseException ex)
+                    {
+                        System.out.println ("Lỗi format String to Date!!" + ex.getMessage ());
+                    }
+                    if ((tgDoanKT.after(tgBD) || tgDoanKT.equals(tgBD)) &&
+                            (tgDoanKT.before(tgKT) || tgDoanKT.equals(tgKT))) {
+                        if (doanDuLichDTO.getMaTour().equals(tourDTO.getMaTour())) {
+                            tkt.tourDTO = tourDTO;
+                            sodoan++;
+                            //tính doanh thu đoàn
+                            tkd = new thongkeDoan();
+                            tkd.doanDuLichDTO = doanDuLichDTO;
+                            for (ChiPhiDTO chiPhiDTO : chiPhiDTOS) {
+                                if (doanDuLichDTO.getMaDoan().equals(chiPhiDTO.getMaDoan())) {
+                                    tongCPD += Long.parseLong(chiPhiDTO.getSoTien());
+                                }
                             }
-                        }
-                        for (ChiTietDoanDTO chiTietDoanDTO : chiTietDoanDTOS) {
-                            if (doanDuLichDTO.getMaDoan().equals(chiTietDoanDTO.getMaDoan())) {
-                                sokhach++;
+                            for (ChiTietDoanDTO chiTietDoanDTO : chiTietDoanDTOS) {
+                                if (doanDuLichDTO.getMaDoan().equals(chiTietDoanDTO.getMaDoan())) {
+                                    sokhach++;
+                                }
                             }
+                            double tienNhan = Double.parseDouble(doanDuLichDTO.getGiaTour()) * sokhach;
+                            DoanhthuD = tienNhan - tongCPD;
+                            tkd.SoKhach = sokhach;
+                            tkd.DoanhThu = DoanhthuD;
+                            tkd.ChiPhi = tongCPD;
+                            // tour
+                            tkt.listDoan.add(tkd);
+                            tongdoanhthuTour += DoanhthuD;
+                            tongchiphiTour += tongCPD;
+                            tmp = true;
                         }
-                        double tienNhan = Double.parseDouble(doanDuLichDTO.getGiaTour()) * sokhach;
-                        DoanhthuD = tienNhan - tongCPD;
-                        tkd.SoKhach = sokhach;
-                        tkd.DoanhThu = DoanhthuD;
-                        tkd.ChiPhi = tongCPD;
-                        // tour
-                        tkt.listDoan.add(tkd);
-                        tongdoanhthuTour += DoanhthuD;
-                        tongchiphiTour += tongCPD;
-                        tmp = true;
                     }
                 }
+                if (tmp == true) {
+                    tkt.SoDoan = sodoan;
+                    tkt.TongDoanhThu = tongdoanhthuTour;
+                    tkt.TongChiPhi = tongchiphiTour;
+                    thongkeTours.add(tkt);
+                }
+                tmp = false;
             }
-            if (tmp == true) {
-                tkt.SoDoan = sodoan;
-                tkt.TongDoanhThu = tongdoanhthuTour;
-                tkt.TongChiPhi = tongchiphiTour;
-                thongkeTours.add(tkt);
-            }
-            tmp = false;
+            model.addAttribute("thongkeTours", thongkeTours);
+            model.addAttribute ("success", "Thống kê thành công");
+        }else{
+            model.addAttribute ("error", "Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc");
         }
-        model.addAttribute("thongkeTours", thongkeTours);
+
+
         return "thongkeDoanhthu";
     }
 

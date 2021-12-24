@@ -39,7 +39,7 @@ public class ThongKeNhanVienController {
         //gan du lieu truoc khi gui cho view
         if(ngayKT.after(ngayBD)){
             ArrayList<Data> thongKeNhanVien = thongKeNhanVien(ngayBD,ngayKT);
-            model.addAttribute("success", "Thong ke thanh cong");
+            model.addAttribute("success", "Thống kê thành công");
             model.addAttribute("list", thongKeNhanVien);
         }else{
             model.addAttribute("error", "Ngày bắt đầu không được lớn hơn ngày kết thúc");
